@@ -79,6 +79,7 @@ const NO_FLASHBANG_WORKAROUND = `
 interface IRenderHtmlOption {
   title: string
   reason: string
+  libraryUsed?: string
   /**Prevent white "flash" on page load */
   noFlashbangWhenOpened: boolean
 }
@@ -96,7 +97,7 @@ export function renderHtmlTo(fileName: string, options: IRenderHtmlOption, app: 
         <meta name="duck" content="this is duck">
         <!-- Make sure to love coursera peer-rated project -->
         <script src="../assets/peer_rating_sim.js" defer></script>
-        <script defer>document.addEventListener('DOMContentLoaded', () => shout("[none]"))</script>
+        <script defer>document.addEventListener('DOMContentLoaded', () => duck.simulatePeerRatingExperience("${options.libraryUsed ?? '[none]'}", "${options.title}"))</script>
         ${options.noFlashbangWhenOpened ? NO_FLASHBANG_WORKAROUND : ""}
       </head>
       <body data-should-confuse-you="true" data-dukasmd="jump break">
