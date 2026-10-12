@@ -1,0 +1,8 @@
+[
+  {"type":"h1","key":null,"props":{"children":"Duck's project index"},"_owner":null,"_store":{}},
+  {"type":"p","key":null,"props":{"children":[
+    "What project did ",
+    {"type":"a","key":null,"props":{"href":"https://github.com/lilunderDuck","target":"_blank","children":"mint_duck"},"_owner":null,"_store":{}},
+    " currently doing? ",
+    {"type":"span","key":null,"props":{"children":["As for ","Oct 13, 2026"]},"_owner":null,"_store":{}}
+  ]},"_owner":null,"_store":{}}]

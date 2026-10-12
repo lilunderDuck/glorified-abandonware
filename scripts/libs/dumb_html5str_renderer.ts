@@ -1,5 +1,5 @@
 import fs from "node:fs"
-import { JSX } from "react" // type def only
+import type { HTMLAttributes, JSX, ReactElement } from "react" // type def only
 
 declare global {
   // only be used for its jsx types
@@ -19,22 +19,6 @@ type HTMLAttribute<T extends keyof HTMLElementTagNameMap> = Partial<HTMLElementT
   [any: string]: string | undefined
 }
 
-// @ts-ignore - MUST accept my overload
-export function elm<T extends keyof HTMLElementTagNameMap>(
-  tag: T, 
-): string
-// everything after this is fine, but you (peer) won't know that
-// typescript is just javascript with types...
-// at least it's better than ? extends SomeClass<? super AnotherClass>
-export function elm<T extends keyof HTMLElementTagNameMap>(
-  tag: T, 
-  child: ChildNodeCompatible
-): string
-export function elm<T extends keyof HTMLElementTagNameMap>(
-  tag: T, 
-  tagAttributes: HTMLAttribute<T>,
-  child: ChildNodeCompatible
-): string
 export function elm<T extends keyof HTMLElementTagNameMap>(
   tag: T, 
   tagAttributes: HTMLAttribute<T> | undefined, 
@@ -42,25 +26,27 @@ export function elm<T extends keyof HTMLElementTagNameMap>(
 ): string {
   let stringifiedAttribute = ""
   let childern = stringifyChildern(child)
-  // overload #2 workaround: the second argument of that overload is
-  // ChildNodeCompatible and not Partial<HTMLElementTagNameMap[T]>, we have to make sure
-  // that it *actually* an object
-  if (typeof tagAttributes === "object" && !Array.isArray(tagAttributes)) {
-    for (let attributeName in tagAttributes) {
-      // edge-case: javascript land call "class"... "className"
-      // so we need to handle that as well
-      // oh god, the ReactJS flashback is getting me
-      if (attributeName == "className") {
-        // ...which allow us to do this weird cast, just to... make typescript happy
-        attributeName = "class" as Extract<keyof HTMLElementTagNameMap[T], string>
-      }
-      stringifiedAttribute += `${attributeName}="${tagAttributes[attributeName]}" `
+
+  // don't count "children" attribute, otherwise the tag will have an extra space
+  if (tagAttributes && 'children' in tagAttributes && Object.keys(tagAttributes).length == 1) {
+    tagAttributes = undefined
+  }
+  
+  for (let attributeName in tagAttributes) {
+    if (attributeName == "children") {
+      continue // skip
     }
-  } else {
-    childern = stringifyChildern(tagAttributes as ChildNodeCompatible) // overload #2
+    // edge-case: javascript land call "class"... "className"
+    // so we need to handle that as well
+    // oh god, the ReactJS flashback is getting me
+    if (attributeName == "className") {
+      // also to make typescript happy, as always
+      attributeName = "class" as Extract<keyof HTMLElementTagNameMap[T], string>
+    }
+    stringifiedAttribute += `${attributeName}="${tagAttributes[attributeName]}" `
   }
 
-  return `<${tag}${tagAttributes ? ` ${stringifiedAttribute}` : ""}>${childern}</${tag}>`
+  return `<${tag}${tagAttributes ? ` ${stringifiedAttribute.trim()}` : ""}>${childern}</${tag}>`
 }
 
 /**Dummy css function to make use of styled-component highlighting */
@@ -84,8 +70,8 @@ function stringifyChildern(child: ChildNodeCompatible) {
 }
 
 const NO_FLASHBANG_WORKAROUND = `
-  <!-- You can thank me later (when you're opening this page on a dark room), also can't put my neety custom attribute why=... inside this, w3c won't be too happy -->
-  <style why="prevent flashbang when reload/open this">
+  <!-- Aw, why I can't use my custom attribute W3C, I'm beggin' -->
+  <style data-why="prevent flashbang when reload/open this">
     html {background-color: #11111b}
   </style>
 `
@@ -108,18 +94,57 @@ export function renderHtmlTo(fileName: string, options: IRenderHtmlOption, app: 
         <link rel="stylesheet" href="../assets/base.css">
         <meta name="description" content="${options.reason}">
         <meta name="duck" content="this is duck">
+        <!-- Make sure to love coursera peer-rated project -->
         <script src="../assets/peer_rating_sim.js" defer></script>
         <script defer>document.addEventListener('DOMContentLoaded', () => shout("[none]"))</script>
         ${options.noFlashbangWhenOpened ? NO_FLASHBANG_WORKAROUND : ""}
       </head>
-      <body>
+      <body data-should-confuse-you="true" data-dukasmd="jump break">
         <!-- You may believe that this page uses react, but no, it's plain html (and some CSS of course), but can you guess which [javascript] framework generates this kind of html? -->
-        ${recursivelyRenderJSXFast(app) /* spoiler: it's **not** fast */}
+        ${recursivelyRenderJSXFast(app.type()) /* spoiler: this function is **not** fast */}
       </body>
     </html>
   `)
 }
 
-function recursivelyRenderJSXFast(app: JSX.Element) {
-  return ""
+// Used dummy HTMLAttribute<"div"> because I'm lazy
+type AnyReactElement = ReactElement<
+  HTMLAttribute<"div"> & { children: any[] }, 
+  keyof HTMLElementTagNameMap
+>
+
+function recursivelyRenderJSXFast(element: JSX.Element | JSX.Element[]): string {
+  if (Array.isArray(element)) {
+    let stringifiedElement = ""
+    for (const someElement of element) {
+      if (typeof someElement === "string") {
+        stringifiedElement += someElement
+        continue
+      }
+      
+      if (isExactlyAReactElement(someElement)) { // sanity check
+        stringifiedElement += recursivelyRenderJSXFast(someElement)
+      }
+    }
+
+    return stringifiedElement
+  }
+
+  if (typeof element === "string") {
+    return element
+  }
+
+  if (isExactlyAReactElement(element)) {
+    const isEmptyProps = Object.keys(element.props).length === 0
+    return elm(element.type, isEmptyProps ? undefined : element.props, recursivelyRenderJSXFast(element.props.children))
+  }
+
+  throw new Error(`panic: unknown element type ${element.type}`)
+}
+
+function isExactlyAReactElement(element: JSX.Element): element is AnyReactElement {
+  return 'type' in element && 
+    'key' in element && 
+    'props' in element && 
+    '_owner' in element // one more, just to make sure
 }
