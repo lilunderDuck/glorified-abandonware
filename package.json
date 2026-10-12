@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "@types/react": "^19.3.0",
+    "html-format": "^1.1.7",
+    "react": "^19.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5"
+  }
+}
