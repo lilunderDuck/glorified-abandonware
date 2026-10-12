@@ -1,5 +1,5 @@
 import fs from "node:fs"
-import type { HTMLAttributes, JSX, ReactElement } from "react" // type def only
+import { Fragment, type HTMLAttributes, type JSX, type ReactElement } from "react" // type def only
 
 declare global {
   // only be used for its jsx types
@@ -19,7 +19,7 @@ type HTMLAttribute<T extends keyof HTMLElementTagNameMap> = Partial<HTMLElementT
   [any: string]: string | undefined
 }
 
-export function elm<T extends keyof HTMLElementTagNameMap>(
+function elm<T extends keyof HTMLElementTagNameMap>(
   tag: T, 
   tagAttributes: HTMLAttribute<T> | undefined, 
   child: ChildNodeCompatible = []
@@ -49,9 +49,59 @@ export function elm<T extends keyof HTMLElementTagNameMap>(
   return `<${tag}${tagAttributes ? ` ${stringifiedAttribute.trim()}` : ""}>${childern}</${tag}>`
 }
 
+const cachedCssValues = new Map<`${string}:${string}`, string | number>()
+
+export function dumpCssThenClearCache() {
+  let everything = ""
+  for (const [cssRule, compiledClassName] of cachedCssValues.entries()) {
+    everything += `.${compiledClassName} {${cssRule}}`
+  }
+
+  cachedCssValues.clear()
+
+  return everything
+}
+
+function makeRandomStr(length: number) {
+  const characters = 'abcdefghijklmnopqrstuvwxyz____';
+  let result = '';
+  
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    result += characters.charAt(randomIndex);
+  }
+  
+  return result;
+}
+
 /**Dummy css function to make use of styled-component highlighting */
 export function css(template: TemplateStringsArray): string {
-  return template.join(' ')
+  const cssRule = template
+    .join(' ')
+    .split(';')
+    .map(rule => rule.trim())
+    .filter(rule => rule.length > 0)
+    .reduce((acc: Record<string, string | number>, rule) => {
+      const colonIndex = rule.indexOf(':')
+      if (colonIndex > -1) {
+        const key = rule.slice(0, colonIndex).trim()
+        const value = rule.slice(colonIndex + 1).trim()
+        acc[key] = value
+        if (!cachedCssValues.has(`${key}:${value}`)) {
+          const randomString = makeRandomStr(3)
+          cachedCssValues.set(`${key}:${value}`, randomString)
+        }
+      }
+      return acc
+    }, {})
+  // ...
+
+  let compiledClassName = ""
+  for (const cssRuleName in cssRule) {
+    compiledClassName += `${cachedCssValues.get(`${cssRuleName}:${cssRule[cssRuleName]}`)} `
+  }
+
+  return compiledClassName.trim()
 }
 
 function stringifyChildern(child: ChildNodeCompatible) {
@@ -80,11 +130,14 @@ interface IRenderHtmlOption {
   title: string
   reason: string
   libraryUsed?: string
+  css: string
   /**Prevent white "flash" on page load */
   noFlashbangWhenOpened: boolean
 }
 
 export function renderHtmlTo(fileName: string, options: IRenderHtmlOption, app: JSX.Element) {
+  // script notice: why the hell w3 mark "defer" attribute on a <script /> without src an error?
+  // "An inline script element (i.e., a script element without a src attribute and with a type attribute that is either unspecified, empty, or a JavaScript MIME type) must not have a defer attribute."
   fs.writeFileSync(fileName, `
     <!DOCTYPE html>
     <html lang="en">
@@ -97,8 +150,9 @@ export function renderHtmlTo(fileName: string, options: IRenderHtmlOption, app: 
         <meta name="duck" content="this is duck">
         <!-- Make sure to love coursera peer-rated project -->
         <script src="../assets/peer_rating_sim.js" defer></script>
-        <script defer>document.addEventListener('DOMContentLoaded', () => duck.simulatePeerRatingExperience("${options.libraryUsed ?? '[none]'}", "${options.title}"))</script>
+        <script>document.addEventListener('DOMContentLoaded', () => duck.simulatePeerRatingExperience("${options.libraryUsed ?? '[none]'}", "${options.title}"))</script>
         ${options.noFlashbangWhenOpened ? NO_FLASHBANG_WORKAROUND : ""}
+        <style data-inline>${options.css}</style>
       </head>
       <body data-should-confuse-you="true" data-dukasmd="jump break">
         <!-- You may believe that this page uses react, but no, it's plain html (and some CSS of course), but can you guess which [javascript] framework generates this kind of html? -->
@@ -115,6 +169,8 @@ type AnyReactElement = ReactElement<
 >
 
 function recursivelyRenderJSXFast(element: JSX.Element | JSX.Element[]): string {
+  if (!element) return ''
+
   if (Array.isArray(element)) {
     let stringifiedElement = ""
     for (const someElement of element) {
@@ -134,16 +190,28 @@ function recursivelyRenderJSXFast(element: JSX.Element | JSX.Element[]): string 
   if (typeof element === "string") {
     return element
   }
+  
+  // edge-case: using other component
+  if (typeof element?.type === "function") {
+    return recursivelyRenderJSXFast(element.type(element.props))
+  }
+
+  // edge-case: dealing with fragments, these guys -> <></>
+  if (isExactlyAReactElement(element) && Object.is(element.type, Fragment)) {
+    return recursivelyRenderJSXFast(element.props.children)
+  }
 
   if (isExactlyAReactElement(element)) {
     const isEmptyProps = Object.keys(element.props).length === 0
     return elm(element.type, isEmptyProps ? undefined : element.props, recursivelyRenderJSXFast(element.props.children))
   }
 
-  throw new Error(`panic: unknown element type ${element.type}`)
+  throw new Error(`panic: unknown element type ${element}`)
 }
 
 function isExactlyAReactElement(element: JSX.Element): element is AnyReactElement {
+  if (typeof element !== "object") return false
+
   return 'type' in element && 
     'key' in element && 
     'props' in element && 
