@@ -1,5 +1,7 @@
 import fs from "node:fs"
-import { Fragment, type HTMLAttributes, type JSX, type ReactElement } from "react" // type def only
+import { Fragment, type JSX, type ReactElement } from "react" // type def only
+import { compile, serialize, stringify, middleware } from 'stylis'
+import { createRandomizer } from "./dumb_random"
 
 declare global {
   // only be used for its jsx types
@@ -49,12 +51,12 @@ function elm<T extends keyof HTMLElementTagNameMap>(
   return `<${tag}${tagAttributes ? ` ${stringifiedAttribute.trim()}` : ""}>${childern}</${tag}>`
 }
 
-const cachedCssValues = new Map<`${string}:${string}`, string | number>()
+const cachedCssValues = new Set<string>()
 
 export function dumpCssThenClearCache() {
   let everything = ""
-  for (const [cssRule, compiledClassName] of cachedCssValues.entries()) {
-    everything += `.${compiledClassName} {${cssRule}}`
+  for (const cssRule of cachedCssValues.values()) {
+    everything += cssRule
   }
 
   cachedCssValues.clear()
@@ -62,46 +64,16 @@ export function dumpCssThenClearCache() {
   return everything
 }
 
-function makeRandomStr(length: number) {
-  const characters = 'abcdefghijklmnopqrstuvwxyz____';
-  let result = '';
-  
-  for (let i = 0; i < length; i++) {
-    const randomIndex = Math.floor(Math.random() * characters.length);
-    result += characters.charAt(randomIndex);
-  }
-  
-  return result;
-}
-
+const cssClassSelectorRandomizer = createRandomizer()
 /**Dummy css function to make use of styled-component highlighting */
 export function css(template: TemplateStringsArray): string {
-  const cssRule = template
-    .join(' ')
-    .split(';')
-    .map(rule => rule.trim())
-    .filter(rule => rule.length > 0)
-    .reduce((acc: Record<string, string | number>, rule) => {
-      const colonIndex = rule.indexOf(':')
-      if (colonIndex > -1) {
-        const key = rule.slice(0, colonIndex).trim()
-        const value = rule.slice(colonIndex + 1).trim()
-        acc[key] = value
-        if (!cachedCssValues.has(`${key}:${value}`)) {
-          const randomString = makeRandomStr(3)
-          cachedCssValues.set(`${key}:${value}`, randomString)
-        }
-      }
-      return acc
-    }, {})
-  // ...
+  const rawCss = template.join(' ')
+  const randomName = cssClassSelectorRandomizer(4)
 
-  let compiledClassName = ""
-  for (const cssRuleName in cssRule) {
-    compiledClassName += `${cachedCssValues.get(`${cssRuleName}:${cssRule[cssRuleName]}`)} `
-  }
-
-  return compiledClassName.trim()
+  const compiled = serialize(compile(`.${randomName}{${rawCss}}`), stringify)
+  cachedCssValues.add(compiled)
+  
+  return randomName
 }
 
 function stringifyChildern(child: ChildNodeCompatible) {
@@ -126,7 +98,7 @@ const NO_FLASHBANG_WORKAROUND = `
   </style>
 `
 
-interface IRenderHtmlOption {
+export interface IRenderHtmlOption {
   title: string
   reason: string
   libraryUsed?: string
@@ -137,7 +109,9 @@ interface IRenderHtmlOption {
 
 export function renderHtmlTo(fileName: string, options: IRenderHtmlOption, app: JSX.Element) {
   // script notice: why the hell w3 mark "defer" attribute on a <script /> without src an error?
-  // "An inline script element (i.e., a script element without a src attribute and with a type attribute that is either unspecified, empty, or a JavaScript MIME type) must not have a defer attribute."
+  //   "An inline script element (i.e., a script element without a src attribute and with 
+  //   a type attribute that is either unspecified, empty, or a JavaScript MIME type) must not 
+  //   have a defer attribute."
   fs.writeFileSync(fileName, `
     <!DOCTYPE html>
     <html lang="en">
@@ -169,6 +143,7 @@ type AnyReactElement = ReactElement<
 >
 
 function recursivelyRenderJSXFast(element: JSX.Element | JSX.Element[]): string {
+  // check for 'null' or 'undefined' case
   if (!element) return ''
 
   if (Array.isArray(element)) {
@@ -191,7 +166,7 @@ function recursivelyRenderJSXFast(element: JSX.Element | JSX.Element[]): string 
     return element
   }
   
-  // edge-case: using other component
+  // edge-case: using other component like <OtherComponent />
   if (typeof element?.type === "function") {
     return recursivelyRenderJSXFast(element.type(element.props))
   }
