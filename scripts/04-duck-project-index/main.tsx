@@ -39,8 +39,8 @@ const htmlRendererOptions: IRenderHtmlOption = {
   css: `${APP_GLOBAL_CSS} ${dumpCssThenClearCache()}`
 }
 
-renderHtmlTo("./docs/04-coursera-css-custom/index.html", htmlRendererOptions, <HomePage buildDate={buildDate} />)
+renderHtmlTo("./docs/04-duck-project-index/index.html", htmlRendererOptions, <HomePage buildDate={buildDate} />)
 
 for (const project of PROJECT_REGISTRY) {
-  renderHtmlTo(`./docs/04-coursera-css-custom/${project.projectNameId}.html`, htmlRendererOptions, <HomeProjectPage />)
+  renderHtmlTo(`./docs/04-duck-project-index/${project.projectNameId}.html`, htmlRendererOptions, <HomeProjectPage />)
 }
