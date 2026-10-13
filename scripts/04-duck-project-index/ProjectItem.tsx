@@ -28,7 +28,7 @@ export function ProjectItem(props: IProjectStat) {
         <Tag bgColor={PROJECT_TYPE_COLOR_MAPPING[props.type]}>{props.type}</Tag>
         <Tag bgColor={PROJECT_STATUS_REGISTRY[props.status]}>Status: {props.status}</Tag>
       </div>
-      <p>{props.description}</p>
+      {Bun.markdown.react(props.description)}
     </li>
   )
 }

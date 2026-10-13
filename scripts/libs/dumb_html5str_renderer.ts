@@ -189,6 +189,5 @@ function isExactlyAReactElement(element: JSX.Element): element is AnyReactElemen
 
   return 'type' in element && 
     'key' in element && 
-    'props' in element && 
-    '_owner' in element // one more, just to make sure
+    'ref' in element
 }

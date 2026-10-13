@@ -42,5 +42,5 @@ const htmlRendererOptions: IRenderHtmlOption = {
 renderHtmlTo("./docs/04-duck-project-index/index.html", htmlRendererOptions, <HomePage buildDate={buildDate} />)
 
 for (const project of PROJECT_REGISTRY) {
-  renderHtmlTo(`./docs/04-duck-project-index/${project.projectNameId}.html`, htmlRendererOptions, <HomeProjectPage />)
+  renderHtmlTo(`./docs/04-duck-project-index/${project.projectNameId}.html`, htmlRendererOptions, <HomeProjectPage {...project} />)
 }

@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "types": ["@types/node", "react/jsx-runtime"],
+    "types": ["@types/node", "react/jsx-runtime", "@types/bun"],
     "jsx": "react-jsx"
   }
 }
