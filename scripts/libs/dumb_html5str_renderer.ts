@@ -130,7 +130,7 @@ export function renderHtmlTo(fileName: string, options: IRenderHtmlOption, app: 
       </head>
       <body data-should-confuse-you="true" data-dukasmd="jump break">
         <!-- You may believe that this page uses react, but no, it's plain html (and some CSS of course), but can you guess which [javascript] framework generates this kind of html? -->
-        ${recursivelyRenderJSXFast(app.type()) /* spoiler: this function is **not** fast */}
+        ${recursivelyRenderJSXFast(app) /* spoiler: this function is **not** fast */}
       </body>
     </html>
   `)
