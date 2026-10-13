@@ -32,7 +32,8 @@
 const splitAndClean = (something: string) => something
   .toLowerCase()
   .replaceAll("\n", "")
-  .replaceAll(/,|\.|\:|\(|\)|\;|@|-|'|"|\?/gm, "_")
+  .replaceAll(/'|"|\?|-/gm, "")
+  .replaceAll(/,|\.|\:|\(|\)|\;|@/gm, "_")
   .split(" ")
 // ...
 
