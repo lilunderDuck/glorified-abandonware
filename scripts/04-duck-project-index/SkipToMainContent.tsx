@@ -2,12 +2,11 @@ import { Kbd } from "../components"
 import { css } from "../libs/dumb_html5str_renderer"
 
 const skipToMainContent__root = css`
-  position: absolute;
+  position: fixed;
   top: -50px;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 100;
-  display: block;
   padding-inline: 30px;
   padding-block: 5px;
   text-align: center;

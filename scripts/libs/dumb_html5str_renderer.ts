@@ -144,7 +144,7 @@ type AnyReactElement = ReactElement<
 
 function recursivelyRenderJSXFast(element: JSX.Element | JSX.Element[]): string {
   // check for 'null' or 'undefined' case
-  if (!element) return ''
+  if (element == null || element == undefined) return ''
 
   if (Array.isArray(element)) {
     let stringifiedElement = ""
@@ -162,7 +162,7 @@ function recursivelyRenderJSXFast(element: JSX.Element | JSX.Element[]): string 
     return stringifiedElement
   }
 
-  if (typeof element === "string") {
+  if (typeof element === "string" || typeof element === "number") {
     return element
   }
   

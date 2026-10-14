@@ -1,5 +1,3 @@
-import { JSX } from "react"
-
 export interface IProjectStat {
   type: "private" | "public"
   status: "active" | "paused" | "completed" | "stopped"
@@ -9,7 +7,7 @@ export interface IProjectStat {
   description: string
   longDescription: string[]
   coverImages: string[]
-  totalCommits: number
+  totalCommits: string // WORKAROUND: currently didn't found why numbers aren't rendered
   previewImages?: string[]
   licence?: {
     name: string
@@ -23,8 +21,7 @@ export const PROJECT_REGISTRY: IProjectStat[] = [
     title: "BigChadGuys+ decompilation",
     projectNameId: "bcg-decomp",
     description: "Decompilation of a minecraft modpack called: [BigChadGuys+ (Non Cobblemon!)](https://www.curseforge.com/minecraft/modpacks/bcgnc) by [jflec](https://www.curseforge.com/members/jflec/projects) (with additional 95 more mods = 396 mods) for fabric 1.20.1",
-    projectRepoUrl: "https://github.com/lilunderDuck/this-generic-playlist",
-    totalCommits: 41,
+    totalCommits: '72',
     type: "private",
     longDescription: [
       "This is an attempt to optimize my modified BCG+ NC modpack for my forever world and the launch time, while also adding some unfixable mods that just crash when opening the world ([Create Big Cannons](https://modrinth.com/mod/create-big-cannons) for example).",
@@ -35,33 +32,25 @@ export const PROJECT_REGISTRY: IProjectStat[] = [
     status: "active",
   },
   {
-    title: "This generic playlist",
-    projectNameId: "toast-playlist",
-    description: "A totally normal playlist player with no twist whatsoever, also completely running in a browser tab.",
-    projectRepoUrl: "https://github.com/lilunderDuck/this-generic-playlist",
-    totalCommits: 41,
-    type: "public",
-    longDescription: [],
-    coverImages: [],
-    status: "active",
-    licence: [{
-      name: "MIT",
-      url: "https://opensource.org/license/mit"
-    }]
-  },
-  {
     title: "Unnamed spinning cube",
     projectNameId: "unnamed-spinning-cube",
     description: "Ominous spinning cube... or is it really a spinning cube?",
     projectRepoUrl: "https://github.com/lilunderDuck/unnamed-spinning-cube",
-    totalCommits: 41,
+    totalCommits: '41',
     type: "public",
-    longDescription: [],
-    coverImages: [],
+    longDescription: [
+      "# Spinning cube??",
+      "Not a cube spinning around violently actually, it's just Maxwell the Cat (at least now) spinning around slowly.",
+      "See this unserious project here: [https://lilunderduck.github.io/unnamed-spinning-cube/](https://lilunderduck.github.io/unnamed-spinning-cube/)",
+      "# Background",
+      "A completely unserious project that I want to try and messing around with [THREE.js](https://threejs.org/), just to have a break with recent personal projects I'm currently working."
+    ],
+    coverImages: ['./maxwell_the_cat.png'],
     status: "active",
     licence: [{
       name: "MIT",
-      url: "https://opensource.org/license/mit"
+      url: "https://opensource.org/license/mit",
+      why: "for the code that handles rendering stuff"
     }, {
       name: "CC BY 4.0",
       url: "https://creativecommons.org/licenses/by/4.0/deed.en",
@@ -73,7 +62,7 @@ export const PROJECT_REGISTRY: IProjectStat[] = [
     projectNameId: "glorified-abandonware",
     description: "Repo for some required course I need to take (oh well).",
     projectRepoUrl: "https://github.com/lilunderDuck/glorified-abandonware",
-    totalCommits: 18,
+    totalCommits: '18',
     type: "public",
     longDescription: [],
     coverImages: [],
@@ -82,36 +71,29 @@ export const PROJECT_REGISTRY: IProjectStat[] = [
       name: "MIT",
       url: "https://opensource.org/license/mit"
     }]
-  },
-  {
-    title: "Progress tracker",
-    projectNameId: "toast-progress-tracker",
-    description: "My own progress tracking list, running directly on my browser tab.",
-    longDescription: [],
-    coverImages: [],
-    projectRepoUrl: "https://github.com/lilunderDuck/progress-tracker",
-    status: "paused",
-    totalCommits: 17,
-    type: "public"
-  },
-  {
-    title: "smol map",
-    projectNameId: "smol-map",
-    description: "Experimenting with terminal UI by making an app for searching yarn v1 .tiny mapping.",
-    projectRepoUrl: "https://github.com/lilunderDuck/smol-map",
-    totalCommits: 9,
-    type: "public",
-    longDescription: [],
-    coverImages: [],
-    status: "paused",
-  },
+  }
 ]
 
-export const PROJECT_STATUS_REGISTRY: Record<IProjectStat["status"], string> = {
-  active: "var(--green)",
-  paused: "var(--yellow)",
-  completed: "var(--sapphire)",
-  stopped: "var(--red)"
+export const PROJECT_STATUS_REGISTRY: Record<IProjectStat["status"], {
+  color: string
+  description: string
+}> = {
+  active: {
+    color: "var(--green)",
+    description: "mint_duck is currently active on maintaining this"
+  },
+  paused: {
+    color: "var(--yellow)",
+    description: "mint_duck is currently pausing this project and will go back to maintain it later"
+  },
+  completed: {
+    color: "var(--sapphire)",
+    description: "mint_duck is finished doing this project (at least for now)"
+  },
+  stopped: {
+    color: "var(--red)",
+    description: "mint_duck has stopped maintaining this project (due to motivation loss for example)"
+  },
 }
 
 export const PROJECT_TYPE_COLOR_MAPPING: Record<IProjectStat["type"], string> = {

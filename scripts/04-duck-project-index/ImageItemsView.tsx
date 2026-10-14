@@ -8,7 +8,7 @@ const view__oneItemView = css`
 
 export function ImageOneItemView(props: ImageViewPropsCompatible) {
   return (
-    <div class={view__oneItemView}>
+    <div class={`${view__oneItemView} ${props.class ?? ""}`}>
       <img class={view__image} src={`./assets/${props.images[0]}`} draggable={false} />
     </div>
   )
@@ -50,7 +50,7 @@ const view__image = css`
   width: 100%;
 `
 
-type ImageViewPropsCompatible = { images: IProjectStat["coverImages"] }
+type ImageViewPropsCompatible = { images: IProjectStat["coverImages"], class?: string }
 
 export function ImageThreeItemView(props: ImageViewPropsCompatible) {
   return (

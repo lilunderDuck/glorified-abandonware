@@ -7,6 +7,21 @@ const item__root = css`
   padding-inline: 10px;
   padding-block: 5px;
   margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+`
+
+const item__index = css`
+  font-size: 2rem;
+  width: 30px;
+  flex-shrink: 0;
+`
+
+const item__icon = css`
+  width: 4.25rem;
+  height: 4.25rem;
+  flex-shrink: 0;
 `
 
 const item__titleWrap = css`
@@ -16,19 +31,31 @@ const item__titleWrap = css`
   margin-bottom: 5px;
 `
 
-export function ProjectItem(props: IProjectStat) {
+export function ProjectItem(props: IProjectStat & { index: number }) {
   return (
     <li class={item__root}>
-      <div class={item__titleWrap}>
-        <h2>
-          <a href={`./${props.projectNameId}.html`}>
-            {props.title}
-          </a>
-        </h2>
-        <Tag bgColor={PROJECT_TYPE_COLOR_MAPPING[props.type]}>{props.type}</Tag>
-        <Tag bgColor={PROJECT_STATUS_REGISTRY[props.status]}>Status: {props.status}</Tag>
+      <div class={item__index}>
+        {props.index}
       </div>
-      {Bun.markdown.react(props.description)}
+      <img class={item__icon} draggable={false}>
+        {/* ... */}
+      </img>
+      <div>
+        <div class={item__titleWrap}>
+          <h2>
+            <a href={`./${props.projectNameId}.html`}>
+              {props.title}
+            </a>
+          </h2>
+          <Tag bgColor={PROJECT_TYPE_COLOR_MAPPING[props.type]}>
+            {props.type}
+          </Tag>
+          <Tag bgColor={PROJECT_STATUS_REGISTRY[props.status].color}>
+            {props.status}
+          </Tag>
+        </div>
+        {Bun.markdown.react(props.description)}
+      </div>
     </li>
   )
 }
