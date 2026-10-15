@@ -59,7 +59,7 @@ export function GlobalHeader(props: { header: string }) {
       <div class={header__titleWrap}>
         {/* NOTE: image is not optimized (4.98MB!!) */}
         <h1 class={header__header}>{props.header}</h1>
-        <img src="./assets/BaconGallupPark.jpg" width="200" alt="Brown Labradoodle sitting next to a statue." draggable={false} />
+        <img src="../02-gallery/assets/BaconGallupPark.jpg" width="200" alt="Brown Labradoodle sitting next to a statue." draggable={false} />
       </div>
     </header>
   )
