@@ -12,6 +12,13 @@ const page__projectNameWrap = css`
   align-items: center;
   margin-bottom: 10px;
   background-color: var(--base);
+  & [data-see-source-code-link] {
+    opacity: 0;
+  }
+
+  &:hover [data-see-source-code-link] {
+    opacity: 1;
+  }
 `
 
 const page__nameWrap = css`
@@ -53,11 +60,8 @@ export default function ProjectName(props: IProjectData) {
       <div class={`${page__projectNameWrap} ${props.score ? "" : page__projectScoreNotAviable}`.trim()}>
         <div class={page__nameWrap}>
           <code>{props.name}</code>
-          {props.custom && (
-            <Tag bgColor="var(--flamingo)">
-              Custom project
-            </Tag>
-          )}
+
+          <a data-see-source-code-link href={`https://github.com/lilunderDuck/glorified-abandonware/tree/main/docs/${props.name}`} target="_blank">See source code</a>
         </div>
 
         <div>
