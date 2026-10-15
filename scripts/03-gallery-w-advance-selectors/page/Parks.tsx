@@ -46,71 +46,18 @@ const page__images = css`
 `
 
 const page__imageGrid = css`
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(6, 1fr);
   gap: 8px;
-  height: 50rem;
+  display: grid;
+  grid-template-columns: 40% 40%;
+  justify-content: space-between;
+  row-gap: 30px;
+  gap: 20px;
+  justify-content: center;
+  & img {
+    width: 100%;
+    align-items: center;
+  }
 `
-    
-const page__image1 = css`
-  grid-column: span 2 / span 2;
-  grid-row: span 3 / span 3;
-`
-
-const page__image2 = css`
-  grid-row: span 3 / span 3;
-  grid-column-start: 3;
-`
-
-const page__image3 = css`
-  grid-row: span 3 / span 3;
-  grid-column-start: 1;
-  grid-row-start: 4;
-`
-
-const page__image4 = css`
-  grid-column: span 2 / span 2;
-  grid-row: span 3 / span 3;
-  grid-column-start: 2;
-  grid-row-start: 4;
-`
-
-const page__image5 = css`
-  grid-column: span 2 / span 2;
-  grid-row: span 2 / span 2;
-  grid-column-start: 4;
-  grid-row-start: 1;
-`
-
-const page__image6 = css`
-  grid-row: span 4 / span 4;
-  grid-column-start: 5;
-  grid-row-start: 3;
-`
-
-const page__image7 = css`
-  grid-row: span 2 / span 2;
-  grid-column-start: 4;
-  grid-row-start: 3;
-`
-
-const page__image8 = css`
-  grid-row: span 2 / span 2;
-  grid-column-start: 4;
-  grid-row-start: 5;
-`
-
-const IMAGE_CLASSLIST = [
-  page__image1,
-  page__image2,
-  page__image3,
-  page__image4,
-  page__image5,
-  page__image6,
-  page__image7,
-  page__image8,
-]
 
 export default function ParksPage() {
   return (
@@ -119,14 +66,12 @@ export default function ParksPage() {
       <main class={page__main} id='main_content_jump_to_here'>
         <div class={page__imageGrid}>
           {IMAGE_LIST.map((it, index, _) => (
-            <div class={IMAGE_CLASSLIST[index]}>
-              <img 
-                src={`../02-gallery/assets/${it.image}`}
-                alt={it.description}
-                class={page__images}
-                draggable={false}
-              />
-            </div>
+            <img 
+              src={`../02-gallery/assets/${it.image}`}
+              alt={it.description}
+              class={page__images}
+              draggable={false}
+            />
           ))}
         </div>
       </main>
