@@ -62,6 +62,7 @@ export default function ProjectName(props: IProjectData) {
           <code>{props.name}</code>
 
           <a data-see-source-code-link href={`https://github.com/lilunderDuck/glorified-abandonware/tree/main/docs/${props.name}`} target="_blank">See source code</a>
+          <a data-see-source-code-link href={`https://lilunderduck.github.io/glorified-abandonware/${props.name}`} target="_blank">See page</a>
         </div>
 
         <div>
