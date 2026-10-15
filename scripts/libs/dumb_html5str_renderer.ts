@@ -25,7 +25,7 @@ function elm<T extends keyof HTMLElementTagNameMap>(
   tag: T, 
   tagAttributes: HTMLAttribute<T> | undefined, 
   child: ChildNodeCompatible = []
-): string {
+) {
   let stringifiedAttribute = ""
   let childern = stringifyChildern(child)
 
@@ -48,7 +48,7 @@ function elm<T extends keyof HTMLElementTagNameMap>(
     stringifiedAttribute += `${attributeName}="${tagAttributes[attributeName]}" `
   }
 
-  return `<${tag}${tagAttributes ? ` ${stringifiedAttribute.trim()}` : ""}>${childern}</${tag}>`
+  return `<${tag}${tagAttributes ? ` ${stringifiedAttribute.trim()}` : ""}>${childern}</${tag}>` as const
 }
 
 const cachedCssValues = new Set<string>()
