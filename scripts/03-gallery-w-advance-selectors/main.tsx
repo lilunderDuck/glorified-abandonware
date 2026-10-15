@@ -53,6 +53,6 @@ const htmlRendererOptions: IRenderHtmlOption = {
   bodyClass: `${scrollbar} ${scrollbar__horizontal}`
 }
 
-renderHtmlTo("./docs/02-gallery/index.html", htmlRendererOptions, <HomePage />)
-renderHtmlTo("./docs/02-gallery/neighborhood.html", htmlRendererOptions, <NeighborhoodPage />)
-renderHtmlTo("./docs/02-gallery/parks.html", htmlRendererOptions, <ParksPage />)
+renderHtmlTo("./docs/03-gallery-w-advance-selectors/index.html", htmlRendererOptions, <HomePage />)
+renderHtmlTo("./docs/03-gallery-w-advance-selectors/neighborhood.html", htmlRendererOptions, <NeighborhoodPage />)
+renderHtmlTo("./docs/03-gallery-w-advance-selectors/parks.html", htmlRendererOptions, <ParksPage />)

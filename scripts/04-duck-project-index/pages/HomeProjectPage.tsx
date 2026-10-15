@@ -1,6 +1,6 @@
-import { scrollbar, scrollbar__invs, scrollbar__vertical, Tag } from "../../components"
+import { scrollbar, scrollbar__invs, scrollbar__vertical, SkipToMainContent, Tag } from "../../components"
 import { css } from "../../libs/dumb_html5str_renderer"
-import { GlobalNavBar, ImageItemView, ImageOneItemView, SkipToMainContent } from "../components"
+import { GlobalNavBar, ImageOneItemView } from "../components"
 import { IProjectStat, PROJECT_STATUS_REGISTRY, PROJECT_TYPE_COLOR_MAPPING } from "../data"
 
 const page__root = css`

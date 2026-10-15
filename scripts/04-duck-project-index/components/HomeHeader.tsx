@@ -1,6 +1,6 @@
+import { SkipToMainContent } from "../../components"
 import { css } from "../../libs/dumb_html5str_renderer"
 import { GlobalNavBar } from "./GlobalNavBar"
-import { SkipToMainContent } from "./SkipToMainContent"
 
 const page__header = css`
   width: 100%;
