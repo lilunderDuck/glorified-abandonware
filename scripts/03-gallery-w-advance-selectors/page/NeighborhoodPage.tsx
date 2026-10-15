@@ -67,16 +67,16 @@ const page__image10 = css`
 `
 
 const IMAGE_LIST = [
-  { image: "./assets/bend_in_the_road.png", description: "a purple tree stands in contrast to the green leaved trees along a bend in the road" },
-  { image: "./assets/pink_blossoms.png", description: "small pink blossoms on an otherwise green leaved tree" },
-  { image: "./assets/blooming_trees.png", description: "brown labradoodle sitting in front of white and purple blooming  trees" },
-  { image: "./assets/falling_petals.png", description: "a purple tulip tree that is beginning to shed its petals" },
-  { image: "./assets/hanging_plants.png", description: "red and green plants in a decorative hanging basket" },
-  { image: "./assets/potted_plants.png", description: "a decorative planter with a variety of brightly colored plants " },
-  { image: "./assets/red_maple.png", description: "a small Japanese maple tree in front of a putple door" },
-  { image: "./assets/tree_with_white_blooms.png", description: "brown labradoodle sitting in front of tree blooming with white petals" },
-  { image: "./assets/tulips.png", description: "bright red tulips in front of a garden light" },
-  { image: "./assets/white_buds_on_tree.png", description: "artsy shot of white blooms on a green tree with a dark background" },
+  { image: "bend_in_the_road.png", description: "a purple tree stands in contrast to the green leaved trees along a bend in the road" },
+  { image: "pink_blossoms.png", description: "small pink blossoms on an otherwise green leaved tree" },
+  { image: "blooming_trees.png", description: "brown labradoodle sitting in front of white and purple blooming  trees" },
+  { image: "falling_petals.png", description: "a purple tulip tree that is beginning to shed its petals" },
+  { image: "hanging_plants.png", description: "red and green plants in a decorative hanging basket" },
+  { image: "potted_plants.png", description: "a decorative planter with a variety of brightly colored plants " },
+  { image: "red_maple.png", description: "a small Japanese maple tree in front of a putple door" },
+  { image: "tree_with_white_blooms.png", description: "brown labradoodle sitting in front of tree blooming with white petals" },
+  { image: "tulips.png", description: "bright red tulips in front of a garden light" },
+  { image: "white_buds_on_tree.png", description: "artsy shot of white blooms on a green tree with a dark background" },
 ]
 
 const IMAGE_CLASSLIST = [
@@ -104,7 +104,7 @@ export default function NeighborhoodPage() {
         <div class={page__imageGrid}>
           {IMAGE_LIST.map((it, index, _) => (
             <img 
-              src={it.image}
+              src={`../02-gallery/assets/${it.image}`}
               alt={it.description}
               class={`${IMAGE_CLASSLIST[index]} ${page__images}`}
               draggable={false}

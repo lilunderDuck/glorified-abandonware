@@ -121,7 +121,7 @@ export default function ParksPage() {
           {IMAGE_LIST.map((it, index, _) => (
             <div class={IMAGE_CLASSLIST[index]}>
               <img 
-                src={`./assets/${it.image}`}
+                src={`../02-gallery/assets/${it.image}`}
                 alt={it.description}
                 class={page__images}
                 draggable={false}
