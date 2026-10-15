@@ -1,3 +1,4 @@
+import { scrollbar, scrollbar__horizontal } from "../components"
 import { dumpCssThenClearCache, type IRenderHtmlOption, renderHtmlTo } from "../libs/dumb_html5str_renderer"
 import HomePage from "./page/HomePage"
 import NeighborhoodPage from "./page/NeighborhoodPage"
@@ -21,6 +22,22 @@ const APP_GLOBAL_CSS = `
   *:focus {
     outline: 4px solid var(--sapphire);
   }
+
+  p, code, li {
+    font-size: 1.5rem;
+  }
+
+  h2 {
+    font-size: 2.3rem;
+  }
+
+  h1 {
+    font-size: 2.375rem;
+  }
+
+  p:not(:last-child) {
+    margin-bottom: 20px;
+  }
 `
 
 const htmlRendererOptions: IRenderHtmlOption = {
@@ -28,7 +45,8 @@ const htmlRendererOptions: IRenderHtmlOption = {
   title: "Springtime In Michigan",
   noFlashbangWhenOpened: true,
   libraryUsed: "libduck_haxjsx2html5 palette@catppuccin_mocha",
-  css: `${APP_GLOBAL_CSS} ${dumpCssThenClearCache()}`
+  css: `${APP_GLOBAL_CSS} ${dumpCssThenClearCache()}`,
+  bodyClass: `${scrollbar} ${scrollbar__horizontal}`
 }
 
 renderHtmlTo("./docs/02-gallery/index.html", htmlRendererOptions, <HomePage />)

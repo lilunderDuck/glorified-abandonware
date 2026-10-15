@@ -1,10 +1,17 @@
-import { GlobalHeader } from "../components";
+import { css } from "../../libs/dumb_html5str_renderer"
+import { GlobalHeader, ShoutOutFooter } from "../components"
+
+const page__main = css`
+  padding-inline: 10%;
+  padding-top: 15px;
+  padding-bottom: 10px;
+`
 
 export default function HomePage() {
   return (
     <>
       <GlobalHeader header="Springtime in Michigan" />
-      <main>
+      <main class={page__main}>
         <p>Springtime in <a href="https://www.michigan.org/city/ann-arbor">Ann Arbor</a> is a beautiful time. Even though
           it can be chilly at times, it is nice to walk my dog Bacon. This site includes some pictures I have taken on
           these walks. 
@@ -16,11 +23,7 @@ export default function HomePage() {
           the <a href="https://www.a2gov.org/departments/Parks-Recreation/parks-places/argo/pages/default.aspx">Argo Park
             Cascades</a>.</p>
       </main>
-      <footer>
-        <p>This page was originally created by Colleen van Lent for the <a
-            href="https://www.coursera.org/specializations/web-design"> Web Design for Everybody</a> Specialization.
-          Specialization. Students are invited to make changes.</p>
-      </footer>
+      <ShoutOutFooter />
     </>
   )
 }

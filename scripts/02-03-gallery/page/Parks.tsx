@@ -1,4 +1,4 @@
-import { GlobalHeader } from "../components"
+import { GlobalHeader, ShoutOutFooter } from "../components"
 
 const IMAGE_LIST = [
   {
@@ -46,11 +46,7 @@ export default function ParksPage() {
           ))}
         </div>
       </main>
-      <footer>
-        <p>This page was originally created by Colleen van Lent for the <a
-          href="https://www.coursera.org/specializations/web-design"> Web Design for Everybody</a> Specialization.
-          Students are invited to make changes.</p>
-      </footer>
+      <ShoutOutFooter />
     </>
   )
 }

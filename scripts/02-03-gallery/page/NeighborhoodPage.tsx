@@ -1,4 +1,4 @@
-import { GlobalHeader } from "../components";
+import { GlobalHeader, ShoutOutFooter } from "../components";
 
 export default function NeighborhoodPage() {
   return (
@@ -23,11 +23,7 @@ export default function NeighborhoodPage() {
             width="100" />
         </div>
       </main>
-      <footer>
-        <p>This page was originally created by Colleen van Lent for the <a
-          href="https://www.coursera.org/specializations/web-design"> Web Design for Everybody</a> Specialization.
-          Students are invited to make changes.</p>
-      </footer>
+      <ShoutOutFooter />
     </>
   )
 }

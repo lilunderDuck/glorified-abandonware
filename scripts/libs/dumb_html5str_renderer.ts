@@ -110,6 +110,7 @@ export interface IRenderHtmlOption {
   css: string
   /**Prevent white "flash" on page load */
   noFlashbangWhenOpened: boolean
+  bodyClass?: string
 }
 
 export function renderHtmlTo(fileName: string, options: IRenderHtmlOption, app: JSX.Element) {
@@ -133,7 +134,7 @@ export function renderHtmlTo(fileName: string, options: IRenderHtmlOption, app: 
         ${options.noFlashbangWhenOpened ? NO_FLASHBANG_WORKAROUND : ""}
         <style data-inline>${options.css}</style>
       </head>
-      <body data-should-confuse-you="true" data-dukasmd="jump break">
+      <body data-should-confuse-you="true" data-dukasmd="jump break"${options.bodyClass ? ` class="${options.bodyClass}"` : ""}>
         <!-- You may believe that this page uses react, but no, it's plain html (and some CSS of course), but can you guess which [javascript] framework generates this kind of html? -->
         ${recursivelyRenderJSXFast(app) /* spoiler: this function is **not** fast */}
       </body>
