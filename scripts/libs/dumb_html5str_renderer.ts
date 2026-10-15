@@ -96,13 +96,6 @@ function stringifyChildern(child: ChildNodeCompatible) {
   return childern
 }
 
-const NO_FLASHBANG_WORKAROUND = `
-  <!-- Aw, why I can't use my custom attribute W3C, I'm beggin' -->
-  <style data-why="prevent flashbang when reload/open this">
-    html {background-color: #11111b}
-  </style>
-`
-
 export interface IRenderHtmlOption {
   title: string
   reason: string
@@ -111,9 +104,35 @@ export interface IRenderHtmlOption {
   /**Prevent white "flash" on page load */
   noFlashbangWhenOpened: boolean
   bodyClass?: string
+  /**When setting to `true`, it will print the project name with libaries used and 
+   * a "disclaimer" message, just to make sure anyone on coursera rate my works
+   * correctly.
+   * 
+   * @default true
+   * @see `peer_rating_sim.ts` for the message
+   */
+  shouldIncludeDisclaimer?: boolean
+  isRoot?: boolean
 }
 
 export function renderHtmlTo(fileName: string, options: IRenderHtmlOption, app: JSX.Element) {
+  if (options.shouldIncludeDisclaimer === undefined) {
+    options.shouldIncludeDisclaimer = true
+  }
+
+  const INCLUDE_DISCLAIMER_SCRIPTS = `
+    <!-- Make sure to love coursera peer-rated project -->
+    <script src="../assets/peer_rating_sim.js" defer></script>
+    <script>document.addEventListener('DOMContentLoaded', () => duck.simulatePeerRatingExperience("${options.libraryUsed ?? '[none]'}", "${options.title}"))</script>
+  `
+
+  const NO_FLASHBANG_WORKAROUND = `
+    <!-- Aw, why I can't use my custom attribute W3C, I'm beggin' -->
+    <style data-why="prevent flashbang when reload/open this">
+      html {background-color: #11111b}
+    </style>
+  `
+
   // script notice: why the hell w3 mark "defer" attribute on a <script /> without src an error?
   //   "An inline script element (i.e., a script element without a src attribute and with 
   //   a type attribute that is either unspecified, empty, or a JavaScript MIME type) must not 
@@ -125,12 +144,10 @@ export function renderHtmlTo(fileName: string, options: IRenderHtmlOption, app: 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>${options.title}</title>
-        <link rel="stylesheet" href="../assets/base.css">
+        <link rel="stylesheet" href="${options.isRoot ? "" : "."}./assets/base.css">
         <meta name="description" content="${options.reason}">
         <meta name="duck" content="this is duck">
-        <!-- Make sure to love coursera peer-rated project -->
-        <script src="../assets/peer_rating_sim.js" defer></script>
-        <script>document.addEventListener('DOMContentLoaded', () => duck.simulatePeerRatingExperience("${options.libraryUsed ?? '[none]'}", "${options.title}"))</script>
+        ${options.shouldIncludeDisclaimer ? INCLUDE_DISCLAIMER_SCRIPTS : ""}
         ${options.noFlashbangWhenOpened ? NO_FLASHBANG_WORKAROUND : ""}
         <style data-inline>${options.css}</style>
       </head>
