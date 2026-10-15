@@ -1,7 +1,9 @@
 import { dumpCssThenClearCache, IRenderHtmlOption, renderHtmlTo } from "../libs/dumb_html5str_renderer"
 import { PROJECT_REGISTRY } from "./data"
-import { HomePage } from "./HomePage"
-import { HomeProjectPage } from "./HomeProjectPage"
+// ...
+import AboutPage from "./pages/AboutPage"
+import HomePage from "./pages/HomePage"
+import HomeProjectPage from "./pages/HomeProjectPage"
 
 const dateFormatter = new Intl.DateTimeFormat("default", {
   day: "2-digit",
@@ -41,6 +43,8 @@ const htmlRendererOptions: IRenderHtmlOption = {
 
 renderHtmlTo("./docs/04-duck-project-index/index.html", htmlRendererOptions, <HomePage buildDate={buildDate} />)
 
+renderHtmlTo("./docs/04-duck-project-index/about.html", htmlRendererOptions, <AboutPage buildDate={buildDate} />)
+
 for (const project of PROJECT_REGISTRY) {
-  renderHtmlTo(`./docs/04-duck-project-index/${project.projectNameId}.html`, htmlRendererOptions, <HomeProjectPage {...project} />)
+  renderHtmlTo(`./docs/04-duck-project-index/${project.id}.html`, htmlRendererOptions, <HomeProjectPage {...project} />)
 }

@@ -1,4 +1,4 @@
-import { css } from "../libs/dumb_html5str_renderer"
+import { css } from "../../libs/dumb_html5str_renderer"
 
 const nav__root = css`
   position: fixed;
@@ -24,7 +24,7 @@ const nav__button = css`
   }
 `
 
-export default function GlobalNavBar() {
+export function GlobalNavBar() {
   return (
     <nav class={nav__root}>
       <a href="./index.html" class={nav__button}>

@@ -1,9 +1,7 @@
-import { scrollbar, scrollbar__invs, scrollbar__vertical, Tag } from "../components"
-import { css } from "../libs/dumb_html5str_renderer"
-import { IProjectStat, PROJECT_STATUS_REGISTRY, PROJECT_TYPE_COLOR_MAPPING } from "./data"
-import GlobalNavBar from "./GlobalNavBar"
-import { ImageItemView, ImageOneItemView } from "./ImageItemsView"
-import { SkipToMainContent } from "./SkipToMainContent"
+import { scrollbar, scrollbar__invs, scrollbar__vertical, Tag } from "../../components"
+import { css } from "../../libs/dumb_html5str_renderer"
+import { GlobalNavBar, ImageItemView, ImageOneItemView, SkipToMainContent } from "../components"
+import { IProjectStat, PROJECT_STATUS_REGISTRY, PROJECT_TYPE_COLOR_MAPPING } from "../data"
 
 const page__root = css`
   user-select: none;
@@ -122,14 +120,14 @@ const page__tableBody = css`
   }
 `
 
-export function HomeProjectPage(props: IProjectStat) {
+export default function HomeProjectPage(props: IProjectStat) {
   const NONE_TAG = <Tag bgColor="var(--red)">none</Tag>
 
   return (
     <div id="root" class={`${page__root} ${scrollbar} ${scrollbar__vertical} ${scrollbar__invs}`}>
       <SkipToMainContent />
       <header class={page__header}>
-        {props.coverImages[0] && <ImageOneItemView class={page__headerImgBorder} images={props.coverImages} />}
+        {props.coverImage && <ImageOneItemView class={page__headerImgBorder} images={props.coverImage} />}
         <div class={page__headerShadow} />
         <div class={page__titleWrap}>
           <span class={page__headerProjectNameWorkaround}>{props.title}</span>
@@ -148,7 +146,7 @@ export function HomeProjectPage(props: IProjectStat) {
         {props.previewImages && (
           <ProjectHeaderSection class={`${page__section} ${page__thisPreviewSection}`}>
             <div class={page__previewSection}>
-              <ImageItemView coverImages={props.previewImages} />
+              <ImageItemView coverImage={props.previewImages} />
             </div>
           </ProjectHeaderSection>
         )}
@@ -177,7 +175,7 @@ export function HomeProjectPage(props: IProjectStat) {
               <tr>
                 <th scope="row" data-category>Github url</th>
                 <td>
-                  {props.projectRepoUrl ? <a href={props.projectRepoUrl} target="_blank">{props.title}</a> : NONE_TAG}
+                  {props.repoUrl ? <a href={props.repoUrl} target="_blank">{props.title}</a> : NONE_TAG}
                 </td>
               </tr>
               <tr>

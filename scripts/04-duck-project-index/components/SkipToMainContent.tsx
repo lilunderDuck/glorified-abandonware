@@ -1,5 +1,5 @@
-import { Kbd } from "../components"
-import { css } from "../libs/dumb_html5str_renderer"
+import { Kbd } from "../../components"
+import { css } from "../../libs/dumb_html5str_renderer"
 
 const skipToMainContent__root = css`
   position: fixed;

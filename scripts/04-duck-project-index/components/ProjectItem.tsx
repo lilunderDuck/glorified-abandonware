@@ -1,6 +1,6 @@
-import { Tag } from "../components"
-import { css } from "../libs/dumb_html5str_renderer"
-import { IProjectStat, PROJECT_STATUS_REGISTRY, PROJECT_TYPE_COLOR_MAPPING } from "./data"
+import { Tag } from "../../components"
+import { css } from "../../libs/dumb_html5str_renderer"
+import { IProjectStat, PROJECT_STATUS_REGISTRY, PROJECT_TYPE_COLOR_MAPPING } from "../data"
 
 const item__root = css`
   list-style: none;
@@ -22,6 +22,7 @@ const item__icon = css`
   width: 4.25rem;
   height: 4.25rem;
   flex-shrink: 0;
+  border-radius: 6px;
 `
 
 const item__titleWrap = css`
@@ -37,13 +38,13 @@ export function ProjectItem(props: IProjectStat & { index: number }) {
       <div class={item__index}>
         {props.index}
       </div>
-      <img class={item__icon} draggable={false}>
+      <img class={item__icon} draggable={false} src={`./assets/icons/${props.icon}`}>
         {/* ... */}
       </img>
       <div>
         <div class={item__titleWrap}>
           <h2>
-            <a href={`./${props.projectNameId}.html`}>
+            <a href={`./${props.id}.html`}>
               {props.title}
             </a>
           </h2>

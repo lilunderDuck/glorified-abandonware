@@ -2,13 +2,14 @@ export interface IProjectStat {
   type: "private" | "public"
   status: "active" | "paused" | "completed" | "stopped"
   title: string
-  projectNameId: string
-  projectRepoUrl?: string
+  id: string
+  repoUrl?: string
   description: string
   longDescription: string[]
-  coverImages: string[]
+  coverImage?: string
   totalCommits: string // WORKAROUND: currently didn't found why numbers aren't rendered
   previewImages?: string[]
+  icon: string
   licence?: {
     name: string
     url: string
@@ -19,7 +20,7 @@ export interface IProjectStat {
 export const PROJECT_REGISTRY: IProjectStat[] = [
   {
     title: "BigChadGuys+ decompilation",
-    projectNameId: "bcg-decomp",
+    id: "bcg-decomp",
     description: "Decompilation of a minecraft modpack called: [BigChadGuys+ (Non Cobblemon!)](https://www.curseforge.com/minecraft/modpacks/bcgnc) by [jflec](https://www.curseforge.com/members/jflec/projects) (with additional 95 more mods = 396 mods) for fabric 1.20.1",
     totalCommits: '72',
     type: "private",
@@ -27,15 +28,16 @@ export const PROJECT_REGISTRY: IProjectStat[] = [
       "This is an attempt to optimize my modified BCG+ NC modpack for my forever world and the launch time, while also adding some unfixable mods that just crash when opening the world ([Create Big Cannons](https://modrinth.com/mod/create-big-cannons) for example).",
       "Every mods are going to be decompiled to identify any memory leaks, or optimize any resource intensive part of the code."
     ],
-    coverImages: ['bcg_2.png'],
+    coverImage: 'bcg_2.png',
     previewImages: ['bcg_2.png', 'bcg_3.png', 'bcg_1.png'],
     status: "active",
+    icon: 'bcg.png'
   },
   {
     title: "Unnamed spinning cube",
-    projectNameId: "unnamed-spinning-cube",
+    id: "unnamed-spinning-cube",
     description: "Ominous spinning cube... or is it really a spinning cube?",
-    projectRepoUrl: "https://github.com/lilunderDuck/unnamed-spinning-cube",
+    repoUrl: "https://github.com/lilunderDuck/unnamed-spinning-cube",
     totalCommits: '41',
     type: "public",
     longDescription: [
@@ -45,7 +47,7 @@ export const PROJECT_REGISTRY: IProjectStat[] = [
       "# Background",
       "A completely unserious project that I want to try and messing around with [THREE.js](https://threejs.org/), just to have a break with recent personal projects I'm currently working."
     ],
-    coverImages: ['./maxwell_the_cat.png'],
+    coverImage: './maxwell_the_cat.png',
     status: "active",
     licence: [{
       name: "MIT",
@@ -55,22 +57,29 @@ export const PROJECT_REGISTRY: IProjectStat[] = [
       name: "CC BY 4.0",
       url: "https://creativecommons.org/licenses/by/4.0/deed.en",
       why: "for all of the 3D models used in the project"
-    }]
+    }],
+    icon: 'maxwell.png'
   },
   {
     title: "Glorified abandonware",
-    projectNameId: "glorified-abandonware",
+    id: "glorified-abandonware",
     description: "Repo for some required course I need to take (oh well).",
-    projectRepoUrl: "https://github.com/lilunderDuck/glorified-abandonware",
-    totalCommits: '18',
+    repoUrl: "https://github.com/lilunderDuck/glorified-abandonware",
+    totalCommits: '27',
     type: "public",
-    longDescription: [],
-    coverImages: [],
+    longDescription: [
+      "# A dumping place and nothing else",
+      "Originally, I put it inside my other project: [unnamed-spinning-cube](https://github.com/lilunderDuck/unnamed-spinning-cube), but I decided to move it into another repo to seperate my project.",
+      "# Repo of (bad) interesting ideas",
+      "While doing this project, I was like *\"How can I be able to generate static html pages just by writing [JSX](https://en.wikipedia.org/wiki/JSX_(programming))?\"*, so I decided to write a not-production-ready highly experimental jsx to html5 renderer for myself. It was very fun.",
+    ],
+    coverImage: undefined,
     status: "active",
     licence: [{
       name: "MIT",
       url: "https://opensource.org/license/mit"
-    }]
+    }],
+    icon: "missing_no.png"
   }
 ]
 

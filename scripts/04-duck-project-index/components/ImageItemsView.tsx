@@ -1,5 +1,5 @@
-import { css } from "../libs/dumb_html5str_renderer"
-import { IProjectStat } from "./data"
+import { css } from "../../libs/dumb_html5str_renderer"
+import { IProjectStat } from "../data"
 
 const view__oneItemView = css`
   width: 100%;
@@ -50,7 +50,7 @@ const view__image = css`
   width: 100%;
 `
 
-type ImageViewPropsCompatible = { images: IProjectStat["coverImages"], class?: string }
+type ImageViewPropsCompatible = { images: NonNullable<IProjectStat["coverImage"]>, class?: string }
 
 export function ImageThreeItemView(props: ImageViewPropsCompatible) {
   return (
@@ -86,11 +86,13 @@ export function ImageFiveItemView(props: ImageViewPropsCompatible) {
   )
 }
 
-export function ImageItemView(props: { coverImages: IProjectStat["coverImages"] }) {
-  switch (props.coverImages.length) {
-    case 1: return <ImageOneItemView images={props.coverImages} />
-    case 3: return <ImageThreeItemView images={props.coverImages} />
-    case 5: return <ImageFiveItemView images={props.coverImages} />
+export function ImageItemView(props: { coverImage: IProjectStat["coverImage"] }) {
+  if (!props.coverImage) return <></>
+
+  switch (props.coverImage.length) {
+    case 1: return <ImageOneItemView images={props.coverImage} />
+    case 3: return <ImageThreeItemView images={props.coverImage} />
+    case 5: return <ImageFiveItemView images={props.coverImage} />
   
     default: return <></>
   }
