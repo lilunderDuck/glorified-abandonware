@@ -39,6 +39,13 @@ const header__titleWrap = css`
   padding-inline: 6rem;
 `
 
+const header__header = css`
+  color: var(--sky);
+  font-size: 3rem;
+  text-align: center;
+  width: 100%;
+`
+
 export function GlobalHeader(props: { header: string }) {
   return (
     <header class={header__root}>
@@ -51,7 +58,7 @@ export function GlobalHeader(props: { header: string }) {
       </nav>
       <div class={header__titleWrap}>
         {/* NOTE: image is not optimized (4.98MB!!) */}
-        <h1>{props.header}</h1>
+        <h1 class={header__header}>{props.header}</h1>
         <img src="./assets/BaconGallupPark.jpg" width="200" alt="Brown Labradoodle sitting next to a statue." draggable={false} />
       </div>
     </header>

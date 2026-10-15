@@ -1,26 +1,115 @@
-import { GlobalHeader, ShoutOutFooter } from "../components";
+import { css } from "../../libs/dumb_html5str_renderer"
+import { GlobalHeader, ShoutOutFooter } from "../components"
+
+const page__main = css`
+  padding-inline: 15px;
+`
+
+const page__imageGrid = css`
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 8px;
+`
+
+const page__images = css`
+  object-fit: cover;
+`
+    
+const page__image1 = css`
+  grid-row: span 3 / span 3;
+`
+
+const page__image2 = css`
+  grid-row: span 2 / span 2;
+`
+
+const page__image3 = css`
+  grid-row: span 3 / span 3;
+`
+
+const page__image4 = css`
+  grid-row: span 2 / span 2;
+`
+
+const page__image5 = css`
+  grid-row: span 3 / span 3;
+`
+
+const page__image6 = css`
+  grid-row: span 2 / span 2;
+  grid-column-start: 1;
+  grid-row-start: 4;
+`
+
+const page__image7 = css`
+  grid-row: span 3 / span 3;
+  grid-column-start: 2;
+  grid-row-start: 3;
+`
+
+const page__image8 = css`
+  grid-row: span 2 / span 2;
+  grid-column-start: 3;
+  grid-row-start: 4;
+`
+
+const page__image9 = css`
+  grid-row: span 3 / span 3;
+  grid-column-start: 4;
+  grid-row-start: 3;
+`
+
+const page__image10 = css`
+  grid-row: span 2 / span 2;
+  grid-column-start: 5;
+  grid-row-start: 4;
+`
+
+const IMAGE_LIST = [
+  { image: "./assets/bend_in_the_road.png", description: "a purple tree stands in contrast to the green leaved trees along a bend in the road" },
+  { image: "./assets/pink_blossoms.png", description: "small pink blossoms on an otherwise green leaved tree" },
+  { image: "./assets/blooming_trees.png", description: "brown labradoodle sitting in front of white and purple blooming  trees" },
+  { image: "./assets/falling_petals.png", description: "a purple tulip tree that is beginning to shed its petals" },
+  { image: "./assets/hanging_plants.png", description: "red and green plants in a decorative hanging basket" },
+  { image: "./assets/potted_plants.png", description: "a decorative planter with a variety of brightly colored plants " },
+  { image: "./assets/red_maple.png", description: "a small Japanese maple tree in front of a putple door" },
+  { image: "./assets/tree_with_white_blooms.png", description: "brown labradoodle sitting in front of tree blooming with white petals" },
+  { image: "./assets/tulips.png", description: "bright red tulips in front of a garden light" },
+  { image: "./assets/white_buds_on_tree.png", description: "artsy shot of white blooms on a green tree with a dark background" },
+]
+
+const IMAGE_CLASSLIST = [
+  page__image1,
+  page__image2,
+  page__image3,
+  page__image4,
+  page__image5,
+  page__image6,
+  page__image7,
+  page__image8,
+  page__image9,
+  page__image10,
+]
 
 export default function NeighborhoodPage() {
+  if (IMAGE_LIST.length !== IMAGE_CLASSLIST.length) {
+    throw new Error("There's not enough images or too much images to display, or there is a missing class.")
+  }
+
   return (
     <>
       <GlobalHeader header="Neighborhood Walks" />
-      <main>
-        <div>
-          <img src="images/bend_in_the_road.png"
-            alt="a purple tree stands in contrast to the green leaved trees along a bend in the road" width="100" />
-          <img src="images/pink_blossoms.png" alt="small pink blossoms on an otherwise green leaved tree" width="100" />
-          <img src="images/blooming_trees.png" alt="brown labradoodle sitting in front of white and purple blooming  trees"
-            width="100" />
-          <img src="images/falling_petals.png" alt="a purple tulip tree that is beginning to shed its petals" width="100" />
-          <img src="images/hanging_plants.png" alt="red and green plants in a decorative hanging basket" width="100" />
-          <img src="images/potted_plants.png" alt="a decorative planter with a variety of brightly colored plants "
-            width="100" />
-          <img src="images/red_maple.png" alt="a small Japanese maple tree in front of a putple door" width="100" />
-          <img src="images/tree_with_white_blooms.png"
-            alt="brown labradoodle sitting in front of tree blooming with white petals" width="100" />
-          <img src="images/tulips.png" alt="bright red tulips in front of a garden light" width="100" />
-          <img src="images/white_buds_on_tree.png" alt="artsy shot of white blooms on a green tree with a dark background"
-            width="100" />
+      <main class={page__main}>
+        <div class={page__imageGrid}>
+          {IMAGE_LIST.map((it, index, _) => (
+            <img 
+              src={it.image}
+              alt={it.description}
+              class={`${IMAGE_CLASSLIST[index]} ${page__images}`}
+              draggable={false}
+            />
+          ))}
         </div>
       </main>
       <ShoutOutFooter />

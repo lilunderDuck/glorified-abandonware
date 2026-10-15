@@ -27,6 +27,10 @@ const APP_GLOBAL_CSS = `
     font-size: 1.5rem;
   }
 
+  p {
+    line-height: 1.8rem;
+  }
+
   h2 {
     font-size: 2.3rem;
   }
