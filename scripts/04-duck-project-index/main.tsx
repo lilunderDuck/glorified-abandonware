@@ -46,5 +46,9 @@ renderHtmlTo("./docs/04-duck-project-index/index.html", htmlRendererOptions, <Ho
 renderHtmlTo("./docs/04-duck-project-index/about.html", htmlRendererOptions, <AboutPage buildDate={buildDate} />)
 
 for (const project of PROJECT_REGISTRY) {
+  if (project.disabled) {
+    continue
+  }
+  
   renderHtmlTo(`./docs/04-duck-project-index/${project.id}.html`, htmlRendererOptions, <HomeProjectPage {...project} />)
 }

@@ -15,23 +15,30 @@ export interface IProjectStat {
     url: string
     why?: string
   }[]
+  disabled?: boolean
 }
 
 export const PROJECT_REGISTRY: IProjectStat[] = [
   {
-    title: "BigChadGuys+ decompilation",
-    id: "bcg-decomp",
-    description: "Decompilation of a minecraft modpack called: [BigChadGuys+ (Non Cobblemon!)](https://www.curseforge.com/minecraft/modpacks/bcgnc) by [jflec](https://www.curseforge.com/members/jflec/projects) (with additional 95 more mods = 396 mods) for fabric 1.20.1",
-    totalCommits: '72',
-    type: "private",
+    title: "Glorified abandonware",
+    id: "glorified-abandonware",
+    description: "Repo for some required course I need to take (oh well).",
+    repoUrl: "https://github.com/lilunderDuck/glorified-abandonware",
+    totalCommits: '30',
+    type: "public",
     longDescription: [
-      "This is an attempt to optimize my modified BCG+ NC modpack for my forever world and the launch time, while also adding some unfixable mods that just crash when opening the world ([Create Big Cannons](https://modrinth.com/mod/create-big-cannons) for example).",
-      "Every mods are going to be decompiled to identify any memory leaks, or optimize any resource intensive part of the code."
+      "# A dumping place and nothing else",
+      "Originally, I put it inside my other project: [unnamed-spinning-cube](https://github.com/lilunderDuck/unnamed-spinning-cube), but I decided to move it into another repo to seperate my project.",
+      "# Repo of (bad) interesting ideas",
+      "While doing this project, I was like *\"How can I be able to generate static html pages just by writing [JSX](https://en.wikipedia.org/wiki/JSX_(programming))?\"*, so I decided to write a not-production-ready highly experimental jsx to html5 renderer for myself. It was very fun.",
     ],
-    coverImage: 'bcg_2.png',
-    previewImages: ['bcg_2.png', 'bcg_3.png', 'bcg_1.png'],
+    coverImage: undefined,
     status: "active",
-    icon: 'bcg.png'
+    licence: [{
+      name: "MIT",
+      url: "https://opensource.org/license/mit"
+    }],
+    icon: "missing_no.png"
   },
   {
     title: "Unnamed spinning cube",
@@ -61,17 +68,15 @@ export const PROJECT_REGISTRY: IProjectStat[] = [
     icon: 'maxwell.png'
   },
   {
-    title: "Glorified abandonware",
-    id: "glorified-abandonware",
-    description: "Repo for some required course I need to take (oh well).",
-    repoUrl: "https://github.com/lilunderDuck/glorified-abandonware",
-    totalCommits: '29',
+    title: "This generic playlist",
+    id: "toast-playlist",
+    description: "A totally normal playlist player with no twist whatsoever, also completely running in a browser tab.",
+    repoUrl: "https://github.com/lilunderDuck/this-generic-playlist",
+    totalCommits: '41',
     type: "public",
     longDescription: [
-      "# A dumping place and nothing else",
-      "Originally, I put it inside my other project: [unnamed-spinning-cube](https://github.com/lilunderDuck/unnamed-spinning-cube), but I decided to move it into another repo to seperate my project.",
-      "# Repo of (bad) interesting ideas",
-      "While doing this project, I was like *\"How can I be able to generate static html pages just by writing [JSX](https://en.wikipedia.org/wiki/JSX_(programming))?\"*, so I decided to write a not-production-ready highly experimental jsx to html5 renderer for myself. It was very fun.",
+      "A locally hosted playlist app that I originally wrote for just 3 days, since I just need a little bit of customization...",
+      "Because my laptop is screaming for more RAM for my average listening to music activity, and Youtube is eating too much RAM if left playing."
     ],
     coverImage: undefined,
     status: "active",
@@ -79,7 +84,76 @@ export const PROJECT_REGISTRY: IProjectStat[] = [
       name: "MIT",
       url: "https://opensource.org/license/mit"
     }],
-    icon: "missing_no.png"
+    icon: "toast.jpg",
+    disabled: true
+  },
+  {
+    title: "Smol map",
+    id: "smol-map",
+    description: "Experimenting with terminal UI by making an app for searching yarn v1 .tiny mapping.",
+    repoUrl: "https://github.com/lilunderDuck/smol-map",
+    totalCommits: '9',
+    type: "public",
+    longDescription: [],
+    coverImage: undefined,
+    status: "paused",
+    licence: [{
+      name: "MIT",
+      url: "https://opensource.org/license/mit"
+    }],
+    icon: "fabric.png",
+    disabled: true
+  },
+  {
+    title: "BigChadGuys+ decompilation",
+    id: "bcg-decomp",
+    description: "Decompilation of a minecraft modpack called: [BigChadGuys+ (Non Cobblemon!)](https://www.curseforge.com/minecraft/modpacks/bcgnc) by [jflec](https://www.curseforge.com/members/jflec/projects) (with additional 95 more mods = 396 mods) for fabric 1.20.1",
+    totalCommits: '72',
+    type: "private",
+    longDescription: [
+      "This is an attempt to optimize my modified BCG+ NC modpack for my forever world and the launch time, while also adding some unfixable mods that just crash when opening the world ([Create Big Cannons](https://modrinth.com/mod/create-big-cannons) for example).",
+      "Every mods are going to be decompiled to identify any memory leaks, or optimize any resource intensive part of the code."
+    ],
+    coverImage: 'bcg_2.png',
+    previewImages: ['bcg_2.png', 'bcg_3.png', 'bcg_1.png'],
+    status: "active",
+    icon: 'bcg.png'
+  },
+  {
+    title: "Progress tracker",
+    id: "toast-progress-tracker",
+    description: "My own progress tracking list, running directly on my browser tab.",
+    repoUrl: "https://github.com/lilunderDuck/progress-tracker",
+    totalCommits: '17',
+    type: "public",
+    longDescription: [
+    ],
+    coverImage: undefined,
+    status: "paused",
+    licence: [{
+      name: "MIT",
+      url: "https://opensource.org/license/mit"
+    }],
+    icon: "toast.jpg",
+    disabled: true
+  },
+  {
+    title: "Digital junk drawer.md",
+    id: "toast-note",
+    description: "Random note taking app for my daily writing. (Currently not active due to rewriting)",
+    repoUrl: "https://github.com/lilunderDuck/toast",
+    totalCommits: '413',
+    type: "private",
+    longDescription: [
+    ],
+    coverImage: undefined,
+    status: "stopped",
+    licence: [{
+      name: "MIT",
+      url: "https://opensource.org/license/mit"
+    }],
+    icon: "toast.jpg",
+    disabled: true
   }
 ]
 
