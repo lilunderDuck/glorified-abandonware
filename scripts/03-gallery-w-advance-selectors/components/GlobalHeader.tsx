@@ -5,6 +5,7 @@ const header__root = css`
   background-color: var(--mantle);
   padding: 15px;
   user-select: none;
+  height: 26rem;
 `
 
 const header__nav = css`
@@ -35,10 +36,16 @@ const header__titleWrap = css`
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  height: 100%;
   padding-inline: 6rem;
   /* req #5: Use a descendent selector to style only the image in the nav to have a width of about 10%. */
   & img {
-    width: 10%;
+    width: 16%;
+    /* Fix: image overflow */
+    height: 50%;
+    /* Fix: image stretch */
+    object-fit: contain;
+    flex-shrink: 0;
   }
 `
 
@@ -61,7 +68,7 @@ export function GlobalHeader(props: { header: string }) {
       <div class={header__titleWrap}>
         {/* NOTE: image is not optimized (4.98MB!!) */}
         <h1 class={header__header}>{props.header}</h1>
-        <img src="../02-gallery/assets/BaconGallupPark.jpg" width="200" alt="Brown Labradoodle sitting next to a statue." draggable={false} />
+        <img src="../02-gallery/assets/BaconGallupPark.jpg" alt="Brown Labradoodle sitting next to a statue." draggable={false} />
       </div>
     </header>
   )

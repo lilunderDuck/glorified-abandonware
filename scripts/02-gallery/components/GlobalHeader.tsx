@@ -4,6 +4,7 @@ const header__root = css`
   background-color: var(--mantle);
   padding: 15px;
   user-select: none;
+  height: 26rem;
 `
 
 const header__nav = css`
@@ -46,6 +47,11 @@ const header__header = css`
   width: 100%;
 `
 
+// Fix: image height is shifting when finish loading
+const header__imageJumpingWorkaround = css`
+  height: 17.5rem;
+`
+
 export function GlobalHeader(props: { header: string }) {
   return (
     <header class={header__root}>
@@ -59,7 +65,7 @@ export function GlobalHeader(props: { header: string }) {
       <div class={header__titleWrap}>
         {/* NOTE: image is not optimized (4.98MB!!) */}
         <h1 class={header__header}>{props.header}</h1>
-        <img src="./assets/BaconGallupPark.jpg" width="200" alt="Brown Labradoodle sitting next to a statue." draggable={false} />
+        <img class={header__imageJumpingWorkaround} src="./assets/BaconGallupPark.jpg" width="200" alt="Brown Labradoodle sitting next to a statue." draggable={false} />
       </div>
     </header>
   )
