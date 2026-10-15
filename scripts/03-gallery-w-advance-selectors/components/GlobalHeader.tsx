@@ -9,7 +9,9 @@ const header__root = css`
 
 const header__nav = css`
   padding: 20px;
-  width: 100%;
+  /* req #4: Change the nav element to use inline-block and have a width of about 80%. */
+  width: 80%;
+  display: inline-block;
 `
 
 const header__navButton = css`
@@ -26,18 +28,16 @@ const header__navButton = css`
   }
 `
 
-const header__navItemList = css`
-  display: flex;
-  gap: 15px;
-  padding-left: 0;
-`
-
 const header__titleWrap = css`
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   padding-inline: 6rem;
+  /* req #5: Use a descendent selector to style only the image in the nav to have a width of about 10%. */
+  & img {
+    width: 10%;
+  }
 `
 
 const header__header = css`
@@ -52,11 +52,9 @@ export function GlobalHeader(props: { header: string }) {
     <header class={header__root}>
       <SkipToMainContent />
       <nav class={header__nav}>
-        <ul class={header__navItemList}>
-          <li class={header__navButton}><a href="./index.html">Home</a></li>
-          <li class={header__navButton}><a href="./neighborhood.html">Neighborhood Walks</a></li>
-          <li class={header__navButton}><a href="./parks.html">Walks in the Park</a></li>
-        </ul>
+        <a class={header__navButton} href="./index.html">Home</a>
+        <a class={header__navButton} href="./neighborhood.html">Neighborhood Walks</a>
+        <a class={header__navButton} href="./parks.html">Walks in the Park</a>
       </nav>
       <div class={header__titleWrap}>
         {/* NOTE: image is not optimized (4.98MB!!) */}
