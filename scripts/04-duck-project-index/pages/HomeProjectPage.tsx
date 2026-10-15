@@ -226,17 +226,26 @@ const page__sectionHeaderDivider = css`
 `
 
 function ProjectHeaderSection(props: { children?: any, name?: string, class?: string }) {
-  return (
-    <section class={`${page__section} ${props.class ?? ""}`}>
-      {props.name && (
+  if (props.name) {
+    return (
+      <section data-section="project" class={`${page__section} ${props.class ?? ""}`}>
         <div class={page__sectionHeaderWrap}>
           <span class={page__sectionHeader}>
             {props.name}
           </span>
           <div class={page__sectionHeaderDivider} />
         </div>
-      )}
+        {props.children}
+      </section>
+    )
+  }
+
+  // w3c warning workaround: fix this warning
+  // Section lacks heading. Consider using h2-h6 elements to add identifying headings to all 
+  // sections, or else use a div element instead for any cases where no heading is needed.
+  return (
+    <div data-section="project" class={`${page__section} ${props.class ?? ""}`}>
       {props.children}
-    </section>
+    </div>
   )
 }
