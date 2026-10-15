@@ -186,7 +186,7 @@ export default function HomeProjectPage(props: IProjectStat) {
                 <th scope="row" data-category>Licence</th>
                 <td>{props.licence?.map((it, index, _) => (
                   <p>
-                    <a href={it.url} target="_blank">{it.name}</a> {it.why}
+                    {it.name ? <a href={it.url} target="_blank">{it.name}</a> : NONE_TAG} {it.why}
                     {index < props.licence!.length - 1 ? ", " : ""}
                   </p>
                 )) ?? NONE_TAG}</td>

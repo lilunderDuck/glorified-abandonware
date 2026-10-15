@@ -7,12 +7,12 @@ export interface IProjectStat {
   description: string
   longDescription: string[]
   coverImage?: string
-  totalCommits: string // WORKAROUND: currently didn't found why numbers aren't rendered
+  totalCommits?: string // WORKAROUND: currently didn't found why numbers aren't rendered
   previewImages?: string[]
   icon: string
   licence?: {
-    name: string
-    url: string
+    name: string | null
+    url?: string
     why?: string
   }[]
   disabled?: boolean
@@ -39,6 +39,25 @@ export const PROJECT_REGISTRY: IProjectStat[] = [
       url: "https://opensource.org/license/mit"
     }],
     icon: "missing_no.png"
+  },
+  {
+    title: "Mihoshiho decompilation",
+    id: "mihoshiho-decomp",
+    description: "Decompilation of the game: [Mihoshiho - It Will Be Okay!](https://redtomatochicken.itch.io/mihoshiho) on itch.io, because the last part of the game is almost impossible to pass thourgh",
+    repoUrl: "https://github.com/lilunderDuck/toast",
+    type: "private",
+    longDescription: [
+      "# Greeding!",
+      ""
+    ],
+    coverImage: undefined,
+    status: "completed",
+    licence: [{
+      name: "All rights reserved",
+      why: "for the cool dev(s) that making this game!"
+    }],
+    icon: "mihoshiho.png",
+    disabled: true
   },
   {
     title: "Unnamed spinning cube",
@@ -117,7 +136,28 @@ export const PROJECT_REGISTRY: IProjectStat[] = [
     coverImage: 'bcg_2.png',
     previewImages: ['bcg_2.png', 'bcg_3.png', 'bcg_1.png'],
     status: "active",
-    icon: 'bcg.png'
+    icon: 'bcg.png',
+    licence: [{
+      name: null,
+      why: "because we should respect Minecraft EULA here"
+    }]
+  },
+  {
+    title: "Buffering.simulation",
+    id: "toast-media",
+    description: "Locally hosted video/image app for no-internet use/archive.",
+    totalCommits: '104',
+    type: "private",
+    longDescription: [
+    ],
+    coverImage: undefined,
+    status: "active",
+    licence: [{
+      name: "MIT",
+      url: "https://opensource.org/license/mit"
+    }],
+    icon: "toast.jpg",
+    disabled: true
   },
   {
     title: "Progress tracker",

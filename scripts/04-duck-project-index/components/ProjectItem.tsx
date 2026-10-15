@@ -17,7 +17,8 @@ const item__root = css`
 `
 
 const item__disabled = css`
-  opacity: 0.75;
+  opacity: 0.5;
+  cursor: not-allowed;
 
   &:hover {
     background-color: transparent;

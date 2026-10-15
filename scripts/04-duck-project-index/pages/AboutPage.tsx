@@ -31,7 +31,7 @@ const page__mainContent = css`
 
 const ABOUT_DESCRIPTION = `
 # Uhhh-
-This is a 1-week hacked-together project for [Introduction to CSS3](https://www.coursera.org/learn/introcss)- a required course that I have to do.
+This is a 1-week hacked-together project for [Introduction to CSS3](https://www.coursera.org/learn/introcss) - a required course that I have to do.
 
 # How can you even write all of this?
 Magic.
@@ -43,6 +43,15 @@ I wrote a [JSX](https://en.wikipedia.org/wiki/JSX_(programming)) to HTML5 render
 ![jsx rendering code](./assets/jsx_rendering_code.png)
 
 Of course, disclaimer, it's **not production ready**, maybe I might find a crazy arbitrary code execution in the code handles the HTML rendering that can steal your bank account. (Uhhh- maybe not?)
+
+# Project appear to be... disabled?
+If you're reading the description on the header at the top... yeah, **just a prototype**. Most of the project listed in the page is simply "disabled".
+
+![Preview of the home page](./assets/app_preview.png)
+
+I still consider to move it onto a seperate repo, maybe soon?
+
+(I really love \`@view-transition\`, but firefox currently does not support that).
 
 # You still want to check this black magic?
 Everything is in [\`glorified-abandonware\` repo](https://github.com/lilunderDuck/glorified-abandonware), you can spy on what kind of ritual I am doing in the... commit messages :)

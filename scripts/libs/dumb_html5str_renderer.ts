@@ -1,6 +1,6 @@
 import fs from "node:fs"
 import { Fragment, type JSX, type ReactElement } from "react" // type def only
-import { compile, serialize, stringify, middleware } from 'stylis'
+import { compile, serialize, stringify } from 'stylis'
 import { createRandomizer } from "./dumb_random"
 
 declare global {
