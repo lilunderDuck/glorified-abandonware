@@ -13,7 +13,9 @@ This fever-dreams-kind-of repo includes the following folders:
 
 Additionally, the folder name in `ritual` matches with the one in `docs`, so you can easily find which one in `ritual` generates the output code in `docs`.
 
-Also, the project is cleanly number-labeled, so you can clearly found out which project I did first.
+Also, the project is cleanly number-labeled, so you can clearly found out which project I did first... or you can see a nicer version [here](https://lilunderduck.github.io/glorified-abandonware), which display everything in a list with color and stuff
+
+![submission page preview](held-readme-for-hostage/submission_preview.png)
 
 # Just explore the repo I think?
 I need something as a cover image of readme, so... here a review of someone rate my work unfairly, I love coursera peer rating so much.
