@@ -2,7 +2,7 @@ import { css } from "../../libs/dumb_html5str_renderer"
 import { GlobalHeader, ShoutOutFooter } from "../components"
 
 const page__main = css`
-  padding-inline: 15px;
+  padding: 15px;
 `
 
 const page__imageGrid = css`
