@@ -48,6 +48,11 @@ function elm<T extends keyof HTMLElementTagNameMap>(
     stringifiedAttribute += `${attributeName}="${tagAttributes[attributeName]}" `
   }
 
+  // Fix w3c error: Stray end tag img.
+  if (["img"].includes(tag)) {
+    return `<${tag}${tagAttributes ? ` ${stringifiedAttribute.trim()}` : ""}>`
+  }
+
   return `<${tag}${tagAttributes ? ` ${stringifiedAttribute.trim()}` : ""}>${childern}</${tag}>` as const
 }
 
