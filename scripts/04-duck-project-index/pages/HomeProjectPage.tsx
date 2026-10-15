@@ -125,8 +125,8 @@ export default function HomeProjectPage(props: IProjectStat) {
 
   return (
     <div id="root" class={`${page__root} ${scrollbar} ${scrollbar__vertical} ${scrollbar__invs}`}>
-      <SkipToMainContent />
       <header class={page__header}>
+        <SkipToMainContent />
         {props.coverImage && <ImageOneItemView class={page__headerImgBorder} images={[props.coverImage]} />}
         <div class={page__headerShadow} />
         <div class={page__titleWrap}>

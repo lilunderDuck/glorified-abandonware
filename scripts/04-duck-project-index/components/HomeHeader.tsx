@@ -37,7 +37,7 @@ export function HomeHeader(props: { buildDate: string }) {
       <div>
         <h1 class={page__title}>The duck's project index</h1>
         <p class={page__description}>
-          (Some of) the projects <a href="https://github.com/lilunderDuck" target="_blank">mint_duck</a> is currently doing <span class={page__updateNote}>(As for {props.buildDate})</span>
+          (Some of) the projects <a href="https://github.com/lilunderDuck" target="_blank">mint_duck</a> is currently doing <span class={page__updateNote}>(As for {props.buildDate})</span>. A prototype, I think.
         </p>
       </div>
     </header>

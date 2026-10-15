@@ -40,6 +40,8 @@ Yeah, magic, honestly.
 
 I wrote a [JSX](https://en.wikipedia.org/wiki/JSX_(programming)) to HTML5 renderer for myself, it was very fun to write the code to handle edge cases. To make it more suspicious, I named the libary: \`haxjsx2html5\`.
 
+![jsx rendering code](./assets/jsx_rendering_code.png)
+
 Of course, disclaimer, it's **not production ready**, maybe I might find a crazy arbitrary code execution in the code handles the HTML rendering that can steal your bank account. (Uhhh- maybe not?)
 
 # You still want to check this black magic?
