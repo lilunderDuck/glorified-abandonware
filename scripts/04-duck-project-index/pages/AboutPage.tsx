@@ -59,6 +59,8 @@ Everything is in [\`glorified-abandonware\` repo](https://github.com/lilunderDuc
 For this one, it's in:
 - Output html: [\`docs/04-duck-project-index\`](https://github.com/lilunderDuck/glorified-abandonware/tree/main/docs/04-duck-project-index)
 - Code for this page: [\`scripts/04-duck-project-index\`](https://github.com/lilunderDuck/glorified-abandonware/tree/main/scripts/04-duck-project-index)
+
+Update note: I intentionally left out some very obvious hint (e.g, a page that does not have 5 images), I still get 100%. Very unexpected.
 `
 
 export default function AboutPage(props: { buildDate: string }) {
