@@ -27,6 +27,7 @@ export function SkipToMainContent() {
       aria-label="Skip directly to main content" 
       href="#main_content_jump_to_here" 
       class={skipToMainContent__root}
+      data-this-is="look at dis skip to main content elememt"
     >
       Skip To Main Content
       <Kbd>Enter</Kbd>
