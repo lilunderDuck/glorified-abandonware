@@ -11,7 +11,7 @@ export default function HomePage() {
   return (
     <>
       <GlobalHeader header="Springtime in Michigan" />
-      <main class={page__main}>
+      <main class={page__main} id='main_content_jump_to_here'>
         <p>Springtime in <a href="https://www.michigan.org/city/ann-arbor">Ann Arbor</a> is a beautiful time. Even though
           it can be chilly at times, it is nice to walk my dog Bacon. This site includes some pictures I have taken on
           these walks. 

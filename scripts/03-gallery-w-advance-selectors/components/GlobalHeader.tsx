@@ -1,3 +1,4 @@
+import { SkipToMainContent } from "../../components"
 import { css } from "../../libs/dumb_html5str_renderer"
 
 const header__root = css`
@@ -49,6 +50,7 @@ const header__header = css`
 export function GlobalHeader(props: { header: string }) {
   return (
     <header class={header__root}>
+      <SkipToMainContent />
       <nav class={header__nav}>
         <ul class={header__navItemList}>
           <li class={header__navButton}><a href="./index.html">Home</a></li>

@@ -116,7 +116,7 @@ export default function ParksPage() {
   return (
     <>
       <GlobalHeader header="Michigan Parks" />
-      <main class={page__main}>
+      <main class={page__main} id='main_content_jump_to_here'>
         <div class={page__imageGrid}>
           {IMAGE_LIST.map((it, index, _) => (
             <div class={IMAGE_CLASSLIST[index]}>
