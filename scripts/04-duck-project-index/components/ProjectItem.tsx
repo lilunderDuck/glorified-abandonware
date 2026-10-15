@@ -10,10 +10,18 @@ const item__root = css`
   display: flex;
   align-items: center;
   gap: 15px;
+  border-radius: 6px;
+  &:hover {
+    background-color: var(--surface0);
+  }
 `
 
 const item__disabled = css`
   opacity: 0.75;
+
+  &:hover {
+    background-color: transparent;
+  }
 `
 
 const item__index = css`
