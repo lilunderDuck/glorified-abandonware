@@ -127,7 +127,7 @@ export default function HomeProjectPage(props: IProjectStat) {
     <div id="root" class={`${page__root} ${scrollbar} ${scrollbar__vertical} ${scrollbar__invs}`}>
       <SkipToMainContent />
       <header class={page__header}>
-        {props.coverImage && <ImageOneItemView class={page__headerImgBorder} images={props.coverImage} />}
+        {props.coverImage && <ImageOneItemView class={page__headerImgBorder} images={[props.coverImage]} />}
         <div class={page__headerShadow} />
         <div class={page__titleWrap}>
           <span class={page__headerProjectNameWorkaround}>{props.title}</span>
@@ -146,7 +146,7 @@ export default function HomeProjectPage(props: IProjectStat) {
         {props.previewImages && (
           <ProjectHeaderSection class={`${page__section} ${page__thisPreviewSection}`}>
             <div class={page__previewSection}>
-              <ImageItemView coverImage={props.previewImages} />
+              <ImageOneItemView images={props.previewImages} />
             </div>
           </ProjectHeaderSection>
         )}

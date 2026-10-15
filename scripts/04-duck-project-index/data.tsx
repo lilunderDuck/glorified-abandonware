@@ -65,7 +65,7 @@ export const PROJECT_REGISTRY: IProjectStat[] = [
     id: "glorified-abandonware",
     description: "Repo for some required course I need to take (oh well).",
     repoUrl: "https://github.com/lilunderDuck/glorified-abandonware",
-    totalCommits: '27',
+    totalCommits: '28',
     type: "public",
     longDescription: [
       "# A dumping place and nothing else",

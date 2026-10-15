@@ -50,7 +50,7 @@ const view__image = css`
   width: 100%;
 `
 
-type ImageViewPropsCompatible = { images: NonNullable<IProjectStat["coverImage"]>, class?: string }
+type ImageViewPropsCompatible = { images: string[], class?: string }
 
 export function ImageThreeItemView(props: ImageViewPropsCompatible) {
   return (
@@ -86,7 +86,7 @@ export function ImageFiveItemView(props: ImageViewPropsCompatible) {
   )
 }
 
-export function ImageItemView(props: { coverImage: IProjectStat["coverImage"] }) {
+export function ImageItemView(props: { coverImage: string[] }) {
   if (!props.coverImage) return <></>
 
   switch (props.coverImage.length) {
