@@ -10,12 +10,13 @@ const page__imageGrid = css`
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(5, 1fr);
   gap: 8px;
+  & img {
+    /* req #7: Use the descendent selector to style only the images in the grid class to have a width of 100%. */
+    width: 100%;
+    object-fit: cover;
+  }
 `
 
-const page__images = css`
-  object-fit: cover;
-`
-    
 const page__image1 = css`
   grid-row: span 3 / span 3;
 `
@@ -103,12 +104,13 @@ export default function NeighborhoodPage() {
       <main class={page__main} id='main_content_jump_to_here'>
         <div class={page__imageGrid}>
           {IMAGE_LIST.map((it, index, _) => (
-            <img 
-              src={`../02-gallery/assets/${it.image}`}
-              alt={it.description}
-              class={`${IMAGE_CLASSLIST[index]} ${page__images}`}
-              draggable={false}
-            />
+            <div class={IMAGE_CLASSLIST[index]}>
+              <img 
+                src={`../02-gallery/assets/${it.image}`}
+                alt={it.description}
+                draggable={false}
+              />
+            </div>
           ))}
         </div>
       </main>

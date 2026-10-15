@@ -15,16 +15,18 @@ const header__nav = css`
 `
 
 const header__navButton = css`
-  list-style: none;
-  & > a {
-    padding-inline: 10px;
-    padding-block: 5px;
-    border-radius: 6px;
-    opacity: 0.85;
-    &:hover {
-      background-color: var(--surface0);
-      opacity: 1;
-    }
+  padding-inline: 10px;
+  padding-block: 5px;
+  border-radius: 6px;
+  opacity: 0.85;
+  font-size: 1.5rem;
+  &:hover {
+    background-color: var(--surface0);
+    opacity: 1;
+  }
+
+  &:not(:first-child) {
+    margin-left: 20px;
   }
 `
 
