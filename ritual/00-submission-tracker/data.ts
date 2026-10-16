@@ -56,7 +56,7 @@ export const SUBMISSION_DATA: IProjectSubmissionData[] = [
       },
       {
         name: "03-gallery-w-advance-selectors",
-        score: null
+        score: [{score: 100, date: new Date(2026, 10 - 1, 16)}]
       },
       {
         name: "04-duck-project-index",
