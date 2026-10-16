@@ -3,6 +3,11 @@ import { Fragment, type JSX, type ReactElement } from "react" // type def only
 import { compile, serialize, stringify } from 'stylis'
 import { createRandomizer } from "./dumb_random"
 
+const GLOBAL_CONTEXT = {
+  cssClassSelectorRandomizer: createRandomizer(),
+  cssClassWordLength: 4,
+}
+
 declare global {
   // only be used for its jsx types
   namespace React {
@@ -69,11 +74,10 @@ export function dumpCssThenClearCache() {
   return everything
 }
 
-const cssClassSelectorRandomizer = createRandomizer()
 /**Dummy css function to make use of styled-component highlighting */
 export function css(template: TemplateStringsArray): string {
   const rawCss = template.join(' ')
-  const randomName = cssClassSelectorRandomizer(4)
+  const randomName = GLOBAL_CONTEXT.cssClassSelectorRandomizer(GLOBAL_CONTEXT.cssClassWordLength)
 
   const compiled = serialize(compile(`.${randomName}{${rawCss}}`), stringify)
   cachedCssValues.add(compiled)
