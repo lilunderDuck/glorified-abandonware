@@ -25,9 +25,11 @@ function whenMouseIsHoverThisImage(_: MouseEvent, thisElement: HTMLImageElement)
     throw new Error("Could not get the value from 'data-image-src', did you change the attribute name?")
   }
   imagePreview.style.setProperty("--current-image-url", `url('${imagePath}')`)
+  imagePreview.setAttribute("data-has-image", "true")
 }
 
 function whenMouseIsNotHoverThisImage(_: MouseEvent, thisElement: HTMLImageElement) {
   imagePreviewText.innerText = ORIGINAL_TEXT
   imagePreview.style.setProperty("--current-image-url", "")
+  imagePreview.setAttribute("data-has-image", "false")
 }

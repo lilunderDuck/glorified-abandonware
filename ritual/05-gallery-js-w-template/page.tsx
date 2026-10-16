@@ -21,6 +21,12 @@ const page__imagePreview = css`
   text-align: center;
   margin-bottom: 25px;
   font-size: 150%;
+  position: relative;
+  &[data-has-image=true] #image_preview_text_hint {
+    position: absolute;
+    bottom: 0;
+    margin: 20px;
+  }
 `
 
 const page__imageListSection = css`
@@ -40,6 +46,13 @@ const page__image = css`
     opacity: 1;
     outline-color: var(--sapphire);
   }
+`
+
+const page__imagePreviewAltText = css`
+  background-color: var(--crust);
+  padding-inline: 10px;
+  padding-block: 5px;
+  border-radius: 6px;
 `
 
 export default function Page() {
@@ -63,8 +76,8 @@ export default function Page() {
     <>
       <script src="./pain.js" defer />
       <div id="root" class={`${page__root} must_preserve_root`}>
-        <div id="image_preview" class={page__imagePreview}>
-          <span id="image_preview_text_hint">Hover over an image below to display here.</span>
+        <div id="image_preview" class={page__imagePreview} data-has-image={false} data-image-src="" style={`--current-image-url:""`}>
+          <div class={page__imagePreviewAltText} id="image_preview_text_hint">Hover over an image below to display here.</div>
         </div>
 
         <section class={page__imageListSection}>
