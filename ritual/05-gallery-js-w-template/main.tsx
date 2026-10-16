@@ -25,4 +25,4 @@ const htmlRendererOptions: IRenderHtmlOption = {
   bodyClass: `${scrollbar} ${scrollbar__horizontal}`
 }
 
-renderHtmlTo("./docs/05-gallery-js-w-template/parks.html", htmlRendererOptions, <Page />)
+renderHtmlTo("./docs/05-gallery-js-w-template/index.html", htmlRendererOptions, <Page />)
