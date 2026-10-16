@@ -14,10 +14,12 @@ for (const element of imagesElement) {
   element.addEventListener("mouseout", (mouseEvent) => whenMouseIsNotHoverThisImage(mouseEvent, element))
 }
 
+const ORIGINAL_TEXT = "Hover over an image below to display here."
+
 function whenMouseIsHoverThisImage(_: MouseEvent, thisElement: HTMLImageElement) {
   // https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/hidden
   // it does have a wide support, so completely valid
-  imagePreviewText.hidden = true
+  imagePreviewText.innerText = thisElement.alt
   const imagePath = thisElement.getAttribute("data-image-src")
   if (!imagePath) {
     throw new Error("Could not get the value from 'data-image-src', did you change the attribute name?")
@@ -26,6 +28,6 @@ function whenMouseIsHoverThisImage(_: MouseEvent, thisElement: HTMLImageElement)
 }
 
 function whenMouseIsNotHoverThisImage(_: MouseEvent, thisElement: HTMLImageElement) {
-  imagePreviewText.hidden = false
+  imagePreviewText.innerText = ORIGINAL_TEXT
   imagePreview.style.setProperty("--current-image-url", "")
 }
