@@ -14,7 +14,7 @@ const imageList__root = css`
   transition: 0.2s ease-out;
 
   &[data-image-list-showing=false] {
-    bottom: -12.5rem;
+    bottom: -10.5rem;
   }
 
   &[data-image-list-showing=false] #imageList__showBtn {
@@ -42,6 +42,9 @@ const imageList__pusher = css`
   width: 100%;
   padding-inline: 30px;
   transition: 0.2s ease-out;
+  & > div {
+    margin-bottom: 10px;
+  }
 `
 
 const imageList__arrowButtonWrap = css`
@@ -75,14 +78,26 @@ const imageList__image = css`
   &:hover {
     outline-color: var(--sapphire);
   }
+
+  &:focus {
+    outline-color: var(--sapphire);
+  }
 `
 
 export function ImageList() {
   return (
-    <section class={imageList__root} data-image-list-showing={false} id="imageList__root">
+    <section class={imageList__root} data-image-list-showing={true} id="imageList__root">
       <div class={imageList__arrowWrap}>
         <div class={imageList__pusher} id="imageList__pusher">
-          <Kbd>Shift + Mouse Wheel</Kbd> scroll image list
+          <div>
+            <Kbd>Shift + Mouse Wheel</Kbd> scroll image list
+          </div>
+          <div>
+            <Kbd>Tab</Kbd> focus next image
+          </div>
+          <div>
+            <Kbd>Shift + Tab</Kbd> focus previous image
+          </div>
         </div>
         <button class={imageList__arrowButtonWrap} id="imageList__showBtn">
           <BsCaretDownFill size="1.25rem" />
@@ -97,7 +112,7 @@ export function ImageList() {
               src={`./assets/${it.imageName}`} 
               alt={it.description} 
               loading="lazy" 
-              class={imageList__image}
+              class={`${imageList__image} imageList__imageRef`}
             />
           )}
         </For>

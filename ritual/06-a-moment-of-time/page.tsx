@@ -10,6 +10,7 @@ const page__root = css`
 export default function Page() {
   return (
     <>
+      <script src="./workaround.js" />
       <script src="./pain.js" defer />
       <div id="root" data-must-preserve-root={true} class={page__root}>
         <GalleryNavigationButtons />

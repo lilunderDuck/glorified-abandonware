@@ -10,8 +10,6 @@ const view__root = css`
   display: flex;
   justify-content: center;
   align-items: center;
-  /* quick hack: shift right 500% of the page width to point to the first image */
-  transform: translateX(500%);
 `
 
 const view__imageWrap = css`
@@ -27,19 +25,15 @@ const view__image = css`
   border-radius: 15px;
   border: none;
   outline: 4px solid var(--surface0);
-  object-fit: contain;
+  object-fit: cover;
 `
 
 export function ImageShowcaseView() {
   return (
     <div class={view__root}>
-      <For each={IMAGE_LIST}>
-        {it => (
-          <div class={view__imageWrap}>
-            <img loading="lazy" draggable={false} class={view__image} src={`./assets/${it.imageName}`} />
-          </div>
-        )}
-      </For>
+      <div class={view__imageWrap}>
+        <img loading="lazy" draggable={false} class={view__image} id="imageShowcaseView__imgRef" />
+      </div>
     </div>
   )
 }

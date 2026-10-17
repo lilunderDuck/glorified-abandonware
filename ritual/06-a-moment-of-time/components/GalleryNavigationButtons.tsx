@@ -27,7 +27,12 @@ const nav__button = css`
   border-radius: 6px;
   color: var(--overlay2);
   background-color: var(--crust);
-  &:hover {
+  &:disabled {
+    opacity: 0.78;
+    cursor: not-allowed;
+  }
+
+  &:hover:not(:disabled) {
     background-color: var(--base);
     color: var(--text);
   }
@@ -37,12 +42,12 @@ export function GalleryNavigationButtons() {
   return (
     <>
       <div class={`${nav__buttonWrap} ${nav__leftNavButtonWrap} gallery__navBtnRef`} data-gray-out={false}>
-        <button class={nav__button}>
+        <button class={nav__button} id="gallery__navLeftBtn">
           <BsCaretLeftFill size="2rem" />
         </button>
       </div>
       <div class={`${nav__buttonWrap} ${nav__rightNavButtonWrap} gallery__navBtnRef`} data-gray-out={false}>
-        <button class={nav__button}>
+        <button class={nav__button} id="gallery__navRightBtn">
           <BsCaretRightFill size="2rem" />
         </button>
       </div>

@@ -11,3 +11,4 @@ compile_05:
 compile_06:
   bun ./ritual/06-a-moment-of-time/main.tsx
   bun build ./ritual/06-a-moment-of-time/pain.ts --bundle --minify --outfile ./docs/06-a-moment-of-time/pain.js --format iife
+  bun build ./ritual/06-a-moment-of-time/workaround.ts --bundle --minify --outfile ./docs/06-a-moment-of-time/workaround.js --format iife
