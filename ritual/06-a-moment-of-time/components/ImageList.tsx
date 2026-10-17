@@ -6,15 +6,14 @@ const imageList__root = css`
   width: 100%;
   position: absolute;
   bottom: 0;
-  height: 15rem;
-  background: linear-gradient(to top, var(--crust) 0%, transparent 100%);
   display: flex;
   justify-content: end;
   flex-direction: column;
   transition: 0.2s ease-out;
+  z-index: 5;
 
   &[data-image-list-showing=false] {
-    bottom: -10.5rem;
+    bottom: -14.8rem;
   }
 
   &[data-image-list-showing=false] #imageList__showBtn {
@@ -27,6 +26,24 @@ const imageList__root = css`
 
   &[data-image-list-showing=true] #imageList__pusher {
     opacity: 1;
+  }
+`
+
+const imageList__shadow = css`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  bottom: 0;
+  background: linear-gradient(to top, var(--crust) 0%, transparent 100%);
+  transition: 0.2s ease-out;
+  z-index: 5;
+
+  &[data-image-list-showing=true] {
+    opacity: 1;
+  }
+
+  &[data-image-list-showing=false] {
+    opacity: 0;
   }
 `
 
@@ -86,37 +103,40 @@ const imageList__image = css`
 
 export function ImageList() {
   return (
-    <section class={imageList__root} data-image-list-showing={true} id="imageList__root">
-      <div class={imageList__arrowWrap}>
-        <div class={imageList__pusher} id="imageList__pusher">
-          <div>
-            <Kbd>Shift + Mouse Wheel</Kbd> scroll image list
+    <>
+      <div class={imageList__shadow} data-image-list-showing={true} />
+      <section class={imageList__root} data-image-list-showing={true}>
+        <div class={imageList__arrowWrap}>
+          <div class={imageList__pusher} id="imageList__pusher">
+            <div>
+              <Kbd>Shift + Mouse Wheel</Kbd> scroll image list
+            </div>
+            <div>
+              <Kbd>Tab</Kbd> focus next image
+            </div>
+            <div>
+              <Kbd>Shift + Tab</Kbd> focus previous image
+            </div>
           </div>
-          <div>
-            <Kbd>Tab</Kbd> focus next image
-          </div>
-          <div>
-            <Kbd>Shift + Tab</Kbd> focus previous image
-          </div>
+          <button class={imageList__arrowButtonWrap} id="imageList__showBtn">
+            <BsCaretDownFill size="1.25rem" />
+          </button>
+          <div class={imageList__pusher} id="imageList__pusher" />
         </div>
-        <button class={imageList__arrowButtonWrap} id="imageList__showBtn">
-          <BsCaretDownFill size="1.25rem" />
-        </button>
-        <div class={imageList__pusher} id="imageList__pusher" />
-      </div>
-      <div class={`${imageList__content} ${scrollbar} ${scrollbar__horizontal} ${scrollbar__invs}`}>
-        <For each={IMAGE_LIST}>
-          {(it, index) => (
-            <img 
-              data-current-image-index={index}
-              src={`./assets/${it.imageName}`} 
-              alt={it.description} 
-              loading="lazy" 
-              class={`${imageList__image} imageList__imageRef`}
-            />
-          )}
-        </For>
-      </div>
-    </section>
+        <div class={`${imageList__content} ${scrollbar} ${scrollbar__horizontal} ${scrollbar__invs}`}>
+          <For each={IMAGE_LIST}>
+            {(it, index) => (
+              <img 
+                data-current-image-index={index}
+                src={`./assets/${it.imageName}`} 
+                alt={it.description} 
+                loading="lazy" 
+                class={`${imageList__image} imageList__imageRef`}
+              />
+            )}
+          </For>
+        </div>
+      </section>
+    </>
   )
 }

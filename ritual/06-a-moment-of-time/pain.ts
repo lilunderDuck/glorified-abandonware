@@ -26,7 +26,7 @@ function forceToFocusFirstImage() {
   imageList__imageRefs[0].click() // focus the first element
 }
 
-const imageList__root = grabElementById<"section">("imageList__root")
+const imageList__root = grabAllElement<"section" | "div">("[data-image-list-showing]")
 const imageList__showBtn = grabElementById<"button">("imageList__showBtn")
 const gallery__navButtons = grabAllElement(".gallery__navBtnRef")
 
@@ -37,8 +37,11 @@ function shouldGrayOutGalleryNavButtons(shouldGrayOut: boolean) {
 }
 
 imageList__showBtn.addEventListener("click", () => {
-  const isShowing = getBooleanAttribute(imageList__root, "data-image-list-showing")
-  setAttribute(imageList__root, "data-image-list-showing", !isShowing)
+  let isShowing
+  for (const imageList of imageList__root) {
+    isShowing = getBooleanAttribute(imageList, "data-image-list-showing")
+    setAttribute(imageList, "data-image-list-showing", !isShowing)
+  }
   shouldGrayOutGalleryNavButtons(!isShowing)
   forceToFocusFirstImage()
 })
@@ -90,3 +93,4 @@ updateImage(0)
 updateGalleryButtonsNav()
 attachTabIndexWorkaround()
 forceToFocusFirstImage()
+shouldGrayOutGalleryNavButtons(true)

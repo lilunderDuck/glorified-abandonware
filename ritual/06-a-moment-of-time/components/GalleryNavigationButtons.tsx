@@ -9,7 +9,11 @@ const nav__buttonWrap = css`
   align-items: center;
   padding-inline: 10px;
   &[data-gray-out=true] {
-    opacity: 0.65;
+    z-index: 1;
+  }
+  
+  &[data-gray-out=false] {
+    z-index: 10;
   }
 `
 
