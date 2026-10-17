@@ -1,15 +1,20 @@
 import { css } from "../../scripts/libs/dumb_html5str_renderer"
 import { ImageList } from "./components"
+import { GalleryNavigationButtons } from "./components/GalleryNavigationButtons"
 
 const page__root = css`
   user-select: none;
+  position: relative;
 `
 
 export default function Page() {
   return (
-    <div id="root" class={page__root}>
+    <>
       <script src="./pain.js" defer />
-      <ImageList />
-    </div>
+      <div id="root" data-must-preserve-root={true} class={page__root}>
+        <GalleryNavigationButtons />
+        <ImageList />
+      </div>
+    </>
   )
 }
