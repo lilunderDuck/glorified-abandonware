@@ -58,7 +58,7 @@ export function ImageShowcaseView() {
       <div class={view__root} id="view__imageView">
         <div class={view__imageWrap}>
           {/* 18/10/2026 - this repo currently not exist yet, I just need something inside src attribute so W3C is happy. */}
-          <img loading="lazy" src="https://lilunderduck.github.io/project-index" alt="" draggable={false} class={view__image} id="imageShowcaseView__imgRef" />
+          <img loading="lazy" src="https://lilunderduck.github.io/project-index" alt="temporary image element, will be updated later by javascript, isnt it obvious, WAVE" draggable={false} class={view__image} id="imageShowcaseView__imgRef" />
         </div>
       </div>
       <div class={view__empty} id="view__emptyView">
