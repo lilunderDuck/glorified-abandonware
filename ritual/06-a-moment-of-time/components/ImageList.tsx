@@ -1,5 +1,6 @@
-import { BsCaretDownFill } from "../../../scripts/components"
+import { BsCaretDownFill, For, Kbd, scrollbar, scrollbar__horizontal, scrollbar__invs } from "../../../scripts/components"
 import { css } from "../../../scripts/libs/dumb_html5str_renderer"
+import { IMAGE_LIST } from "./image_list"
 
 const imageList__root = css`
   width: 100%;
@@ -19,14 +20,28 @@ const imageList__root = css`
   &[data-image-list-showing=false] #imageList__showBtn {
     rotate: 180deg;
   }
+
+  &[data-image-list-showing=false] #imageList__pusher {
+    opacity: 0;
+  }
+
+  &[data-image-list-showing=true] #imageList__pusher {
+    opacity: 1;
+  }
 `
 
 const imageList__arrowWrap = css`
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   margin-bottom: 15px;
+`
+
+const imageList__pusher = css`
+  width: 100%;
+  padding-inline: 30px;
+  transition: 0.2s ease-out;
 `
 
 const imageList__arrowButtonWrap = css`
@@ -35,6 +50,7 @@ const imageList__arrowButtonWrap = css`
   background-color: var(--base);
   color: var(--overlay2);
   outline: 4px solid transparent;
+  flex-shrink: 0;
   &:hover {
     color: var(--text);
     outline-color: var(--sapphire);
@@ -46,28 +62,46 @@ const imageList__content = css`
   height: 12rem;
   background-color: var(--mantle);
   display: flex;
+  gap: 10px;
   padding-inline: 15px;
   padding-block: 10px;
   margin-inline: 20px;
   margin-bottom: 10px;
-  border-radius: 6px;
 `
 
-const IMAGE_LIST = [
-  {
-    imageName: "", description: ""
+const imageList__image = css`
+  border-radius: 6px;
+  outline: 4px solid transparent;
+  &:hover {
+    outline-color: var(--sapphire);
   }
-]
+`
 
 export function ImageList() {
   return (
     <section class={imageList__root} data-image-list-showing={false} id="imageList__root">
       <div class={imageList__arrowWrap}>
+        <div class={imageList__pusher} id="imageList__pusher">
+          <Kbd>Shift + Mouse Wheel</Kbd> scroll image list
+        </div>
         <button class={imageList__arrowButtonWrap} id="imageList__showBtn">
           <BsCaretDownFill size="1.25rem" />
         </button>
+        <div class={imageList__pusher} id="imageList__pusher" />
       </div>
-      <div class={imageList__content}></div>
+      <div class={`${imageList__content} ${scrollbar} ${scrollbar__horizontal} ${scrollbar__invs}`}>
+        <For each={IMAGE_LIST}>
+          {(it, index) => (
+            <img 
+              data-current-image-index={index}
+              src={`./assets/${it.imageName}`} 
+              alt={it.description} 
+              loading="lazy" 
+              class={imageList__image}
+            />
+          )}
+        </For>
+      </div>
     </section>
   )
 }

@@ -1,5 +1,5 @@
 import { css } from "../../scripts/libs/dumb_html5str_renderer"
-import { ImageList } from "./components"
+import { ImageList, ImageShowcaseView } from "./components"
 import { GalleryNavigationButtons } from "./components/GalleryNavigationButtons"
 
 const page__root = css`
@@ -14,6 +14,7 @@ export default function Page() {
       <div id="root" data-must-preserve-root={true} class={page__root}>
         <GalleryNavigationButtons />
         <ImageList />
+        <ImageShowcaseView />
       </div>
     </>
   )

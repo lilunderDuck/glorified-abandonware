@@ -295,9 +295,13 @@ function recursivelyParseCSSFast(thisCssRule: CSSElement[], ref: IFastCSSParserR
         })
 
       continue
+
+      case "comm": // comment
+        // ... skip ...
+      continue
     
       default:
-        throw new Error("panic: unknown CSS type: " + cssRule.value)
+        throw new Error("panic: unknown CSS type: " + cssRule.type)
     }
   }
 

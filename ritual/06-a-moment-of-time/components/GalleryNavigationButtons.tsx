@@ -22,10 +22,11 @@ const nav__rightNavButtonWrap = css`
 `
 
 const nav__button = css`
-  padding-inline: 10px;
-  padding-block: 20px;
+  padding-inline: 5px;
+  padding-block: 15px;
   border-radius: 6px;
   color: var(--overlay2);
+  background-color: var(--crust);
   &:hover {
     background-color: var(--base);
     color: var(--text);
