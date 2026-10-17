@@ -1,20 +1,11 @@
 import { css } from "../../scripts/libs/dumb_html5str_renderer"
 import { ImageList, ImageShowcaseView } from "./components"
-import { GalleryNavigationButtons } from "./components/GalleryNavigationButtons"
 
 const page__root = css`
   user-select: none;
 `
 
 const page__accessFix = css`
-  &[data-image-list-showing=false] .gallery__navButton {
-    z-index: 10;
-  }
-
-  &[data-image-list-showing=true] .gallery__navButton {
-    z-index: 1;
-  }
-
   &[data-image-list-showing=false] #imageList__showBtn > svg {
     rotate: 180deg;
   }
@@ -46,7 +37,6 @@ export default function Page() {
       <script src="./workaround.js" />
       <script src="./pain.js" defer />
       <div id="root" data-image-list-showing={true} data-must-preserve-root={true} class={`${page__root} ${page__accessFix}`}>
-        <GalleryNavigationButtons />
         <ImageList />
         <ImageShowcaseView />
       </div>

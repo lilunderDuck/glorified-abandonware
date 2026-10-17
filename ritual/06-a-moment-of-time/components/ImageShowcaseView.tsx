@@ -1,6 +1,4 @@
-import { For } from "../../../scripts/components"
 import { css } from "../../../scripts/libs/dumb_html5str_renderer"
-import { IMAGE_LIST } from "./image_list"
 
 const view__root = css`
   width: 100%;
