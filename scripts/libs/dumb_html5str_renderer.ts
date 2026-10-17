@@ -6,25 +6,15 @@ import { AnyRandomizerFn, createWordSlidingRandomizer } from "./dumb_random"
 declare global {
   // only be used for its jsx types
   namespace React {
-    // patch: add class attribute, because we absolutely can
-    // (since we don't care anything about reactive stuff and just a static site)
     interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
+      // patch: add class attribute, because we absolutely can
+      // (since we don't care anything about reactive stuff and just a static site)
       class?: string
+      // patch: patching out the 'style' attribute so I can directly write
+      // CSS properties in string.
+      // @ts-ignore - duplicated declaration, but we can ignore it.
+      style?: CSSProperties | undefined | string
     }
-  }
-}
-
-interface IRendererGlobalContext {
-  readonly cssClasses: {
-    nameRandomizer: AnyRandomizerFn,
-    wordLength: number
-  }
-}
-
-export const GLOBAL_CONTEXT: IRendererGlobalContext = {
-  cssClasses: {
-    nameRandomizer: createWordSlidingRandomizer(),
-    wordLength: 4,
   }
 }
 
@@ -70,30 +60,6 @@ function elm<T extends keyof HTMLElementTagNameMap>(
   return `<${tag}${tagAttributes ? ` ${stringifiedAttribute.trim()}` : ""}>${childern}</${tag}>` as const
 }
 
-const cachedCssValues = new Set<string>()
-
-export function dumpCssThenClearCache() {
-  let everything = ""
-  for (const cssRule of cachedCssValues.values()) {
-    everything += cssRule
-  }
-
-  cachedCssValues.clear()
-
-  return everything
-}
-
-/**Dummy css function to make use of styled-component highlighting */
-export function css(template: TemplateStringsArray): string {
-  const rawCss = template.join(' ')
-  const randomName = GLOBAL_CONTEXT.cssClasses.nameRandomizer(GLOBAL_CONTEXT.cssClasses.wordLength)
-
-  const compiled = serialize(compile(`.${randomName}{${rawCss}}`), stringify)
-  cachedCssValues.add(compiled)
-  
-  return randomName
-}
-
 function stringifyChildern(child: ChildNodeCompatible) {
   let childern = ""
   if (!child) {
@@ -109,18 +75,83 @@ function stringifyChildern(child: ChildNodeCompatible) {
   return childern
 }
 
+const cachedCssValues = new Set<string>()
+function dumpCssThenClearCache() {
+  let everything = ""
+  for (const cssRule of cachedCssValues.values()) {
+    everything += cssRule
+  }
+
+  cachedCssValues.clear()
+
+  return everything
+}
+
+type CSSTemplateFnWorkaround = ((template: TemplateStringsArray) => string) & {
+  nameRandomizer: AnyRandomizerFn
+  wordLength: number
+}
+
+/**Dummy-ish css templated function to make use of `styled-component` highlighting.
+ * 
+ * To create some style, all you need to do is:
+ * ```
+ * const app__page = css`
+ *   padding-inline: 10px;
+ *   padding-block: 15px;
+ *   &:hover {
+ *     background-color: black;
+ *   }
+ * `
+ * ```
+ * 
+ * To swap out the generator responsible for generating CSS name:
+ * ```
+ * import { yourRandomizer } from "./somewhere"
+ * import { css } from "./dumb_html5str_renderer"
+ * // must be on top!
+ * css.nameRandomizer = yourRandomizer
+ * 
+ * // then you can use it like normal
+ * const app__page = css`... some styles ...`
+ * ```
+ * 
+ * @param template the templated string array, just ignore it and follow the example above.
+ * @returns the compiled CSS classnames
+ * 
+ * @see `dumb_random.ts` for example randomizer function
+ * @see {@link CSSTemplateFnWorkaround}
+ */
+export const css = ((template: TemplateStringsArray): string => {
+  const rawCss = template.join(' ')
+  const randomName = css.nameRandomizer(css.wordLength)
+
+  const compiled = serialize(compile(`.${randomName}{${rawCss}}`), stringify)
+  cachedCssValues.add(compiled)
+  
+  return randomName
+}) as CSSTemplateFnWorkaround
+
+css.nameRandomizer = createWordSlidingRandomizer()
+css.wordLength = 4
+
 export interface IRenderHtmlOption {
   title: string
   reason: string
   libraryUsed?: string
-  css: string
+  /**Additional CSS (e.g global styles) to the page, default will be
+   * the generated CSS output by `dumpCssThenClearCache()` function.
+   * @default "... css output ..."
+   * @see {@link css}
+   * @see {@link dumpCssThenClearCache()}
+   */
+  css?: string
   /**Prevent white "flash" on page load */
   noFlashbangWhenOpened: boolean
   bodyClass?: string
   /**When setting to `true`, it will print the project name with libaries used and 
    * a "disclaimer" message, just to make sure anyone on coursera rate my works
    * correctly.
-   * 
    * @default true
    * @see `peer_rating_sim.ts` for the message
    */
@@ -162,7 +193,7 @@ export function renderHtmlTo(fileName: string, options: IRenderHtmlOption, app: 
         <meta name="duck" content="this is duck">
         ${options.shouldIncludeDisclaimer ? INCLUDE_DISCLAIMER_SCRIPTS : ""}
         ${options.noFlashbangWhenOpened ? NO_FLASHBANG_WORKAROUND : ""}
-        <style data-inline>${options.css}</style>
+        <style data-inline>${`${options.css ?? ""} ${dumpCssThenClearCache()}`.trim()}</style>
       </head>
       <body data-should-confuse-you="true" data-dukasmd="jump break"${options.bodyClass ? ` class="${options.bodyClass}"` : ""}>
         <!-- You may believe that this page uses react, but no, it's plain html (and some CSS of course), but can you guess which [javascript] framework generates this kind of html? -->

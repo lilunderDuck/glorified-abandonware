@@ -1,5 +1,5 @@
 import { scrollbar, scrollbar__horizontal } from "../../scripts/components"
-import { dumpCssThenClearCache, type IRenderHtmlOption, renderHtmlTo } from "../../scripts/libs/dumb_html5str_renderer"
+import { type IRenderHtmlOption, renderHtmlTo } from "../../scripts/libs/dumb_html5str_renderer"
 import HomePage from "./page/HomePage"
 import NeighborhoodPage from "./page/NeighborhoodPage"
 import ParksPage from "./page/Parks"
@@ -49,7 +49,7 @@ const htmlRendererOptions: IRenderHtmlOption = {
   title: "Springtime In Michigan",
   noFlashbangWhenOpened: true,
   libraryUsed: "libduck_haxjsx2html5 palette@catppuccin_mocha",
-  css: `${APP_GLOBAL_CSS} ${dumpCssThenClearCache()}`,
+  css: APP_GLOBAL_CSS,
   bodyClass: `${scrollbar} ${scrollbar__horizontal}`
 }
 
