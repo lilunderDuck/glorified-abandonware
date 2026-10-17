@@ -39,9 +39,15 @@ function elm<T extends keyof HTMLElementTagNameMap>(
   }
   
   for (let attributeName in tagAttributes) {
+    let attributeValue = tagAttributes[attributeName]
     if (attributeName == "children") {
       continue // skip
     }
+
+    if (attributeName === "defer") { // encounter "defer" attribute in <script> element
+      attributeValue = "" // patch the value of "defer" from "true" to "" (nothing)
+    }
+
     // edge-case: javascript land call "class"... "className"
     // so we need to handle that as well
     // oh god, the ReactJS flashback is getting me
@@ -49,7 +55,7 @@ function elm<T extends keyof HTMLElementTagNameMap>(
       // also to make typescript happy, as always
       attributeName = "class" as Extract<keyof HTMLElementTagNameMap[T], string>
     }
-    stringifiedAttribute += `${attributeName}="${tagAttributes[attributeName]}" `
+    stringifiedAttribute += `${attributeName}="${attributeValue}" `
   }
 
   // Fix w3c error: Stray end tag img.

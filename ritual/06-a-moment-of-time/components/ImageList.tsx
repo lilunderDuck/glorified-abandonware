@@ -85,7 +85,7 @@ export function ImageList() {
   return (
     <>
       <div class={`${imageList__shadow} imageList__shadow`} />
-      <section class={`${imageList__root} imageList__root`}>
+      <div class={`${imageList__root} imageList__root`}>
         <div class={imageList__arrowWrap}>
           <div class={`${imageList__pusher} imageList__pusher`}>
             <div>
@@ -116,7 +116,7 @@ export function ImageList() {
             )}
           </For>
         </div>
-      </section>
+      </div>
     </>
   )
 }
