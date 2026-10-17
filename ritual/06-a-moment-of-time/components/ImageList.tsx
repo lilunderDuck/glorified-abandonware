@@ -98,9 +98,9 @@ export function ImageList() {
               <Kbd>Shift + Tab</Kbd> focus previous image
             </div>
           </div>
-          <button class={imageList__arrowButtonWrap} id="imageList__showBtn">
+          <div class={imageList__arrowButtonWrap} id="imageList__showBtn">
             <BsCaretDownFill size="1.25rem" />
-          </button>
+          </div>
           <div class={`${imageList__pusher} imageList__pusher`} />
         </div>
         <div class={`${imageList__content} ${scrollbar} ${scrollbar__horizontal} ${scrollbar__invs}`}>
