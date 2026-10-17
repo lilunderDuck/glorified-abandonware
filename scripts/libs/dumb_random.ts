@@ -29,14 +29,14 @@ const splitAndClean = (something: string) => something
   .split(" ")
 // ...
 
-/**The default source set for `createRandomizer()` function to generate some names.
+/**The default source set for `createWordSlidingRandomizer()` function to generate some names.
  * 
  * The sources are adapted from: 
  * - [`The missle knows where it is at all times`](https://copypastatext.com/the-missile-knows-where-it-is/)
  * - [`Neoforge's Registries for 1.21.1`](https://docs.neoforged.net/docs/concepts/registries/)
  * - [`Neoforge's Events for 1.21.1`](https://docs.neoforged.net/docs/1.21.1/concepts/events/#event-buses)
  * 
- * @see {@link createRandomizer()}
+ * @see {@link createWordSlidingRandomizer()}
  */
 const CHARSET_FOR_RANDOM_STR = `
 The missile knows where it is at all times. It knows this because it knows where it isn't. By subtracting where it is from where it isn't, or where it isn't from where it is (whichever is greater), it obtains a difference, or deviation. The guidance subsystem uses deviations to generate corrective commands to drive the missile from a position where it is to a position where it isn't, and arriving at a position where it wasn't, it now is. Consequently, the position where it is, is now the position that it wasn't, and it follows that the position that it was, is now the position that it isn't.
@@ -58,6 +58,8 @@ Custom registries allow you to specify additional systems that addon mods for yo
 While most events are posted on the NeoForge.EVENT_BUS, some events are posted on the mod event bus instead. These are generally called mod bus events. Mod bus events can be distinguished from regular events by their superinterface IModBusEvent.
 `
 
+export type AnyRandomizerFn = /* roll */(length: number) => string
+
 /**A factory function that generate an (almost) sensical sentence, but will be cut 
  * off by no reason.
  * 
@@ -71,10 +73,10 @@ While most events are posted on the NeoForge.EVENT_BUS, some events are posted o
  * @example
  * ```
  * // not really a randomizer to be honest
- * const randomizer = createRandomizer()
- * console.log(randomizer(6))
+ * const randomizer = createWordSlidingRandomizer()
  * console.log(randomizer(6))
  * // the_missile_knows_where_it
+ * console.log(randomizer(6))
  * // at_all_times_dot_it_knows_this
  * ```
  * @param source any source you want, default is `CHARSET_FOR_RANDOM_STR`
@@ -82,10 +84,10 @@ While most events are posted on the NeoForge.EVENT_BUS, some events are posted o
  * @see {@link CHARSET_FOR_RANDOM_STR} - default random set.
  * @see {@link splitAndClean()} - utility function to clean up the source set.
  */
-export function createRandomizer(source: string[] = splitAndClean(CHARSET_FOR_RANDOM_STR)) {
+export function createWordSlidingRandomizer(source: string[] = splitAndClean(CHARSET_FOR_RANDOM_STR)): AnyRandomizerFn {
   const generated = new Set<string>()
   let nextIndex = 0
-  return function roll(length: number): string {
+  return function roll(length) {
     let randomPrefix: string[] = []
 
     for (let i = 0; i < length; i++) {
@@ -99,6 +101,39 @@ export function createRandomizer(source: string[] = splitAndClean(CHARSET_FOR_RA
 
     generated.add(rolled)
     nextIndex += length - 1
+    return rolled
+  }
+}
+
+/**A factory function that generate only a single word with the provided source set.
+ * 
+ * Unlike {@link createWordSlidingRandomizer()}, it only generates a single word name, unless it
+ * found no duplicated name generated.
+ * @param source any source you want, default is `CHARSET_FOR_RANDOM_STR`
+ * @returns 
+ * @see {@link CHARSET_FOR_RANDOM_STR} - default random set.
+ * @see {@link splitAndClean()} - utility function to clean up the source set.
+ */
+export function createAtomicRandomizer(
+  source: string[] = splitAndClean(CHARSET_FOR_RANDOM_STR)
+): AnyRandomizerFn {
+  const generated = new Set<string>()
+  let currentWordIndex = 0
+  let randomPrefix: string[] = []
+  let wordLength = 1
+  return function roll(length) {
+    length = wordLength
+    randomPrefix.push(source[currentWordIndex])
+
+    const rolled = randomPrefix.join("_")
+    if (generated.has(rolled)) { // if found duplicate
+      currentWordIndex += 1
+      return roll(length)
+    }
+
+    generated.add(rolled)
+    currentWordIndex += 1
+    randomPrefix = []
     return rolled
   }
 }

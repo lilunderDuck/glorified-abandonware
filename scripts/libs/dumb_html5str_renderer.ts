@@ -1,12 +1,7 @@
 import fs from "node:fs"
 import { Fragment, type JSX, type ReactElement } from "react" // type def only
 import { compile, serialize, stringify } from 'stylis'
-import { createRandomizer } from "./dumb_random"
-
-const GLOBAL_CONTEXT = {
-  cssClassSelectorRandomizer: createRandomizer(),
-  cssClassWordLength: 4,
-}
+import { AnyRandomizerFn, createWordSlidingRandomizer } from "./dumb_random"
 
 declare global {
   // only be used for its jsx types
@@ -16,6 +11,20 @@ declare global {
     interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
       class?: string
     }
+  }
+}
+
+interface IRendererGlobalContext {
+  readonly cssClasses: {
+    nameRandomizer: AnyRandomizerFn,
+    wordLength: number
+  }
+}
+
+export const GLOBAL_CONTEXT: IRendererGlobalContext = {
+  cssClasses: {
+    nameRandomizer: createWordSlidingRandomizer(),
+    wordLength: 4,
   }
 }
 
@@ -77,7 +86,7 @@ export function dumpCssThenClearCache() {
 /**Dummy css function to make use of styled-component highlighting */
 export function css(template: TemplateStringsArray): string {
   const rawCss = template.join(' ')
-  const randomName = GLOBAL_CONTEXT.cssClassSelectorRandomizer(GLOBAL_CONTEXT.cssClassWordLength)
+  const randomName = GLOBAL_CONTEXT.cssClasses.nameRandomizer(GLOBAL_CONTEXT.cssClasses.wordLength)
 
   const compiled = serialize(compile(`.${randomName}{${rawCss}}`), stringify)
   cachedCssValues.add(compiled)

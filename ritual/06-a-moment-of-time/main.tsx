@@ -1,5 +1,5 @@
-import { scrollbar, scrollbar__horizontal } from "../../scripts/components"
-import { dumpCssThenClearCache, IRenderHtmlOption, renderHtmlTo } from "../../scripts/libs/dumb_html5str_renderer"
+import { dumpCssThenClearCache, IRenderHtmlOption, renderHtmlTo, GLOBAL_CONTEXT } from "../../scripts/libs/dumb_html5str_renderer"
+import Page from "./page"
 
 const APP_GLOBAL_CSS = `
   @font-face {
@@ -17,10 +17,10 @@ const APP_GLOBAL_CSS = `
 
 const htmlRendererOptions: IRenderHtmlOption = {
   reason: ``,
-  title: "Springtime In Michigan",
+  title: "A moment of time",
   noFlashbangWhenOpened: true,
   libraryUsed: "libduck_haxjsx2html5 palette@catppuccin_mocha",
   css: `${APP_GLOBAL_CSS} ${dumpCssThenClearCache()}`,
 }
 
-renderHtmlTo("./docs/06-a-moment-of-time/parks.html", htmlRendererOptions, <div>hello world</div>)
+renderHtmlTo("./docs/06-a-moment-of-time/index.html", htmlRendererOptions, <Page />)
