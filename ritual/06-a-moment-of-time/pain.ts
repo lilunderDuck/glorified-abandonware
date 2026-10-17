@@ -19,6 +19,10 @@ function attachTabIndexWorkaround() {
       logStateTransition("IMAGE_TAB_FOCUSED", "for", imageRef.src)
     })
 
+    imageRef.addEventListener("mouseenter", () => {
+      updateImage(i)
+    })
+
     imageRef.tabIndex = i + 1
   }
 }
