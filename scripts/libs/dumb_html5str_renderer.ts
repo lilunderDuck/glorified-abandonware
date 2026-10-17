@@ -109,10 +109,15 @@ export const CSS_GLOBAL_CONTEXT = {
  * 
  * To swap out the generator responsible for generating CSS name:
  * ```
- * import { yourRandomizer } from "./somewhere"
- * import { css } from "./dumb_html5str_renderer"
+ * // dumbconfig.ts
+ * import { yourHandler } from "./somewhere"
+ * import { CSS_GLOBAL_CONTEXT } from "./dumb_html5str_renderer"
  * // must be on top!
- * css.nameRandomizer = yourRandomizer
+ * CSS_GLOBAL_CONTEXT.currentHandler = yourHandler
+ * 
+ * // main.ts
+ * import "./dumbconfig" // make sure that it on the top of all of the imports
+ * import ...
  * 
  * // then you can use it like normal
  * const app__page = css`... some styles ...`
@@ -120,9 +125,9 @@ export const CSS_GLOBAL_CONTEXT = {
  * 
  * @param template the templated string array, just ignore it and follow the example above.
  * @returns the compiled CSS classnames
- * 
  * @see `dumb_random.ts` for example randomizer function
- * @see {@link CSSTemplateFnWorkaround}
+ * @see {@link cssDefaultHandler()} - the default CSS class name handler
+ * @see {@link cssAtomicHandler()} - more chaos version of the tame `cssDefaultHandler()`
  */
 export function css(template: TemplateStringsArray): string {
   const rawCss = template.join(' ')
@@ -206,7 +211,6 @@ export function cssDefaultHandler() {
  * 
  * @see {@link createSingleWordSlidingRandomizer()}
  * @see {@link simpleCSSBlocksParser()}
- * @see {@link CSSTemplateFnWorkaround}
  * @returns 
  */
 export function cssAtomicHandler() {

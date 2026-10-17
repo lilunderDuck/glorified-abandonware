@@ -1,5 +1,5 @@
-import { IRenderHtmlOption, renderHtmlTo } from "../../scripts/libs/dumb_html5str_renderer"
 import "./dumbconfig"
+import { IRenderHtmlOption, renderHtmlTo } from "../../scripts/libs/dumb_html5str_renderer"
 import Page from "./page"
 
 const APP_GLOBAL_CSS = `
