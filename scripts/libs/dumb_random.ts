@@ -37,6 +37,7 @@ const splitAndClean = (something: string) => something
  * - [`Neoforge's Events for 1.21.1`](https://docs.neoforged.net/docs/1.21.1/concepts/events/#event-buses)
  * 
  * @see {@link createWordSlidingRandomizer()}
+ * @see {@link createSingleWordSlidingRandomizer()}
  */
 const CHARSET_FOR_RANDOM_STR = `
 The missile knows where it is at all times. It knows this because it knows where it isn't. By subtracting where it is from where it isn't, or where it isn't from where it is (whichever is greater), it obtains a difference, or deviation. The guidance subsystem uses deviations to generate corrective commands to drive the missile from a position where it is to a position where it isn't, and arriving at a position where it wasn't, it now is. Consequently, the position where it is, is now the position that it wasn't, and it follows that the position that it was, is now the position that it isn't.
@@ -105,34 +106,67 @@ export function createWordSlidingRandomizer(source: string[] = splitAndClean(CHA
   }
 }
 
-/**A factory function that generate only a single word with the provided source set.
+/**A factory function that generate only (almost) a single word with the provided source set.
  * 
- * Unlike {@link createWordSlidingRandomizer()}, it only generates a single word name, unless it
- * found no duplicated name generated.
+ * Unlike {@link createWordSlidingRandomizer()} **(nerdy alert again)**:
+ * - First it will generate a single word, regardless of the `length` parameter you 
+ *   provided (tl:dr - it ignored `length`)
+ * - If there's a duplicated word, try mashing the next word
+ * - Returns the generated name
+ * 
+ * @example
+ * ```
+ * // again, not random at all
+ * const randomizer = createSingleWordSlidingRandomizer()
+ * for (let i = 0; i <= 13; i++) console.log(randomizer())
+ * // the 
+ * // missile 
+ * // knows 
+ * // where 
+ * // it 
+ * // is 
+ * // at 
+ * // all 
+ * // times
+ * // it_knows               <- it found the duplicated word, so it tries
+ * // this                      to roll the next word
+ * // because 
+ * // it_knows_where 
+ * // it_isnt
+ * ```
  * @param source any source you want, default is `CHARSET_FOR_RANDOM_STR`
  * @returns 
  * @see {@link CHARSET_FOR_RANDOM_STR} - default random set.
  * @see {@link splitAndClean()} - utility function to clean up the source set.
  */
-export function createAtomicRandomizer(
-  source: string[] = splitAndClean(CHARSET_FOR_RANDOM_STR)
-): AnyRandomizerFn {
+export function createSingleWordSlidingRandomizer(
+  source: string[] = splitAndClean(CHARSET_FOR_RANDOM_STR.replaceAll(".", ""))
+) {
   const generated = new Set<string>()
+  const SOURCE_MAX_LENGTH = source.length
+  const MAX_RETRY = 10
+  let currentRetry = 0
   let currentWordIndex = 0
   let randomPrefix: string[] = []
   let wordLength = 1
-  return function roll(length) {
+  return function roll(length = wordLength) {
     length = wordLength
     randomPrefix.push(source[currentWordIndex])
-
+    
     const rolled = randomPrefix.join("_")
+    if (generated.has(rolled) && currentWordIndex === SOURCE_MAX_LENGTH - 1 && currentRetry === MAX_RETRY) {
+      throw new Error("panic: starvation - cannot generate a new name, createSingleWordSlidingRandomizer() has ran out of words.")
+    }
+
     if (generated.has(rolled)) { // if found duplicate
       currentWordIndex += 1
+      currentRetry += 1
       return roll(length)
     }
 
     generated.add(rolled)
     currentWordIndex += 1
+    currentRetry = 0
     randomPrefix = []
     return rolled
   }
