@@ -3,6 +3,7 @@ import { getBooleanAttribute, grabAllElement, grabElementById, setAttribute } fr
 import { IMAGE_LIST } from "./components/image_list"
 
 const imageList__imageRefs = grabAllElement<"img">(".imageList__imageRef")
+const root = grabElementById("root")
 const imageShowcaseView__imgRef = grabElementById<"img">("imageShowcaseView__imgRef")
 // implementation note: of course, we can attach "tabindex" attribute ahead-of-time,
 // in our JSX, but... the instructions told us to manually attach that in the javascript code:
@@ -22,28 +23,19 @@ function attachTabIndexWorkaround() {
   }
 }
 
+function toggleShowImageList(shouldShow: boolean) {
+  setAttribute(root, "data-image-list-showing", shouldShow)
+} 
+
 function forceToFocusFirstImage() {
   imageList__imageRefs[0].click() // focus the first element
 }
 
-const imageList__root = grabAllElement<"section" | "div">("[data-image-list-showing]")
 const imageList__showBtn = grabElementById<"button">("imageList__showBtn")
-const gallery__navButtons = grabAllElement(".gallery__navBtnRef")
-
-function shouldGrayOutGalleryNavButtons(shouldGrayOut: boolean) {
-  for (const navButton of gallery__navButtons) {
-    setAttribute(navButton, "data-gray-out", shouldGrayOut)
-  }
-}
 
 imageList__showBtn.addEventListener("click", () => {
-  let isShowing
-  for (const imageList of imageList__root) {
-    isShowing = getBooleanAttribute(imageList, "data-image-list-showing")
-    setAttribute(imageList, "data-image-list-showing", !isShowing)
-  }
-  shouldGrayOutGalleryNavButtons(!isShowing)
-  forceToFocusFirstImage()
+  const isShowing = getBooleanAttribute(root, "data-image-list-showing")
+  toggleShowImageList(!isShowing)
 })
 
 let currentImageIndex = 0
@@ -93,4 +85,4 @@ updateImage(0)
 updateGalleryButtonsNav()
 attachTabIndexWorkaround()
 forceToFocusFirstImage()
-shouldGrayOutGalleryNavButtons(true)
+toggleShowImageList(true)

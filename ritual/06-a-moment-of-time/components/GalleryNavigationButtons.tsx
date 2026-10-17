@@ -8,13 +8,6 @@ const nav__buttonWrap = css`
   justify-content: center;
   align-items: center;
   padding-inline: 10px;
-  &[data-gray-out=true] {
-    z-index: 1;
-  }
-  
-  &[data-gray-out=false] {
-    z-index: 10;
-  }
 `
 
 const nav__leftNavButtonWrap = css`
@@ -45,12 +38,12 @@ const nav__button = css`
 export function GalleryNavigationButtons() {
   return (
     <>
-      <div class={`${nav__buttonWrap} ${nav__leftNavButtonWrap} gallery__navBtnRef`} data-gray-out={false}>
+      <div class={`${nav__buttonWrap} ${nav__leftNavButtonWrap} gallery__navButton`} data-gray-out={false}>
         <button class={nav__button} id="gallery__navLeftBtn">
           <BsCaretLeftFill size="2rem" />
         </button>
       </div>
-      <div class={`${nav__buttonWrap} ${nav__rightNavButtonWrap} gallery__navBtnRef`} data-gray-out={false}>
+      <div class={`${nav__buttonWrap} ${nav__rightNavButtonWrap} gallery__navButton`} data-gray-out={false}>
         <button class={nav__button} id="gallery__navRightBtn">
           <BsCaretRightFill size="2rem" />
         </button>

@@ -11,22 +11,6 @@ const imageList__root = css`
   flex-direction: column;
   transition: 0.2s ease-out;
   z-index: 5;
-
-  &[data-image-list-showing=false] {
-    bottom: -14.8rem;
-  }
-
-  &[data-image-list-showing=false] #imageList__showBtn {
-    rotate: 180deg;
-  }
-
-  &[data-image-list-showing=false] #imageList__pusher {
-    opacity: 0;
-  }
-
-  &[data-image-list-showing=true] #imageList__pusher {
-    opacity: 1;
-  }
 `
 
 const imageList__shadow = css`
@@ -37,14 +21,6 @@ const imageList__shadow = css`
   background: linear-gradient(to top, var(--crust) 0%, transparent 100%);
   transition: 0.2s ease-out;
   z-index: 5;
-
-  &[data-image-list-showing=true] {
-    opacity: 1;
-  }
-
-  &[data-image-list-showing=false] {
-    opacity: 0;
-  }
 `
 
 const imageList__arrowWrap = css`
@@ -75,6 +51,10 @@ const imageList__arrowButtonWrap = css`
     color: var(--text);
     outline-color: var(--sapphire);
   }
+
+  & > svg {
+    transition: rotate 0.3s ease-out;
+  }
 `
 
 const imageList__content = css`
@@ -104,10 +84,10 @@ const imageList__image = css`
 export function ImageList() {
   return (
     <>
-      <div class={imageList__shadow} data-image-list-showing={true} />
-      <section class={imageList__root} data-image-list-showing={true}>
+      <div class={`${imageList__shadow} imageList__shadow`} />
+      <section class={`${imageList__root} imageList__root`}>
         <div class={imageList__arrowWrap}>
-          <div class={imageList__pusher} id="imageList__pusher">
+          <div class={`${imageList__pusher} imageList__pusher`}>
             <div>
               <Kbd>Shift + Mouse Wheel</Kbd> scroll image list
             </div>
@@ -121,7 +101,7 @@ export function ImageList() {
           <button class={imageList__arrowButtonWrap} id="imageList__showBtn">
             <BsCaretDownFill size="1.25rem" />
           </button>
-          <div class={imageList__pusher} id="imageList__pusher" />
+          <div class={`${imageList__pusher} imageList__pusher`} />
         </div>
         <div class={`${imageList__content} ${scrollbar} ${scrollbar__horizontal} ${scrollbar__invs}`}>
           <For each={IMAGE_LIST}>
