@@ -37,6 +37,26 @@ const page__accessFix = css`
   &[data-image-list-showing=false] #view__imageDescription {
     top: calc(100% - 5rem);
   }
+
+  &[data-image-is-currently-showing=true] #view__imageView {
+    display: block;
+  }
+
+  &[data-image-is-currently-showing=false] #view__imageView {
+    display: none;
+  }
+
+  &[data-image-is-currently-showing=true] #view__emptyView {
+    display: none;
+  }
+  
+  &[data-image-is-currently-showing=false] #view__emptyView {
+    display: flex;
+  }
+
+  &[data-image-is-currently-showing=false] #view__imageDescription {
+    display: none;
+  }
 `
 
 export default function Page() {
@@ -44,7 +64,13 @@ export default function Page() {
     <>
       <script src="./workaround.js" />
       <script src="./pain.js" defer />
-      <div id="root" data-image-list-showing={true} data-must-preserve-root={true} class={`${page__root} ${page__accessFix}`}>
+      <div 
+        id="root" 
+        data-image-list-showing={true} 
+        data-image-is-currently-showing={false}
+        data-must-preserve-root={true} 
+        class={`${page__root} ${page__accessFix}`}
+      >
         <ImageList />
         <ImageShowcaseView />
       </div>
