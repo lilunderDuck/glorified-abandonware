@@ -71,7 +71,7 @@ export const SUBMISSION_DATA: IProjectSubmissionData[] = [
     projects: [
       {
         name: "05-gallery-js-w-template",
-        score: null
+        score: [{score: 100, date: new Date(2026, 10 - 1, 17)}]
       },
       {
         name: "06-a-moment-of-time",
