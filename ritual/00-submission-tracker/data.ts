@@ -85,7 +85,7 @@ export const SUBMISSION_DATA: IProjectSubmissionData[] = [
     link: "https://www.coursera.org/learn/responsivedesign",
     projects: [
       {
-        name: "07-responsive-website",
+        name: "07-responsive-stylesheet",
         score: null
       },
       {
