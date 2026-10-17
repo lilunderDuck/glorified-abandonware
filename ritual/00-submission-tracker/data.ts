@@ -75,7 +75,7 @@ export const SUBMISSION_DATA: IProjectSubmissionData[] = [
       },
       {
         name: "06-a-moment-of-time",
-        score: null,
+        score: null, // Wait for scores
         custom: true
       }
     ]
