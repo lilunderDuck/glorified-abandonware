@@ -1,4 +1,5 @@
 import { IRenderHtmlOption, renderHtmlTo } from "../../scripts/libs/dumb_html5str_renderer"
+import "./dumbconfig"
 import Page from "./page"
 
 const APP_GLOBAL_CSS = `
@@ -21,6 +22,7 @@ const htmlRendererOptions: IRenderHtmlOption = {
   noFlashbangWhenOpened: true,
   libraryUsed: "libduck_haxjsx2html5 palette@catppuccin_mocha",
   css: APP_GLOBAL_CSS,
+  shouldIncludeSomeUnrelatedBodyAttributes: false
 }
 
 renderHtmlTo("./docs/06-a-moment-of-time/index.html", htmlRendererOptions, <Page />)

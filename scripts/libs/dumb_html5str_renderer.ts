@@ -87,11 +87,8 @@ function dumpCssThenClearCache() {
   return everything
 }
 
-/**Workaround type, I need to somehow change the underlying handler responsibles for
- * generating CSS class name, somehow.
- */
-type CSSTemplateFnWorkaround = ((template: TemplateStringsArray) => string) & {
-  handler: (rawCss: string) => string
+export const CSS_GLOBAL_CONTEXT = {
+  currentHandler: cssDefaultHandler()
 }
 
 /**Dummy-ish css templated function to make use of `styled-component` highlighting.
@@ -127,12 +124,10 @@ type CSSTemplateFnWorkaround = ((template: TemplateStringsArray) => string) & {
  * @see `dumb_random.ts` for example randomizer function
  * @see {@link CSSTemplateFnWorkaround}
  */
-export const css = ((template: TemplateStringsArray): string => {
+export function css(template: TemplateStringsArray): string {
   const rawCss = template.join(' ')
-  return css.handler(rawCss)
-}) as CSSTemplateFnWorkaround
-
-css.handler = cssDefaultHandler()
+  return CSS_GLOBAL_CONTEXT.currentHandler(rawCss)
+}
 
 /**The default CSS class name handler, it's fine.
  * 
@@ -326,12 +321,23 @@ export interface IRenderHtmlOption {
    * @see `peer_rating_sim.ts` for the message
    */
   shouldIncludeDisclaimer?: boolean
+  /**When setting to `true`, it will inject the following attribute into the `<body />` tag.
+   * ```
+   * data-should-confuse-you="true" data-dukasmd="jump break"
+   * ```
+   * @default true
+   */
+  shouldIncludeSomeUnrelatedBodyAttributes?: boolean
   isRoot?: boolean
 }
 
 export function renderHtmlTo(fileName: string, options: IRenderHtmlOption, app: JSX.Element) {
   if (options.shouldIncludeDisclaimer === undefined) {
     options.shouldIncludeDisclaimer = true
+  }
+
+  if (options.shouldIncludeSomeUnrelatedBodyAttributes === undefined) {
+    options.shouldIncludeSomeUnrelatedBodyAttributes = true
   }
 
   const INCLUDE_DISCLAIMER_SCRIPTS = `
@@ -346,6 +352,8 @@ export function renderHtmlTo(fileName: string, options: IRenderHtmlOption, app: 
       html {background-color: #11111b}
     </style>
   `
+
+  const CONFUSION_HINT = ` data-should-confuse-you="true" data-dukasmd="jump break"`
 
   // script notice: why the hell w3 mark "defer" attribute on a <script /> without src an error?
   //   "An inline script element (i.e., a script element without a src attribute and with 
@@ -365,7 +373,7 @@ export function renderHtmlTo(fileName: string, options: IRenderHtmlOption, app: 
         ${options.noFlashbangWhenOpened ? NO_FLASHBANG_WORKAROUND : ""}
         <style data-inline>${`${options.css ?? ""} ${dumpCssThenClearCache()}`.trim()}</style>
       </head>
-      <body data-should-confuse-you="true" data-dukasmd="jump break"${options.bodyClass ? ` class="${options.bodyClass}"` : ""}>
+      <body${options.shouldIncludeSomeUnrelatedBodyAttributes ? CONFUSION_HINT : ""}${options.bodyClass ? ` class="${options.bodyClass}"` : ""}>
         <!-- You may believe that this page uses react, but no, it's plain html (and some CSS of course), but can you guess which [javascript] framework generates this kind of html? -->
         ${recursivelyRenderJSXFast(app) /* spoiler: this function is **not** fast */}
       </body>
