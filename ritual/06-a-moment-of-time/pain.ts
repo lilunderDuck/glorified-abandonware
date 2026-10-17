@@ -62,6 +62,7 @@ function updateImage(currentIndex: number | null) {
     // hot patch: when the mouse is removed from a smaller image the background 
     // for the large image is updated to an empty URL.
     imageShowcaseView__imgRef.src = ""
+    imageShowcaseView__imgRef.alt = ""
     imageDescriptionRef.innerText = ""
     logStateTransition("RESTORE_EMPTY_VIEW")
     setAttribute(root, "data-image-is-currently-showing", false)
@@ -69,7 +70,7 @@ function updateImage(currentIndex: number | null) {
   }
   const imgRef = imageList__imageRefs[currentIndex]
   imageShowcaseView__imgRef.src = imgRef.src
-  imageDescriptionRef.innerText = imgRef.alt
+  imageShowcaseView__imgRef.alt = imageDescriptionRef.innerText = imgRef.alt
   setAttribute(root, "data-image-is-currently-showing", true)
   logStateTransition("UPDATE_IMAGE", "for", imgRef.src, "at index", currentIndex)
 }
