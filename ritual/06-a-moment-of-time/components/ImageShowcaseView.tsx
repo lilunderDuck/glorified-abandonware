@@ -10,6 +10,17 @@ const view__root = css`
   align-items: center;
 `
 
+const view__imageDescription = css`
+  padding-inline: 20px;
+  padding-block: 10px;
+  background-color: var(--base);
+  border-radius: 6px;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: 0.15s ease-out;
+`
+
 const view__imageWrap = css`
   width: calc(100% - 30px * 2);
   height: calc(100% - 25px * 2);
@@ -28,11 +39,14 @@ const view__image = css`
 
 export function ImageShowcaseView() {
   return (
-    <div class={view__root}>
-      <div class={view__imageWrap}>
-        {/* 18/10/2026 - this repo currently not exist yet, I just need something inside src attribute so W3C is happy. */}
-        <img loading="lazy" src="https://lilunderduck.github.io/project-index" alt="" draggable={false} class={view__image} id="imageShowcaseView__imgRef" />
+    <>
+      <div class={view__imageDescription} id="view__imageDescription"></div>
+      <div class={view__root}>
+        <div class={view__imageWrap}>
+          {/* 18/10/2026 - this repo currently not exist yet, I just need something inside src attribute so W3C is happy. */}
+          <img loading="lazy" src="https://lilunderduck.github.io/project-index" alt="" draggable={false} class={view__image} id="imageShowcaseView__imgRef" />
+        </div>
       </div>
-    </div>
+    </>
   )
 }

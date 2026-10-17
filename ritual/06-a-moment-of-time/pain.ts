@@ -6,6 +6,7 @@ let shouldUpdateImageByHovering = true
 const imageList__imageRefs = grabAllElement<"img">(".imageList__imageRef")
 const root = grabElementById("root")
 const imageShowcaseView__imgRef = grabElementById<"img">("imageShowcaseView__imgRef")
+const imageDescriptionRef = grabElementById<"div">("view__imageDescription")
 // implementation note: of course, we can attach "tabindex" attribute ahead-of-time,
 // in our JSX, but... the instructions told us to manually attach that in the javascript code:
 //   9. Add the new function for adding the tabfocus attribute
@@ -62,6 +63,7 @@ imageList__showBtn.addEventListener("click", () => {
 function updateImage(currentIndex: number) {
   const imgRef = imageList__imageRefs[currentIndex]
   imageShowcaseView__imgRef.src = imgRef.src
+  imageDescriptionRef.innerText = imgRef.alt
   logStateTransition("UPDATE_IMAGE", "for", imgRef.src, "at index", currentIndex)
 }
 

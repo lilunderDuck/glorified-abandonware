@@ -29,6 +29,14 @@ const page__accessFix = css`
   &[data-image-list-showing=false] .imageList__pusher {
     opacity: 0;
   }
+
+  &[data-image-list-showing=true] #view__imageDescription {
+    top: 50px;
+  }
+
+  &[data-image-list-showing=false] #view__imageDescription {
+    top: calc(100% - 5rem);
+  }
 `
 
 export default function Page() {
