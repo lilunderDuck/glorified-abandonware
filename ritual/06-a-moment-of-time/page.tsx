@@ -3,6 +3,7 @@ import { ImageList, ImageShowcaseView } from "./components"
 
 const page__root = css`
   user-select: none;
+  display: flex;
 `
 
 const page__accessFix = css`
@@ -71,8 +72,8 @@ export default function Page() {
         data-must-preserve-root={true} 
         class={`${page__root} ${page__accessFix}`}
       >
-        <ImageList />
         <ImageShowcaseView />
+        <ImageList />
       </div>
     </>
   )
