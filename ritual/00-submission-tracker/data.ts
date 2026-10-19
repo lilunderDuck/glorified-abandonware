@@ -59,7 +59,7 @@ export const SUBMISSION_DATA: IProjectSubmissionData[] = [
       },
       {
         name: "06-a-moment-of-time",
-        score: null, // Wait for scores
+        score: [{score: 100, date: new Date(2026, 10 - 1, 18)}],
         custom: true
       }
     ]
