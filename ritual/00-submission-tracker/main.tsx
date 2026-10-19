@@ -6,7 +6,7 @@ const APP_GLOBAL_CSS = `
   @font-face {
     font-family: ZeroProtoNerdFont;
     font-display: swap;
-    src: url("./assets/da_font.woff2") format('woff2');
+    src: url("./assets/ComicRelief-Bold.woff2") format('woff2');
   }
 
   html { overflow: hidden; }
@@ -17,7 +17,7 @@ const APP_GLOBAL_CSS = `
 `
 
 const htmlRendererOptions: IRenderHtmlOption = {
-  reason: ``,
+  reason: `Tracking all of my projects score on coursera.`,
   title: "Glorified abandonware - submission tracker",
   noFlashbangWhenOpened: true,
   libraryUsed: "libduck_haxjsx2html5 palette@catppuccin_mocha",
