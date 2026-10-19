@@ -1,7 +1,7 @@
 import fs from "node:fs"
 import { Fragment, type JSX, type ReactElement } from "react" // type def only
 import { compile, serialize, stringify, type Element as CSSElement } from 'stylis'
-import { AnyRandomizerFn, createSingleWordSlidingRandomizer, createWordSlidingRandomizer } from "./dumb_random"
+import { createSingleWordSlidingRandomizer, createWordSlidingRandomizer } from "./dumb_random"
 
 declare global {
   // only be used for its jsx types
@@ -215,12 +215,14 @@ export function cssDefaultHandler() {
  * .knows { padding-inline: 10px; } // duplicated padding-inline property here
  * ```
  * 
+ * @param nameRandomizer a randomizer function to generate CSS class name, 
+ * default is `createSingleWordSlidingRandomizer()`
+ * 
  * @see {@link createSingleWordSlidingRandomizer()}
  * @see {@link simpleCSSBlocksParser()}
  * @returns 
  */
-export function cssAtomicHandler() {
-  const nameRandomizer = createSingleWordSlidingRandomizer()
+export function cssAtomicHandler(nameRandomizer = createSingleWordSlidingRandomizer()) {
   const MAX_WORD_LENGTH = 1
 
   return (rawCss: string) => {

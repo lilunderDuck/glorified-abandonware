@@ -1,19 +1,3 @@
-const HTML_FINAL_PROJECT = "Peer-graded Assignment: Final Project"
-
-const htmlCourseInfo = {
-  name: "Introduction to HTML5",
-  link: "https://www.coursera.org/learn/html",
-}
-
-export const SUBMISSION = [
-  {
-    name: "01-coursera-html-final-project",
-    score: 100
-  },
-  ,
-  
-]
-
 export interface IProjectScoreData {
   score: number
   date: Date
