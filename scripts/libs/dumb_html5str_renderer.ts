@@ -82,13 +82,11 @@ function stringifyChildern(child: ChildNodeCompatible) {
 }
 
 const cachedCssValues = new Map<string, string>()
-function dumpCssThenClearCache() {
+function dumpCSS() {
   let everything = ""
   for (const cssRule of cachedCssValues.values()) {
     everything += cssRule
   }
-
-  cachedCssValues.clear()
 
   return everything
 }
@@ -321,10 +319,10 @@ export interface IRenderHtmlOption {
   reason: string
   libraryUsed?: string
   /**Additional CSS (e.g global styles) to the page, default will be
-   * the generated CSS output by `dumpCssThenClearCache()` function.
+   * the generated CSS output by `dumpCSS()` function.
    * @default "... css output ..."
    * @see {@link css}
-   * @see {@link dumpCssThenClearCache()}
+   * @see {@link dumpCSS()}
    */
   css?: string
   /**Prevent white "flash" on page load */
@@ -387,7 +385,7 @@ export function renderHtmlTo(fileName: string, options: IRenderHtmlOption, app: 
         <meta name="duck" content="this is duck">
         ${options.shouldIncludeDisclaimer ? INCLUDE_DISCLAIMER_SCRIPTS : ""}
         ${options.noFlashbangWhenOpened ? NO_FLASHBANG_WORKAROUND : ""}
-        <style data-inline>${`${options.css ?? ""} ${dumpCssThenClearCache()}`.trim()}</style>
+        <style data-inline>${`${options.css ?? ""} ${dumpCSS()}`.trim()}</style>
       </head>
       <body${options.shouldIncludeSomeUnrelatedBodyAttributes ? CONFUSION_HINT : ""}${options.bodyClass ? ` class="${options.bodyClass}"` : ""}>
         <!-- You may believe that this page uses react, but no, it's plain html (and some CSS of course), but can you guess which [javascript] framework generates this kind of html? -->
