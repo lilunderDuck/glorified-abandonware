@@ -6,10 +6,10 @@ Originally, I put it inside my other project: [`unnamed-spinning-cube`](https://
 # Finding the code responsible for multiple violations 
 This fever-dreams-kind-of repo includes the following folders:
 - `docs`: the nightmare fuel, every projects live here.
-- `docs/assets`: global assets to be used across all project inside `docs`
-- `scripts`: core library (hacked-together) to generate code, then put it into `docs` folder.
-- `ritual`: scripts for auto-generating code, if *too much duplicate code*, because I love fun. 
-- `held-readme-for-hostage`: some images and stuff for `README.md`
+- `docs/assets`: global assets to be used across all project inside `docs`.
+- `scripts`: core (hacked-together) library to generate HTML, CSS and pure Javascript code.
+- `ritual`: scripts for auto-generating code, if *too much duplicate code*, because I love fun.
+- `held-readme-for-hostage`: some images and stuff for `README.md`.
 
 Additionally, the folder name in `ritual` matches with the one in `docs`, so you can easily find which one in `ritual` generates the output code in `docs`.
 
