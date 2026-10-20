@@ -17,7 +17,7 @@ const APP_GLOBAL_CSS = `
   @font-face {
     font-family: ZeroProtoNerdFont;
     font-display: swap;
-    src: url("../assets/ComicRelief-Bold.woff2") format('woff2');
+    src: url("../assets/SourGummy.woff2") format('woff2');
   }
 
   html { overflow: hidden; }
