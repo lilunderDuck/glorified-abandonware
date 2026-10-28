@@ -25,7 +25,7 @@ export const SUBMISSION_DATA: IProjectSubmissionData[] = [
         name: "01-coursera-html-final-project",
         score: [
           {score: 0, date: new Date(2026, 10 - 1, 1), reason: "followed all of the instruction, but being rated 0"}, 
-          {score: 100, date: new Date(2026, 10 - 1, 1)}
+          {score: 100, date: new Date(2026, 10 - 1, 1), reason: "applied the dumb-est fix and somehow they rated it 100"}
         ]
       }
     ]

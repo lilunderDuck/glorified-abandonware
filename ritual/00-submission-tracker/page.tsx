@@ -39,7 +39,7 @@ export default function Page() {
   return (
     <>
       <header class={page__headerRoot}>
-        <h1>Submission scores</h1>
+        <h1>Directory of bad ideas</h1>
         <p>Every project inside Glorified Abandonware and how peer-rated it.</p>
       </header>
       <main class={page__mainRoot}>
