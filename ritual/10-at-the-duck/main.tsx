@@ -1,3 +1,4 @@
+import { scrollbar, scrollbar__vertical } from "../../scripts/components"
 import { renderHtmlTo } from "../../scripts/libs/dumb_html5str_renderer"
 import HomePage from "./page"
 
@@ -22,5 +23,5 @@ renderHtmlTo("./docs/10-at-the-duck/index.html", {
   title: "The duck dot info",
   reason: "The final project for Web Design for Everybody - https://www.coursera.org/learn/web-design-project - what if you view someone's portfolio in a terminal?",
   libraryUsed: "libduck_haxjsx2html5 palette@catppuccin_mocha",
-  css: APP_GLOBAL_CSS
+  css: APP_GLOBAL_CSS,
 }, <HomePage />)

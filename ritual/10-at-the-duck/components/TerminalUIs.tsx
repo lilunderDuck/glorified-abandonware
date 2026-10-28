@@ -22,6 +22,10 @@ const tui__box = css`
   & > :first-child {
     margin-top: 1ch;
   }
+
+  & > :last-child {
+    margin-bottom: 1ch;
+  }
 `
 
 const tui__boxLineHide = css`
@@ -29,6 +33,11 @@ const tui__boxLineHide = css`
 `
 
 const tui__text = css`
+`
+
+const tui__heading = css`
+  color: var(--peach);
+  font-weight: bold;
 `
 
 const tui__lineBreak = css`
@@ -55,5 +64,9 @@ export namespace Tui {
 
   export function Link(props: JSX.IntrinsicElements["a"]) {
     return <a tab-index={0} {...props}>{props.children}</a>
+  }
+
+  export function Heading(props: JSX.IntrinsicElements["div"]) {
+    return <div tab-index={0} {...props} class={`${tui__text} ${tui__heading} ${props.class ?? ""}`.trim()}># {props.children}</div>
   }
 }
