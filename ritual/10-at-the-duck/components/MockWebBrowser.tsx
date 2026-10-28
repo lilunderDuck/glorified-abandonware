@@ -3,8 +3,6 @@ import { css } from "../../../scripts/libs/dumb_html5str_renderer"
 import { Tui } from "./TerminalUIs"
 
 const browser__root = css`
-  padding-inline: 15px;
-  padding-block: 5px;
   user-select: none;
   height: 30rem;
 `

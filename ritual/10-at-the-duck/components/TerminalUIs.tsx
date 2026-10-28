@@ -3,6 +3,8 @@ import { css } from "../../../scripts/libs/dumb_html5str_renderer";
 
 const tui__box = css`
   position: relative;
+  padding-inline: 15px;
+  padding-block: 5px;
   &::before {
     content: "";
     position: absolute;
