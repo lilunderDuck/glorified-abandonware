@@ -5,6 +5,7 @@ const tui__box = css`
   position: relative;
   padding-inline: 15px;
   padding-block: 5px;
+  margin-block: 10px;
   &::before {
     content: "";
     position: absolute;

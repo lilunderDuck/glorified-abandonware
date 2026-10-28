@@ -5,6 +5,7 @@ import { Tui } from "./TerminalUIs"
 const browser__root = css`
   user-select: none;
   height: 30rem;
+  margin-block: 10px;
 `
 
 const browser__tabList = css`
