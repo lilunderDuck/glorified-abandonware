@@ -17,7 +17,6 @@ const APP_GLOBAL_CSS = `
   }
 `
 
-
 renderHtmlTo("./docs/10-at-the-duck/index.html", {
   noFlashbangWhenOpened: true,
   title: "The duck dot info",
