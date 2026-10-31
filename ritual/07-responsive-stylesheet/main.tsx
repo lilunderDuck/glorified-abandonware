@@ -1,5 +1,7 @@
+import "./dumbconfig"
 import { IRenderHtmlOption, renderHtmlTo } from "../../scripts/libs/dumb_html5str_renderer"
 import Page from "./page"
+import { scrollbar, scrollbar__vertical } from "../../scripts/components"
 
 const APP_GLOBAL_CSS = `
   @font-face {
@@ -22,7 +24,8 @@ const htmlRendererOptions: IRenderHtmlOption = {
   noFlashbangWhenOpened: true,
   libraryUsed: "jsx2html5 palette@catppuccin_mocha",
   css: APP_GLOBAL_CSS,
+  bodyClass: `${scrollbar} ${scrollbar__vertical}`,
   shouldIncludeSomeUnrelatedBodyAttributes: false
 }
 
-renderHtmlTo("./docs/06-a-moment-of-time/index.html", htmlRendererOptions, <Page />)
+renderHtmlTo("./docs/07-responsive-stylesheet/index.html", htmlRendererOptions, <Page />)

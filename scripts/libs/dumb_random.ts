@@ -19,7 +19,7 @@
  */
 // ...
 
-const splitAndClean = (something: string) => something
+export const splitAndClean = (something: string) => something
   .toLowerCase()
   .replaceAll("\n", "")
   // ultra specific case, do not touch
