@@ -37,20 +37,24 @@ const APP_GLOBAL_CSS = `
   .${GlobalRegistry.COLOR_IMAGE_WRAP} {
     width: 80%;
   }
-
+  
+  /*note 1: The first media query uses min-width and triggers at 772 px.*/
   @media screen and (min-width: 772px) {
     .${GlobalRegistry.COLOR_IMAGE_WRAP} {
-      width: 45%;
+      /*note 1.1: In the first media query the div selector is set to a width of 45vw and uses display inline-block*/
+      width: 45vw;
     }
 
     .${GlobalRegistry.COLOR_IMAGE_WRAP} > img {
-      width: 30%;
+      /*note 1.2: In the first media query the <img> selector is set to a max-height of 30vh*/
+      max-height: 30vh;
     }
   }
 
+  /*note 2: The second media query uses min-width and triggers at 998 px.  */
   @media screen and (min-width: 998px) {
     .${GlobalRegistry.COLOR_IMAGE_WRAP} {
-      width: 30%;
+      width: 30vw;
     }
   }
 `
