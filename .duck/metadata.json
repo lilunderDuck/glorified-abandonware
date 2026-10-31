@@ -1,0 +1,10 @@
+{
+  "title": "Glorified abandonware",
+  "id": "glorified-abandonware",
+  "description": "A place to store some of the code for some required course I need to take (oh well).",
+  "type": "public",
+  "status": "active",
+  "icon": "missing-no.png",
+  "banner": "uh.png",
+  "repoUrl": "https://github.com/lilunderDuck/glorified-abandonware"
+}
