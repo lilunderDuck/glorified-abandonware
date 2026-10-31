@@ -22,6 +22,6 @@ renderHtmlTo("./docs/10-at-the-duck/index.html", {
   noFlashbangWhenOpened: true,
   title: "The duck dot info",
   reason: "The final project for Web Design for Everybody - https://www.coursera.org/learn/web-design-project - what if you view someone's portfolio in a terminal?",
-  libraryUsed: "libduck_haxjsx2html5 palette@catppuccin_mocha",
+  libraryUsed: "jsx2html5 palette@catppuccin_mocha",
   css: APP_GLOBAL_CSS,
 }, <HomePage />)

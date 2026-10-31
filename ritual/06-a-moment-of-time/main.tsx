@@ -20,7 +20,7 @@ const htmlRendererOptions: IRenderHtmlOption = {
   reason: `Of course, a final project for Interactivity with JavaScript course - https://www.coursera.org/learn/javascript - on coursera, totally nothing complex hidden inside this page.`,
   title: "A moment of time",
   noFlashbangWhenOpened: true,
-  libraryUsed: "libduck_haxjsx2html5 palette@catppuccin_mocha",
+  libraryUsed: "jsx2html5 palette@catppuccin_mocha",
   css: APP_GLOBAL_CSS,
   shouldIncludeSomeUnrelatedBodyAttributes: false
 }

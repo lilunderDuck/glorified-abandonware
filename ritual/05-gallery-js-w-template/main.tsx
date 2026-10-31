@@ -20,7 +20,7 @@ const htmlRendererOptions: IRenderHtmlOption = {
   title: "Interactive Photo Gallery",
   reason: `A fairly, very simple gallery page with a little bit of javascript, for the https://www.coursera.org/learn/javascript. Template is forked from: https://codepen.io/ColleenEMc/pen/wKYxZa`,
   noFlashbangWhenOpened: true,
-  libraryUsed: "libduck_haxjsx2html5 palette@catppuccin_mocha",
+  libraryUsed: "jsx2html5 palette@catppuccin_mocha",
   css: APP_GLOBAL_CSS,
   bodyClass: `${scrollbar} ${scrollbar__horizontal}`
 }

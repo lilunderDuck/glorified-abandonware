@@ -37,7 +37,7 @@ const htmlRendererOptions: IRenderHtmlOption = {
   reason: `Every duck project (as for ${buildDate}), a project for a course final project on coursera: https://www.coursera.org/learn/introcss/peer/JMPGW/final-project-create-your-site`,
   title: "Duck's project index",
   noFlashbangWhenOpened: true,
-  libraryUsed: "libduck_haxjsx2html5 palette@catppuccin_mocha",
+  libraryUsed: "jsx2html5 palette@catppuccin_mocha",
   css: APP_GLOBAL_CSS
 }
 

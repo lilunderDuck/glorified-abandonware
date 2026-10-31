@@ -20,7 +20,7 @@ const htmlRendererOptions: IRenderHtmlOption = {
   reason: `Tracking all of my projects score on coursera.`,
   title: "Glorified abandonware - submission tracker",
   noFlashbangWhenOpened: true,
-  libraryUsed: "libduck_haxjsx2html5 palette@catppuccin_mocha",
+  libraryUsed: "jsx2html5 palette@catppuccin_mocha",
   css: APP_GLOBAL_CSS,
   bodyClass: `${scrollbar} ${scrollbar__horizontal}`,
   shouldIncludeDisclaimer: false,
