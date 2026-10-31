@@ -1,8 +1,44 @@
 import { For } from "../../scripts/components"
+import { css } from "../../scripts/libs/dumb_html5str_renderer"
 import { createWordSlidingRandomizer, splitAndClean, SRC_CAT_SET } from "../../scripts/libs/dumb_random"
 
 // Happy halloween :)
 //  - 31/10/2026 7:48 PM GMT+7 - mint_duck
+
+const page__heading = css`
+  text-align: center;
+  font-size: 32px;
+`
+
+const page__backToTheTopLink = css`
+  text-decoration: none;
+  /* font-family:Arial, sans-serif;  commented: already applied the font family globally */
+`
+
+const page__mainMustPreserveRoot = css`
+  & > p {
+    font-size: 25px;
+    /* font-family: Arial, sans-serif;  commented: already applied the font family globally */
+    text-align: center;
+  }
+`
+
+const page__image = css`
+  /* my CSS reset already set the width to 100% */
+`
+
+const page__imageWrap = css`
+  display: inline-block;
+  width: 24%;
+  margin: 5px;
+  padding: 2px;
+  & > img {
+    width: 150px;
+    height: 150px;
+    display: block;
+    margin: auto;
+  }
+`
 
 export default function Page() {
   const IMAGE_DATA = [
@@ -22,10 +58,12 @@ export default function Page() {
   return (
     <>
       <header>
-        <h1 id={TOP_HEADING_ID}>Colors!</h1>
+        <h1 class={page__heading} id={TOP_HEADING_ID}>
+          Colors!
+        </h1>
       </header>
 
-      <main>
+      <main class={page__mainMustPreserveRoot}>
         <h2>Basic Media Queries</h2>
         <p>In this assignment you will add two media queries to the css file.</p>
         <ul>
@@ -37,8 +75,14 @@ export default function Page() {
 
         <For each={IMAGE_DATA}>
           {it => (
-            <div>
-              <img src={`./images/${it.imageName}`} alt={it.label} width="200" />
+            <div class={page__imageWrap}>
+              <img 
+                draggable={false}
+                class={page__image} 
+                src={`./images/${it.imageName}`} 
+                alt={it.label} 
+                width="200" 
+              />
               <p class= "label">{it.label}</p>
             </div>
           )}
@@ -46,7 +90,9 @@ export default function Page() {
       </main>
 
       <footer>
-        <a href={`#${TOP_HEADING_ID}`}>Jump to the Top</a>
+        <a href={`#${TOP_HEADING_ID}`} class={page__backToTheTopLink}>
+          Jump to the Top
+        </a>
       </footer>
     </>
   )

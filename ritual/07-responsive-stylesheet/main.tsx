@@ -15,6 +15,11 @@ const APP_GLOBAL_CSS = `
   :root {
     font-family: ZeroProtoNerdFont, Arial, Helvetica, sans-serif;
   }
+
+  body {
+    padding-inline: 15px;
+    padding-block: 10px;
+  }
 `
 
 const htmlRendererOptions: IRenderHtmlOption = {
