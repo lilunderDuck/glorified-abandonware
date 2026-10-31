@@ -18,6 +18,7 @@ const page__name = css`
 const page__cmdLine = css`
   display: flex;
   gap: 2ch;
+  margin-bottom: 1ch;
 `
 
 const page__content = css`
@@ -73,6 +74,10 @@ export default function HomePage() {
           ]} />
         </div>
         <Tui.Text class={page__commandOutput}>
+          <div>
+            <div></div>
+            <div></div>
+          </div>
           Hello, I'm <span class={page__name}>me@mint_duck</span>.
           <Tui.LineBreak />
           I love programming, and programming brought me joy and pain at the same time, while also be fascinated by random topics at the same time.
