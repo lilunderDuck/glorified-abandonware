@@ -2,6 +2,18 @@ import "./dumbconfig"
 import { IRenderHtmlOption, renderHtmlTo } from "../../scripts/libs/dumb_html5str_renderer"
 import Page from "./page"
 import { scrollbar, scrollbar__vertical } from "../../scripts/components"
+import { createWordSlidingRandomizer, splitAndClean, SRC_CAT_SET } from "../../scripts/libs/dumb_random"
+
+const randomizer = createWordSlidingRandomizer(splitAndClean(SRC_CAT_SET))
+const roll = () => randomizer(7)
+export const GlobalRegistry = {
+  /**This is for "jump to the top" id */
+  TOP_HEADING_ID: roll(),
+  /**Classname for all of the colored images, this is a workaround
+   * because I haven't thought of handling `@media` queries yet.
+   */
+  COLOR_IMAGE_WRAP: roll(),
+}
 
 const APP_GLOBAL_CSS = `
   @font-face {
@@ -19,6 +31,27 @@ const APP_GLOBAL_CSS = `
   body {
     padding-inline: 15px;
     padding-block: 10px;
+  }
+
+  /*displayed all images at the same time for mobile screens feel... very weird, but whatever, the instruction doesn't say anything so I should do (almost) the same thing*/
+  .${GlobalRegistry.COLOR_IMAGE_WRAP} {
+    width: 80%;
+  }
+
+  @media screen and (min-width: 772px) {
+    .${GlobalRegistry.COLOR_IMAGE_WRAP} {
+      width: 45%;
+    }
+
+    .${GlobalRegistry.COLOR_IMAGE_WRAP} > img {
+      width: 30%;
+    }
+  }
+
+  @media screen and (min-width: 998px) {
+    .${GlobalRegistry.COLOR_IMAGE_WRAP} {
+      width: 30%;
+    }
   }
 `
 
