@@ -1,0 +1,2 @@
+# Brief
+The goal of the final project is to give me "the chance to create something unique using HTML code". In general I need to write code that will pass validation and accessibility checkers. The code must include elements for a `doctype`, `<head>`, `<body>`, `<title>`, and `<main>`. In the `<main>` it needs to have (at a minimum) headings, images, and a list.
