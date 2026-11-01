@@ -70,7 +70,7 @@ export const SUBMISSION_DATA: IProjectSubmissionData[] = [
     projects: [
       {
         name: "07-responsive-stylesheet",
-        score: null
+        score: [{score: 100, date: new Date(2026, 11 - 1, 1)}]
       },
       {
         name: "08-gallery-responsive (?)",
