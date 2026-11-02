@@ -86,15 +86,17 @@ export default function Page() {
         <div class={GlobalRegistry.IMAGE_LIST_CONTAINER}>
           <For each={IMAGE_DATA}>
             {it => (
-              <div class={`${GlobalRegistry.IMAGE_ITEM} ${page__imageWrap}`}>
+              <figure class={`${GlobalRegistry.IMAGE_ITEM} ${page__imageWrap}`}>
                 <img 
                   draggable={false}
                   class={page__image} 
                   src={`../06-a-moment-of-time/assets/${it.imageName}`} 
                   alt={it.description}
                 />
-                <p class={page__imageLabel}>{it.description}</p>
-              </div>
+                <figcaption class={page__imageLabel}>
+                  {it.description}
+                </figcaption>
+              </figure>
             )}
           </For>
         </div>

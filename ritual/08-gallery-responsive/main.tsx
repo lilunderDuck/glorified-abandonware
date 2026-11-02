@@ -73,6 +73,14 @@ const APP_GLOBAL_CSS = `
       scroll-behavior: auto !important;
     }
   }
+
+  @media (prefers-color-scheme: dark) {
+    figure {
+      background-color: var(--surface0);
+      color: var(--text);
+      border-color: var(--surface0);
+    }
+  }
 `
 
 const htmlRendererOptions: IRenderHtmlOption = {
