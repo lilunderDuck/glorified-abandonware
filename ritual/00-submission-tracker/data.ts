@@ -74,7 +74,7 @@ export const SUBMISSION_DATA: IProjectSubmissionData[] = [
       },
       {
         name: "08-gallery-responsive (?)",
-        score: null,
+        score: [{score: -1, date: new Date(2026, 11 - 1, 2)}],
         custom: true
       }
     ]
