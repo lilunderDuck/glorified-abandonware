@@ -59,8 +59,8 @@ const page__imageWrap = css`
   align-items: center;
   flex-direction: column;
   & > img {
-    width: 150px;
-    height: 150px;
+    width: 100%;
+    height: 200px;
     border-radius: 6px;
     flex-shrink: 0;
   }
@@ -91,7 +91,6 @@ export default function Page() {
                   class={page__image} 
                   src={`../06-a-moment-of-time/assets/${it.imageName}`} 
                   alt={it.description}
-                  width="200" 
                 />
                 <p class={page__imageLabel}>{it.description}</p>
               </div>
