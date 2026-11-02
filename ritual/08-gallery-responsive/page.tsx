@@ -77,7 +77,7 @@ export default function Page() {
     <>
       <header>
         <h1 class={page__heading} id={GlobalRegistry.TOP_HEADING_ID}>
-          Colors!
+          Images stuff.
         </h1>
       </header>
 
