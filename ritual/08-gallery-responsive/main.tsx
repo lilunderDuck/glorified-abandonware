@@ -12,7 +12,8 @@ export const GlobalRegistry = {
   /**Classname for all of the colored images, this is a workaround
    * because I haven't thought of handling `@media` queries yet.
    */
-  COLOR_IMAGE_WRAP: roll(),
+  IMAGE_ITEM: roll(),
+  IMAGE_LIST_CONTAINER: roll(),
 }
 
 const APP_GLOBAL_CSS = `
@@ -33,28 +34,43 @@ const APP_GLOBAL_CSS = `
     padding-block: 10px;
   }
 
-  /*displayed all images at the same time for mobile screens feel... very weird, but whatever, the instruction doesn't say anything so I should do (almost) the same thing*/
-  .${GlobalRegistry.COLOR_IMAGE_WRAP} {
+  .${GlobalRegistry.IMAGE_LIST_CONTAINER} {
+    display: grid;
+    gap: 10px;
+    place-items: center;
+  }
+
+  .${GlobalRegistry.IMAGE_ITEM} {
     width: 80%;
   }
   
-  /*note 1: The first media query uses min-width and triggers at 772 px.*/
   @media screen and (min-width: 772px) {
-    .${GlobalRegistry.COLOR_IMAGE_WRAP} {
-      /*note 1.1: In the first media query the div selector is set to a width of 45vw and uses display inline-block*/
-      width: 45vw;
+    .${GlobalRegistry.IMAGE_LIST_CONTAINER} {
+      grid-template-columns: 1fr 1fr;
+    }
+    
+    .${GlobalRegistry.IMAGE_ITEM} {
+      border-radius: 10px;
     }
 
-    .${GlobalRegistry.COLOR_IMAGE_WRAP} > img {
-      /*note 1.2: In the first media query the <img> selector is set to a max-height of 30vh*/
-      max-height: 30vh;
+    .${GlobalRegistry.IMAGE_ITEM}:last-child {
+      grid-column: 1 / -1;
     }
   }
 
-  /*note 2: The second media query uses min-width and triggers at 998 px.  */
   @media screen and (min-width: 998px) {
-    .${GlobalRegistry.COLOR_IMAGE_WRAP} {
-      width: 30vw;
+    .${GlobalRegistry.IMAGE_ITEM} {
+      border-radius: 0;
+    }
+    
+    .${GlobalRegistry.IMAGE_ITEM}:nth-child(3n) {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    body {
+      scroll-behavior: auto !important;
     }
   }
 `
@@ -70,4 +86,4 @@ const htmlRendererOptions: IRenderHtmlOption = {
   shouldIncludeSomeUnrelatedBodyAttributes: false
 }
 
-renderHtmlTo("./docs/07-responsive-stylesheet/index.html", htmlRendererOptions, <Page />)
+renderHtmlTo("./docs/08-gallery-responsive/index.html", htmlRendererOptions, <Page />)

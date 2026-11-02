@@ -7,6 +7,5 @@ export const IMAGE_DATA = [
   { imageName: "2026-09-07_21.15.28.png", description: "Chilly night with my plane" },
   { imageName: "2026-09-07_21.36.33.png", description: "Mountain climbing, again (this one is 302 blocks high)" },
   { imageName: "2026-10-14_21.44.30.png", description: "Small crowded path way in Ancient City" },
-  { imageName: "2026-10-14_21.49.54.png", description: "Ancient City surely is very dark with shader enabled" },
-  { imageName: "2026-10-14_21.54.30.png", description: "The Warden is awakening..." },
+  { imageName: "2026-10-14_21.49.54.png", description: "Ancient City surely is very dark with shader enabled" }
 ]

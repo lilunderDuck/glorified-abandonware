@@ -1,5 +1,6 @@
 import { For } from "../../scripts/components"
 import { css } from "../../scripts/libs/dumb_html5str_renderer"
+import { IMAGE_DATA } from "./imageData"
 import { GlobalRegistry } from "./main"
 
 // Happy halloween :)
@@ -33,9 +34,6 @@ const page__backToTheTopLink = css`
 const page__mainMustPreserveRoot = css`
   padding-inline: 10px;
   padding-block: 15px;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
   & > p {
     font-size: 25px;
     /* font-family: Arial, sans-serif;  commented: already applied the font family globally */
@@ -44,7 +42,7 @@ const page__mainMustPreserveRoot = css`
 `
 
 const page__image = css`
-  /* my CSS reset already set the width to 100% */
+  object-fit: cover;
 `
 
 const page__imageLabel = css`
@@ -53,13 +51,9 @@ const page__imageLabel = css`
 `
 
 const page__imageWrap = css`
-  display: inline-block;
-  margin: 5px;
-  padding: 2px;
   background-color: var(--surface0);
   padding-inline: 15px;
   padding-block: 10px;
-  border-radius: 6px;
   user-select: none;
   display: flex;
   align-items: center;
@@ -78,18 +72,6 @@ const page__imageWrap = css`
 `
 
 export default function Page() {
-  const IMAGE_DATA = [
-    { imageName: "Red.jpeg", label: "Red" },
-    { imageName: "Orange.png", label: "Orange" },
-    { imageName: "Yellow.png", label: "Yellow" },
-    { imageName: "Green.png", label: "Green" },
-    { imageName: "Blue.png", label: "Blue" },
-    { imageName: "Indigo.jpeg", label: "Indigo" },
-    { imageName: "Purple.png", label: "Purple" },
-    { imageName: "Pink.jpeg", label: "Pink" },
-    { imageName: "White.png", label: "White" },
-  ]
-
   return (
     <>
       <header>
@@ -98,31 +80,24 @@ export default function Page() {
         </h1>
       </header>
 
-      <main class={page__mainMustPreserveRoot}>
-        {/* for future note: if somehow they decided to deduct points because "it is not forked from a template", please uncomment this!! */}
-        {/* <h2>Basic Media Queries</h2>
-        <p>In this assignment I need to add two media queries to the css file.</p>
-        <ul>
-          <li>{Bun.markdown.react("The first media query should trigger at `772px` and change the layout of the `div`s to be `45%` of the viewport width. The `image`s should have a maximum height of `30%` of the viewport height.")}</li>
-
-          <li>{Bun.markdown.react("The second media query should trigger at `998px` and change the layout of the `div`s to be `30%` of the viewport width.")}</li>
-        </ul>
-        {Bun.markdown.react("I then have to make additional changes to ensure that the `div`s appear next to each other and that the `image`s are contained within the `div`s. Some of these properties include `display`, `width` and `max-height`. (Seems fair)")} */}
-
-        <For each={IMAGE_DATA}>
-          {it => (
-            <div class={`${GlobalRegistry.COLOR_IMAGE_WRAP} ${page__imageWrap}`}>
-              <img 
-                draggable={false}
-                class={page__image} 
-                src={`./images/${it.imageName}`} 
-                alt={it.label} 
-                width="200" 
-              />
-              <p class={page__imageLabel}>{it.label}</p>
-            </div>
-          )}
-        </For>
+      <main class={`${page__mainMustPreserveRoot}`}>
+        {Bun.markdown.react("Questioning to why there's so many gallery-based project, but, here we are.")}
+        <div class={GlobalRegistry.IMAGE_LIST_CONTAINER}>
+          <For each={IMAGE_DATA}>
+            {it => (
+              <div class={`${GlobalRegistry.IMAGE_ITEM} ${page__imageWrap}`}>
+                <img 
+                  draggable={false}
+                  class={page__image} 
+                  src={`../06-a-moment-of-time/assets/${it.imageName}`} 
+                  alt={it.description}
+                  width="200" 
+                />
+                <p class={page__imageLabel}>{it.description}</p>
+              </div>
+            )}
+          </For>
+        </div>
       </main>
 
       <footer class={page__footer}>
