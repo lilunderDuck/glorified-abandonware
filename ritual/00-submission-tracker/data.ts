@@ -85,7 +85,7 @@ export const SUBMISSION_DATA: IProjectSubmissionData[] = [
     projects: [
       {
         name: "09-sketch",
-        score: null,
+        score: [{score: 100, date: new Date(2026, 11 - 1, 3)}],
         custom: true
       },
       {
