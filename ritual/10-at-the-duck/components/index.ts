@@ -1,4 +1,6 @@
 export * from "./MockWebBrowser"
+export * from "./PageWaveyBackground"
 export * from "./TerminalUIs"
 export * from "./TerminalUsername"
 export * from "./TerminalCmd"
+export * from "./ConnectionSection"
