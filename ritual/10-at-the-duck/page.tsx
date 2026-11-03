@@ -1,5 +1,5 @@
 import { css } from "../../scripts/libs/dumb_html5str_renderer"
-import { ConnectionSection, PageWaveyBackground1, PageWaveyBackground2, ProfileSection, ProjectSection } from "./components"
+import { ConnectionSection, PageWaveyBackground1, PageWaveyBackground2, ProfileSection, ProjectSection, WhySection } from "./components"
 
 const page__background = css`
   width: 100%;
@@ -40,6 +40,7 @@ export default function HomePage() {
       <ProfileSection />
       <ConnectionSection />
       <ProjectSection />
+      <WhySection />
     </div>
   )
 }

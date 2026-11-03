@@ -4,9 +4,10 @@ import { PageWaveyBackground2 } from "./PageWaveyBackground"
 
 const section__root = css`
   width: 100%;
-  height: 50%;
+  height: 100%;
   padding-inline: 5rem;
   margin-top: 5rem;
+  margin-bottom: 2rem;
   position: relative;
 `
 
