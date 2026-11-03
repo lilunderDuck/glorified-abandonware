@@ -36,18 +36,10 @@ const page__movingDots = css`
 
 export default function HomePage() {
   return (
-    <>
-      <div class={`${page__background} ${page__firstBackgroundPosition}`}>
-        <PageWaveyBackground1 />
-      </div>
-      <div class={`${page__background} ${page__secondBackgroundPosition}`}>
-        <PageWaveyBackground2 />
-      </div>
-      <div class={`${page__content}`}>
-        <ProfileSection />
-        <ConnectionSection />
-        <ProjectSection />
-      </div>
-    </>
+    <div class={`${page__content}`}>
+      <ProfileSection />
+      <ConnectionSection />
+      <ProjectSection />
+    </div>
   )
 }

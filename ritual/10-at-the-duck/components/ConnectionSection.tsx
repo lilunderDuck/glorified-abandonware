@@ -1,10 +1,13 @@
-import { BsDiscord, BsGithub, For, Show } from "../../../scripts/components";
-import { css } from "../../../scripts/libs/dumb_html5str_renderer";
+import { BsDiscord, BsGithub, For, Show } from "../../../scripts/components"
+import { css } from "../../../scripts/libs/dumb_html5str_renderer"
+import { PageWaveyBackground1 } from "./PageWaveyBackground"
 
 const section__root = css`
-  padding-top: 0.5rem; /* from profile offset */
+  padding-top: 1.5rem; /* from profile offset */
   padding-inline: 3rem;
   margin-top: 15px;
+  margin-bottom: 12rem;
+  position: relative;
   & p {
     text-align: center;
   }
@@ -70,6 +73,18 @@ const section__connectionNoLink = css`
   color: var(--sky);
 `
 
+const section__background = css`
+  width: 100%;
+  height: 150%;
+  position: fixed;
+  left: 0;
+  top: -12rem;
+  z-index: -1;
+  & > svg {
+    max-height: 100%;
+  }
+`
+
 export function ConnectionSection() {
   const CONNECTION = [
     {
@@ -85,8 +100,11 @@ export function ConnectionSection() {
   
   return (
     <section class={section__root}>
+      <div class={section__background}>
+        <PageWaveyBackground1 />
+      </div>
       <div class={section__briefWrap}>
-        <p class={section__brief}>Hello, I'm <span class={section__myName}>mint_duck</span>, and I do something with computer. If I found something interesting, I would do some research and have some mess around.</p>
+        <p class={section__brief}>Hello, I'm <span class={section__myName}>mint_duck</span>, and I do something with computer. I also like cats (and minecraft) :)</p>
       </div>
       <div class={section__briefConnectionContainer}>
         <div class={section__briefConnectionText}>
