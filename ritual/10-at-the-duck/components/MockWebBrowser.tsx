@@ -1,4 +1,4 @@
-import { BsX, For } from "../../../scripts/components"
+import { BsCaretLeftFill, BsCaretRightFill, BsX, For } from "../../../scripts/components"
 import { css } from "../../../scripts/libs/dumb_html5str_renderer"
 
 const browser__root = css`
@@ -41,9 +41,12 @@ const browser__tabMacCircleMinimize = css`
 const browser__searchBarWrapper = css`
   display: flex;
   align-items: center;
+  gap: 10px;
   padding-inline: 10px;
   padding-block: 5px;
   background-color: var(--surface0);
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
 `
 
 const browser__searchBar = css`
@@ -51,6 +54,7 @@ const browser__searchBar = css`
   overflow-x: hidden;
   text-overflow: ellipsis;
   width: 100%;
+  margin-left: 15px;
 `
 
 const browser__contentWrap = css`
@@ -62,6 +66,8 @@ const browser__content = css`
   height: 100%;
   -webkit-overflow-scrolling: touch;
   overflow-y: hidden;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
 `
 
 const browser__tabName = css`
@@ -70,24 +76,9 @@ const browser__tabName = css`
   display: flex;
   align-items: center;
   gap: 10px;
-  padding-inline: 10px;
-  /* &::before, &::after {
-    content: '';
-    background-color: var(--surface0);
-    width: 1ch;
-    height: 1ch;
-    display: inline-block;
-    vertical-align: middle;
-    overflow: hidden;
-  }
-
-  &::before {
-    clip-path: polygon(100% 0,100% 100%,0 100%);
-  }
-
-  &::after {
-    clip-path: polygon(0 0,100% 100%,0 100%);
-  } */
+  padding-inline: 15px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
 `
 
 const browser__searchBarUrlProtocol = css`
@@ -112,8 +103,8 @@ export function MockWebBroswer(props: { pageUrl: string, name: string }) {
         </div>
       </div>
       <div class={browser__searchBarWrapper}>
-        <div></div>
-        <div></div>
+        <BsCaretLeftFill />
+        <BsCaretRightFill />
         <div class={browser__searchBar}>
           <span class={browser__searchBarUrlProtocol}>
             {urlProtocol}//
