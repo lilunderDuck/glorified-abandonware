@@ -30,6 +30,7 @@ const section__reasonList = css`
   list-style: none;
   padding-left: 0;
   margin-top: 30px;
+  padding-bottom: 1rem;
   & > li {
     padding-inline: 20px;
     padding-block: 15px;
