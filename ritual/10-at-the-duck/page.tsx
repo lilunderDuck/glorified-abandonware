@@ -1,5 +1,5 @@
 import { css } from "../../scripts/libs/dumb_html5str_renderer"
-import { ConnectionSection, PageWaveyBackground1, PageWaveyBackground2, ProjectSection } from "./components"
+import { ConnectionSection, PageWaveyBackground1, PageWaveyBackground2, ProfileSection, ProjectSection } from "./components"
 
 const page__background = css`
   width: 100%;
@@ -25,26 +25,6 @@ const page__content = css`
   position: absolute;
 `
 
-const page__sectionProfile = css`
-  width: 100%;
-  height: 15rem;
-  position: relative;
-`
-
-const page__sectionProfileBg = css`
-  width: 14rem;
-  height: 14rem;
-  border-radius: 50%;
-  border: 4px solid var(--surface0);
-  position: absolute;
-  left: 50%;
-  bottom: -14rem;
-  transform: translate(-50%, -50%);
-  background: center center no-repeat url('./assets/icon.png');
-  background-size: contain;
-  z-index: 4;
-`
-
 const page__movingDots = css`
   background-size: 40px 40px;
   background-image: radial-gradient(var(--surface1) 2px, transparent 2px);
@@ -64,9 +44,7 @@ export default function HomePage() {
         <PageWaveyBackground2 />
       </div>
       <div class={`${page__content}`}>
-        <section class={page__sectionProfile}>
-          <div class={page__sectionProfileBg} />
-        </section>
+        <ProfileSection />
         <ConnectionSection />
         <ProjectSection />
       </div>

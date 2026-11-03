@@ -1,8 +1,8 @@
 import { BsDiscord, BsGithub, For, Show } from "../../../scripts/components";
 import { css } from "../../../scripts/libs/dumb_html5str_renderer";
 
-const page__sectionBrief = css`
-  padding-top: 7.5rem; /* from profile offset */
+const section__root = css`
+  padding-top: 0.5rem; /* from profile offset */
   padding-inline: 3rem;
   margin-top: 15px;
   & p {
@@ -10,20 +10,20 @@ const page__sectionBrief = css`
   }
 `
 
-const page__briefWrap = css`
+const section__briefWrap = css`
   width: 100%;
   display: flex;
   justify-content: center;
 `
 
-const page__brief = css`
+const section__brief = css`
   user-select: none;
   width: 80%;
 `
 
-const page__briefName = css`color:var(--sapphire);`
+const section__myName = css`color:var(--sapphire);`
 
-const page__briefConnectionContainer = css`
+const section__briefConnectionContainer = css`
   margin-inline: 3rem;
   margin-top: 3.5rem;
   display: flex;
@@ -31,7 +31,7 @@ const page__briefConnectionContainer = css`
   position: relative;
 `
 
-const page__briefConnectionText = css`
+const section__briefConnectionText = css`
   padding-inline: 10px;
   padding-block: 5px;
   background-color: #5f3e69;
@@ -45,7 +45,7 @@ const page__briefConnectionText = css`
   user-select: none;
 `
 
-const page__briefConnectionWrap = css`
+const section__briefConnectionWrap = css`
   width: fit-content;
   display: flex;
   justify-content: center;
@@ -57,16 +57,16 @@ const page__briefConnectionWrap = css`
   border-radius: 6px;
 `
 
-const page__briefConnection = css`
+const section__briefConnection = css`
   display: inline-flex;
   gap: 20px;
 `
 
-const page__connectionHaveLink = css`
+const section__connectionHaveLink = css`
   user-select: none;
 `
 
-const page__connectionNoLink = css`
+const section__connectionNoLink = css`
   color: var(--sky);
 `
 
@@ -84,23 +84,23 @@ export function ConnectionSection() {
   ]
   
   return (
-    <section class={page__sectionBrief}>
-      <div class={page__briefWrap}>
-        <p class={page__brief}>Hello, I'm <span class={page__briefName}>mint_duck</span>, and I do something with computer. If I found something interesting, I would do some research and have some mess around.</p>
+    <section class={section__root}>
+      <div class={section__briefWrap}>
+        <p class={section__brief}>Hello, I'm <span class={section__myName}>mint_duck</span>, and I do something with computer. If I found something interesting, I would do some research and have some mess around.</p>
       </div>
-      <div class={page__briefConnectionContainer}>
-        <div class={page__briefConnectionText}>
+      <div class={section__briefConnectionContainer}>
+        <div class={section__briefConnectionText}>
           (Spy me on)
         </div>
-        <div class={page__briefConnectionWrap}>
+        <div class={section__briefConnectionWrap}>
           <For each={CONNECTION}>
             {it => (
-              <div class={page__briefConnection}>
+              <div class={section__briefConnection}>
                 <it.icon />
                 <Show when={it.url} fallback={
-                  <span class={page__connectionNoLink}>{it.name}</span>
+                  <span class={section__connectionNoLink}>{it.name}</span>
                 }>
-                  <a class={page__connectionHaveLink} href={it.url} target="_blank">
+                  <a class={section__connectionHaveLink} href={it.url} target="_blank">
                     {it.name}
                   </a>
                 </Show>

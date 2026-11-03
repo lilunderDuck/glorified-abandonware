@@ -1,6 +1,5 @@
 import { BsX, For } from "../../../scripts/components"
 import { css } from "../../../scripts/libs/dumb_html5str_renderer"
-import { Tui } from "./TerminalUIs"
 
 const browser__root = css`
   user-select: none;
