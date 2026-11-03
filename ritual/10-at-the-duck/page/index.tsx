@@ -56,50 +56,8 @@ export default function HomePage() {
   ]
 
   return (
-    <Tui.Box class={`${page__root}`}>
-      <div class={`${page__content} ${scrollbar} ${scrollbar__vertical}`}>
-        <Tui.Text class={page__bootText}>
-          Local human connection opened to <span class={page__name}>me@mint_duck</span> at <Tui.Link>duck.localhost:3000</Tui.Link>
-        </Tui.Text>
-        <Tui.Text class={page__bootText}>
-          I sent a virtual hug to make you happy for the rest of the day, but not really sure it will reach you...
-        </Tui.Text>
-        <Tui.LineBreak />
-        <div class={page__cmdLine}>
-          <TerminalUsername host="you" name="name" />
-          <TerminalCmd rootCmd="./intro" flags={[
-            { name: "me@mint_duck" },
-            { name: "-short" },
-            { name: "-with-banner" },
-          ]} />
-        </div>
-        <Tui.Text class={page__commandOutput}>
-          <div>
-            <div></div>
-            <div></div>
-          </div>
-          Hello, I'm <span class={page__name}>me@mint_duck</span>.
-          <Tui.LineBreak />
-          I love programming, and programming brought me joy and pain at the same time, while also be fascinated by random topics at the same time.
-          <Tui.LineBreak />
-          <i>(You tired of reading just that, don't you? I'm watching you *stares*)</i>.
-          <Tui.LineBreak />
-          <Tui.Heading>Help me! I'm stuck!</Tui.Heading>
-          <Tui.LineBreak />
-          You don't need to type the command, just click the command name listed below :)
-          <Tui.LineBreak />
-          <For each={COMMAND_LIST}>
-            {it => (
-              <div>
-                <div>{it.command}</div>
-                <Tui.Box>
-                  <p>{it.description}</p>
-                </Tui.Box>
-              </div>
-            )}
-          </For>
-        </Tui.Text>
-      </div>
-    </Tui.Box>
+    <div class={`${page__content} ${scrollbar} ${scrollbar__vertical}`}>
+      
+    </div>
   )
 }
