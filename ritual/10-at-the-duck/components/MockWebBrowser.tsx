@@ -17,6 +17,7 @@ const browser__tabMacWindowControls = css`
   align-items: center;
   gap: 5px;
   padding-right: 10px;
+  padding-left: 5px;
 `
 
 const browser__tabMacCircle = css`
@@ -98,13 +99,13 @@ export function MockWebBroswer(props: { pageUrl: string, name: string }) {
   const [urlProtocol, urlRest] = props.pageUrl.split("//")
 
   return (
-    <Tui.Box class={browser__root}>
+    <div class={browser__root}>
       <div class={browser__tabList}>
-        <Tui.BoxLineHidden class={browser__tabMacWindowControls}>
+        <div class={browser__tabMacWindowControls}>
           <For each={[browser__tabMacCircleClose, browser__tabMacCircleMaximize, browser__tabMacCircleMinimize]}>
             {it => <div class={`${browser__tabMacCircle} ${it}`} />}
           </For>
-        </Tui.BoxLineHidden>
+        </div>
 
         <div class={browser__tabName}>
           <div>{props.name}</div>
@@ -127,6 +128,6 @@ export function MockWebBroswer(props: { pageUrl: string, name: string }) {
       <div class={browser__contentWrap}>
         <iframe width="1200" height="800" src={props.pageUrl} class={browser__content}></iframe>
       </div>
-    </Tui.Box>
+    </div>
   )
 }

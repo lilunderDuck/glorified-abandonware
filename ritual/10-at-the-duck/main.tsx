@@ -1,3 +1,4 @@
+import { scrollbar, scrollbar__vertical } from "../../scripts/components"
 import { renderHtmlTo } from "../../scripts/libs/dumb_html5str_renderer"
 import HomePage from "./page"
 
@@ -22,4 +23,5 @@ renderHtmlTo("./docs/10-at-the-duck/index.html", {
   libraryUsed: "jsx2html5 palette@catppuccin_mocha",
   css: APP_GLOBAL_CSS,
   shouldIncludeSomeUnrelatedBodyAttributes: false,
+  bodyClass: `${scrollbar} ${scrollbar__vertical}`
 }, <HomePage />)
