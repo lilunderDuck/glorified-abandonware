@@ -18,5 +18,5 @@ Also, the project is cleanly number-labeled, so you can clearly found out which 
 ![submission page preview](held-readme-for-hostage/submission_preview.png)
 
 # Just explore the repo I think?
-I need something as a cover image of readme, so... here a review of someone rate my work unfairly, I love coursera peer rating so much.
-![wall of flame](held-readme-for-hostage/deserved_to_be_in_wall_of_flame.png)
+I need something as a cover image of readme, so... here a review of someone rate my work unfairly, I love coursera peer rating so much!!!
+![wall of flame](held-readme-for-hostage/its_been_a_while.png)
