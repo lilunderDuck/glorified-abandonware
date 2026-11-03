@@ -55,10 +55,6 @@ const APP_GLOBAL_CSS = `
       padding-inline: 1rem;
     }
 
-    .${globalRegistry.WHY_SECTION_INLINE_PADDING} > ul {
-      padding-bottom: 1rem;
-    }
-
     .${globalRegistry.PROJECT_SECTION_INLINE_PADDING} {
       padding-inline: 2rem;
     }
