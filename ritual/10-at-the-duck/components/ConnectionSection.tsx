@@ -1,5 +1,6 @@
 import { BsDiscord, BsGithub, For, Show } from "../../../scripts/components"
 import { css } from "../../../scripts/libs/dumb_html5str_renderer"
+import { globalRegistry } from "../main"
 import { PageWaveyBackground1 } from "./PageWaveyBackground"
 
 const section__root = css`
@@ -99,7 +100,7 @@ export function ConnectionSection() {
   ]
   
   return (
-    <section class={section__root}>
+    <section class={`${section__root} ${globalRegistry.BRIEF_SECTION_BOTTOM_MARGIN}`}>
       <div class={section__background}>
         <PageWaveyBackground1 />
       </div>
@@ -110,7 +111,7 @@ export function ConnectionSection() {
         <div class={section__briefConnectionText}>
           (Spy me on)
         </div>
-        <div class={section__briefConnectionWrap}>
+        <div class={`${section__briefConnectionWrap} ${globalRegistry.BRIEF_SECTION_CONTACT_INFO}`}>
           <For each={CONNECTION}>
             {it => (
               <div class={section__briefConnection}>

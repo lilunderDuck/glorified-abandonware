@@ -1,10 +1,10 @@
 import { css } from "../../../scripts/libs/dumb_html5str_renderer"
+import { globalRegistry } from "../main"
 import { PageWaveyBackground3 } from "./PageWaveyBackground"
 
 const section__root = css`
   width: 100%;
-  height: 100%;
-  padding-inline: 7rem;
+  height: auto;
   position: relative;
   background-color: #496562;
   user-select: none;
@@ -46,7 +46,7 @@ const section__idkWhatToNameThis = css`
 
 export function WhySection() {
   return (
-    <section class={section__root}>
+    <section class={`${section__root} ${globalRegistry.WHY_SECTION_INLINE_PADDING}`}>
       <div class={section__background}>
         <PageWaveyBackground3 />
       </div>

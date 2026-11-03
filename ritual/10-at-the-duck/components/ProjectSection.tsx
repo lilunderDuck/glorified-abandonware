@@ -1,11 +1,11 @@
 import { css } from "../../../scripts/libs/dumb_html5str_renderer"
+import { globalRegistry } from "../main"
 import { MockWebBroswer } from "./MockWebBrowser"
 import { PageWaveyBackground2 } from "./PageWaveyBackground"
 
 const section__root = css`
   width: 100%;
   height: 100%;
-  padding-inline: 5rem;
   margin-top: 5rem;
   margin-bottom: 2rem;
   position: relative;
@@ -22,7 +22,7 @@ const section__background = css`
 
 export function ProjectSection() {
   return (
-    <section class={section__root}>
+    <section class={`${section__root} ${globalRegistry.PROJECT_SECTION_INLINE_PADDING}`}>
       <div class={section__background}>
         <PageWaveyBackground2 />
       </div>
