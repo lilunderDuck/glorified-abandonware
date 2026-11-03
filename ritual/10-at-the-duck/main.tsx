@@ -14,6 +14,15 @@ const APP_GLOBAL_CSS = `
   :root {
     font-family: ZeroProtoNerdFont, Arial, Helvetica, sans-serif;
   }
+
+  @keyframes dot_grid_move {
+    from {
+      background-position: 0 0;
+    }
+    to {
+      background-position: 40px -40px;
+    }
+  }
 `
 
 renderHtmlTo("./docs/10-at-the-duck/index.html", {

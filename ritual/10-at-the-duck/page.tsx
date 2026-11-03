@@ -45,6 +45,15 @@ const page__sectionProfileBg = css`
   z-index: 4;
 `
 
+const page__movingDots = css`
+  background-size: 40px 40px;
+  background-image: radial-gradient(var(--surface1) 2px, transparent 2px);
+  width: 100%;
+  height: 100%;
+  background-color: var(--mantle);
+  animation: dot_grid_move 5s linear infinite;
+`
+
 export default function HomePage() {
   return (
     <>
